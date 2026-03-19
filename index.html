@@ -131,6 +131,7 @@ footer{text-align:center;padding:20px;color:#444;font-size:0.75em}
 <div class="qr-box">
 <img src="alipay.jpg" alt="付款码">
 <p style="font-size:0.8em;color:var(--888);margin-top:10px;">扫码付款后自动解锁</p>
+<button onclick="showVIPContent()" style="background:linear-gradient(135deg,var(--purple),var(--pink));border:none;padding:12px 30px;border-radius:25px;color:#fff;font-weight:bold;cursor:pointer;margin-top:15px;">🧪 模拟付款查看VIP版</button>
 </div>
 </div>
 </div>
@@ -258,6 +259,17 @@ aiMsg.className='message ai';
 aiMsg.innerHTML=questions[0];
 document.getElementById('chatMessages').appendChild(aiMsg);
 },600);
+
+function showVIPContent(){
+// 隐藏付费墙
+document.getElementById('payWall').style.display='none';
+
+// 添加VIP内容
+const vipHTML='<div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 东方玄学 - 命运解析</h3><p>根据你的生辰八字，你属于木命人。木主生发，代表着创造力和生长力。你的五行中木属性较强，说明你是一个有着强烈自我意识的人。在命格方面，你偏向偏财运，这意味着你在财务方面有着不错的运气，但需要注意的是不要过于贪婪。近期大运显示你正处于事业上升期，这是一个很好的机会去争取更多的成就。西方星座方面，你的太阳星座是狮子座，这意味着你有着强烈的领导力和自信心...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🌟 西方星座 - 运势详解</h3><p>你的太阳星座狮子座给你带来了王者之气，你喜欢成为焦点，享受被关注的感觉。你的月亮星座代表了你的内心情感世界，它显示你其实是一个非常敏感的人，只是平时用坚强的外表掩盖了。上升星座则是你在外人眼中的形象，通常是别人对你的第一印象...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🎨 AI专属形象 - 灵魂化身</h3><p style="text-align:center;font-size:3em;">🐙</p><p>你是深海中的章鱼。你的触手遍布每一个角落，感知着周围的一切。你聪明、灵活、适应力强，同时又保持着神秘感。表面上你可能看起来平静甚至有点冷漠，但实际上你的内心戏非常丰富...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💰 财富密码</h3><p>你对于金钱的态度是既务实又理想。你知道钱的重要性，但不愿意为了钱放弃自己的原则。你有很强的赚钱能力，但有时候会过于谨慎，错失一些机会。建议你适当冒险，因为你的偏财运确实不错...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💕 情感密码</h3><p>在感情中，你是一个既需要空间又需要陪伴的矛盾体。你渴望被理解，但又不善于表达自己的真实感受。你往往会选择暗恋，因为害怕被拒绝。你的理想伴侣是能够看懂你坚强外壳下脆弱一面的人...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 30天运势预测</h3><p>未来30天，你的整体运势呈现上升趋势。事业方面，你会有一个新的机会出现，这可能是你展示能力的舞台。财运方面，正财和偏财都有收获，但不要过于冒险。感情方面，单身者有望遇到心动的对象，已婚者则需要多花时间陪伴伴侣...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>⚡ 专属行动计划</h3><p>1. 抓住眼前的机会，不要犹豫<br>2. 控制情绪，不要冲动做决定<br>3. 多关心身边的人<br>4. 保持学习的热情<br>5. 记住，你比想象中更优秀</p></div>';
+
+document.getElementById('result').insertAdjacentHTML('beforeend',vipHTML);
+document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
 </script>
 </body>
 </html>
