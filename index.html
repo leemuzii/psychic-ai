@@ -54,6 +54,8 @@ h1{font-size:1.5em;background:linear-gradient(135deg,var(--red),var(--gold));-we
 .avatar-gen{text-align:center;padding:20px;background:linear-gradient(135deg,rgba(168,85,247,0.2),rgba(236,72,153,0.2));border-radius:12px;margin:15px 0}
 .avatar-gen img{max-width:280px;border-radius:12px;border:3px solid var(--gold)}
 .loading{color:var(--gold);font-size:0.9em;margin-top:10px}
+@keyframes loadingPulse{0%{opacity:0.5}50%{opacity:1}100%{opacity:0.5}}
+.waiting-anim{animation:loadingPulse 1.5s infinite}
 @keyframes avatarPop{0%{transform:scale(0)rotate(-20deg);opacity:0}50%{transform:scale(1.2)rotate(10deg)}70%{transform:scale(0.9)rotate(-5deg)}100%{transform:scale(1)rotate(0)}}
 .avatar-pop{animation:avatarPop 0.8s ease-out forwards}
 footer{text-align:center;padding:20px;color:#444;font-size:0.75em}
@@ -404,29 +406,12 @@ document.getElementById('behavior').innerText="经过完整的48道题测试，�
 
 const prompt=generateAvatarPrompt(currentMBTI,ownerGender);
 
-const vipHTML='<div class="result-section" style="border:2px solid var(--gold);" id="avatarSection"><h3>🎨 AI专属像素头像 - 独家定制</h3><div class="avatar-gen"><div class="loading" id="avatarLoading">🎨 正在根据你的性格和性别生成专属头像...</div><img id="genAvatar" style="display:none;" alt="AI生成头像"></div></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 东方玄学 - 生辰八字</h3><p>根据你的性格分析报告和MBTI类型，你属于木火通明之命。木主生发，代表着创造力和生长力；火主热情，代表着行动力和表达力。你的五行中木火属性较强，说明你是一个既有创意又能行动的人。你的人生剧本中，注定要经历从蛰伏到绽放的过程。前25年是在积累，后25年就是绽放的时刻...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🧧 东方玄学 - 五行命格</h3><p>你的五行属木，偏阳木。阳木代表着你有着坚韧不拔的性格，像大树一样向上生长。你的人生大运目前正处于上升期，未来三年会有非常重要的转折点。在这个阶段，你需要做的是保持耐心，同时主动出击。记住，机会是留给有准备的人的...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 东方玄学 - 30天运势</h3><p>未来30天，你的运势呈现稳步上升的趋势。事业上，你会有一个新的机会出现，这个机会可能会改变你的职业轨迹。财运方面，偏财运不错，可以适当尝试一些投资，但不要过于激进。感情上，如果你还是单身，月底可能会有桃花运...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🌟 西方星座 - 太阳+月亮+上升</h3><p>根据你的MBTI类型分析，你的太阳星座特质非常明显。你有着强烈的自我意识和表达欲望，同时又保持着理性思考的能力。你的月亮星座代表了你的内心情感世界，它显示你其实是一个非常注重内在成长的人...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🪐 西方星座 - 守护星+相位</h3><p>你的守护星是太阳，这代表着你是一个有着强烈个人魅力的人。你的人生主题是表达自我和创造价值。在接下来的日子里，你需要学会平衡自我表达和他人期待之间的关系...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🌙 西方星座 - 本月运势</h3><p>本月你的整体运势非常不错！在事业方面，你会有突破性的进展，之前努力的事情开始看到回报。财运方面，正财和偏财都有收获，特别是月底会有意外之财。感情方面，单身者有望遇到心动的对象...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💰 财富密码</h3><p>你对于金钱的态度是既务实又理想。你知道钱的重要性，但不愿意为了钱放弃自己的原则。你有很强的赚钱能力，但有时候会过于谨慎，错失一些机会。建议你适当冒险，因为你的财运确实不错...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💕 情感密码</h3><p>在感情中，你是一个既需要空间又需要陪伴的矛盾体。你渴望被理解，但又不善于表达自己的真实感受。你往往会选择暗恋，因为害怕被拒绝。但其实你的条件很好，只是自信心不够...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>⚡ 专属行动计划</h3><p>1. 抓住眼前的机会，不要犹豫<br>2. 控制情绪，不要冲动做决定<br>3. 多关心身边的人<br>4. 保持学习的热情<br>5. 记住，你比想象中更优秀</p></div>';
+const vipHTML='<div class="result-section" style="border:2px solid var(--gold);" id="avatarSection"><h3>🎨 AI专属像素头像 - 独家定制</h3><div class="avatar-gen"><div class="loading waiting-anim" id="avatarLoading">🎨 正在根据你的性格和性别生成专属头像...</div><img id="genAvatar" style="display:none;" alt="AI生成头像"></div></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 东方玄学 - 生辰八字</h3><p>根据你的性格分析报告和MBTI类型，你属于木火通明之命。木主生发，代表着创造力和生长力；火主热情，代表着行动力和表达力。你的五行中木火属性较强，说明你是一个既有创意又能行动的人。你的人生剧本中，注定要经历从蛰伏到绽放的过程。前25年是在积累，后25年就是绽放的时刻...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🧧 东方玄学 - 五行命格</h3><p>你的五行属木，偏阳木。阳木代表着你有着坚韧不拔的性格，像大树一样向上生长。你的人生大运目前正处于上升期，未来三年会有非常重要的转折点。在这个阶段，你需要做的是保持耐心，同时主动出击。记住，机会是留给有准备的人的...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 东方玄学 - 30天运势</h3><p>未来30天，你的运势呈现稳步上升的趋势。事业上，你会有一个新的机会出现，这个机会可能会改变你的职业轨迹。财运方面，偏财运不错，可以适当尝试一些投资，但不要过于激进。感情上，如果你还是单身，月底可能会有桃花运...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🌟 西方星座 - 太阳+月亮+上升</h3><p>根据你的MBTI类型分析，你的太阳星座特质非常明显。你有着强烈的自我意识和表达欲望，同时又保持着理性思考的能力。你的月亮星座代表了你的内心情感世界，它显示你其实是一个非常注重内在成长的人...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🪐 西方星座 - 守护星+相位</h3><p>你的守护星是太阳，这代表着你是一个有着强烈个人魅力的人。你的人生主题是表达自我和创造价值。在接下来的日子里，你需要学会平衡自我表达和他人期待之间的关系...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🌙 西方星座 - 本月运势</h3><p>本月你的整体运势非常不错！在事业方面，你会有突破性的进展，之前努力的事情开始看到回报。财运方面，正财和偏财都有收获，特别是月底会有意外之财。感情方面，单身者有望遇到心动的对象...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💰 财富密码</h3><p>你对于金钱的态度是既务实又理想。你知道钱的重要性，但不愿意为了钱放弃自己的原则。你有很强的赚钱能力，但有时候会过于谨慎，错失一些机会。建议你适当冒险，因为你的财运确实不错...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💕 情感密码</h3><p>在感情中，你是一个既需要空间又需要陪伴的矛盾体。你渴望被理解，但又不善于表达自己的真实感受。你往往会选择暗恋，因为害怕被拒绝。但其实你的条件很好，只是自信心不够...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>⚡ 专属行动计划</h3><p>1. 抓住眼前的机会，不要犹豫<br>2. 控制情绪，不要冲动做决定<br>3. 多关心身边的人<br>4. 保持学习的热情<br>5. 记住，你比想象中更优秀</p></div>';
 
 document.getElementById('result').insertAdjacentHTML('beforeend',vipHTML);
 
-// 1. 缓慢滚动到页面底部展示内容
-setTimeout(()=>{
-document.getElementById('result').scrollIntoView({behavior:'smooth'});
-},300);
-
-// 2. 滚动到底部后，快速回到顶部
-setTimeout(()=>{
-window.scrollTo({top:0,behavior:'smooth'});
-},2500);
-
-// 3. 回到顶部后，图片弹出动画
-setTimeout(()=>{
-const avatar=document.getElementById('genAvatar');
-if(avatar){
-avatar.classList.add('avatar-pop');
-avatar.style.display='inline-block';
-document.getElementById('avatarLoading').style.display='none';
-}
-},3500);
+// 显示等待动画
+document.getElementById('avatarLoading').innerHTML='<span class="waiting-anim">🎨 正在根据你的性格生成专属头像...</span>';
 
 // 调用图像生成API
 try{
@@ -436,10 +421,27 @@ headers:{'Content-Type':'application/json','Authorization':'Bearer 88167bb1-2e67
 body:JSON.stringify({guidance_scale:5,model:"doubao-seedream-4-0-250828",prompt:prompt,response_format:"url",seed:Math.floor(Math.random()*1000000),size:"1024x1024",watermark:true})
 });
 const data=await response.json();
+
+// API返回后，滚动到图片位置
 if(data.data&&data.data[0]&&data.data[0].url){
-setTimeout(()=>{
 document.getElementById('genAvatar').src=data.data[0].url;
-},3500);
+
+// 滚动到图片位置
+setTimeout(()=>{
+document.getElementById('avatarSection').scrollIntoView({behavior:'smooth'});
+},300);
+
+// 滚动到位后，显示弹出动画
+setTimeout(()=>{
+const avatar=document.getElementById('genAvatar');
+if(avatar){
+avatar.classList.add('avatar-pop');
+avatar.style.display='inline-block';
+document.getElementById('avatarLoading').style.display='none';
+}
+},1500);
+}else{
+document.getElementById('avatarLoading').innerText='头像生成中，请刷新页面查看';
 }
 }catch(e){
 document.getElementById('avatarLoading').innerText='头像生成遇到问题';
