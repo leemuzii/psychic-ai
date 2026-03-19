@@ -391,6 +391,11 @@
                 document.getElementById('paymentShow').style.display = 'none';
                 document.getElementById('vipContent').style.display = 'block';
                 
+                // 生成玄学内容
+                generateDivination();
+                generateWestern();
+                generateAvatar();
+                
                 // 生成更详细的VIP内容
                 var fullDescs = [
                     '你是那种表面云淡风轻，内心戏超多的人。表面上说"随便啊都行"，其实内心已经上演了80集宫斗剧。朋友圈永远岁月静好，微博小号全是 emo。你最大的优点是想得太多，缺点也是想得太多。',
@@ -702,3 +707,51 @@
     </script>
 </body>
 </html>
+
+            // 东方玄学占卜
+            function generateDivination() {
+                var bazi = ['丙子年','甲辰月','戊申日','辛亥时','壬戌年','丁卯月','庚子日','戊午时','丙寅年','辛未月','壬辰日','甲戌时'];
+                var wuxing = ['木命 - 缺金','火命 - 缺水','土命 - 缺木','金命 - 缺火','水命 - 缺土','木火通明','金水相生','土金相生','水木相生','火土相生'];
+                var mingge = ['偏财运旺','事业有成','感情丰富','智慧超群','领导力强','艺术天赋','技术专精','社交达人','学术型人才','创业型人才'];
+                var dayun = ['目前正走事业运','明年有升职机会','后年财运爆发','3年后桃花运','5年后人生巅峰'];
+                
+                document.getElementById('bazi').innerText = bazi[Math.floor(Math.random() * bazi.length)];
+                document.getElementById('wuxing').innerText = wuxing[Math.floor(Math.random() * wuxing.length)];
+                document.getElementById('mingge').innerText = mingge[Math.floor(Math.random() * mingge.length)];
+                document.getElementById('dayun').innerText = dayun[Math.floor(Math.random() * dayun.length)];
+            }
+            
+            // 西方星座
+            function generateWestern() {
+                var suns = ['白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座'];
+                var planets = ['太阳 - 自我表达','月亮 - 内心情感','水星 - 沟通思维','金星 - 爱情审美','火星 - 行动能量','木星 - 幸运扩展','土星 - 责任限制'];
+                
+                document.getElementById('sunSign').innerText = suns[Math.floor(Math.random() * suns.length)];
+                document.getElementById('moonSign').innerText = suns[Math.floor(Math.random() * suns.length)];
+                document.getElementById('risingSign').innerText = suns[Math.floor(Math.random() * suns.length)];
+                document.getElementById('planet').innerText = planets[Math.floor(Math.random() * planets.length)];
+            }
+            
+            // 100道测试
+            function start100Test() {
+                alert('100道测试功能开发中！敬请期待...');
+            }
+            
+            // AI生成头像
+            function generateAvatar() {
+                var avatars = [
+                    {emoji: '🐙', desc: '神秘深邃的章鱼🐙 - 你主人的内心像深海一样复杂，表面上冷静，实际上戏超多。', features: '智慧型/思考者/内敛'},
+                    {emoji: '🦊', desc: '聪明狡黠的狐狸🦊 - 看起来无害，其实一肚子坏水。表面笑眯眯，内心各种盘算。', features: '聪明/狡黠/社交达人'},
+                    {emoji: '🐺', desc: '孤傲的狼🐺 - 独来独往，只对自己认可的人敞开心扉。', features: '独立/忠诚/神秘'},
+                    {emoji: '🦁', desc: '王者之狮🦁 - 天生的领导者，霸气外露，但内心也有柔软的一面。', features: '领导力/自信/热情'},
+                    {emoji: '🐱', desc: '傲娇的猫🐱 - 表面高冷，内心粘人。需要独处空间，但也渴望被关注。', features: '傲娇/敏感/可爱'},
+                    {emoji: '🦅', desc: '高飞的鹰🦅 - 眼光长远，志向高远。不屑于小事，追求卓越。', features: '志向远大/洞察力强/独立'},
+                    {emoji: '🐉', desc: '神龙🐉 - 潜力无限，但还在沉睡。一旦觉醒，必将震撼世界！', features: '潜力股/神秘/强大'},
+                    {emoji: '🦋', desc: '破茧的蝶🦋 - 正在经历蜕变，表面平静，内心正在发生巨大变化。', features: '变化/成长/美丽'}
+                ];
+                
+                var av = avatars[Math.floor(Math.random() * avatars.length)];
+                document.getElementById('avatarDisplay').innerText = av.emoji;
+                document.getElementById('avatarDesc').innerText = av.desc;
+                document.getElementById('avatarFeatures').innerText = '特质：' + av.features;
+            }
