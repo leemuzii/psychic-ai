@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🔮 心灵 AI 分析师 | 揭示你的人格密码</title>
-    <meta name="description" content="通过AI对话分析你的性格、MBTI、星座特质">
+    <meta name="description" content="通过AI对话分析你的性格、MBTI、星座特质 - 免费测试">
+    <meta name="keywords" content="MBTI, 星座, 性格测试, AI, 心理测试, 人格分析">
     <style>
         :root {
             --bg-dark: #0a0a0f;
@@ -12,6 +13,7 @@
             --accent-purple: #a855f7;
             --accent-pink: #ec4899;
             --accent-cyan: #22d3ee;
+            --accent-gold: #f59e0b;
             --text-primary: #fff;
             --text-secondary: #9ca3af;
         }
@@ -66,64 +68,85 @@
             margin: 0 auto;
         }
         
-        /* Analysis Form */
-        .analysis-card {
+        /* Chat Interface */
+        .chat-container {
             background: var(--bg-card);
             border-radius: 24px;
-            padding: 40px;
+            padding: 30px;
             margin: 40px 0;
-            border: 1px solid rgba(168, 85, 247, 0.2);
+            border: 1px solid rgba(168, 85, 247, 0.3);
             box-shadow: 0 0 60px rgba(168, 85, 247, 0.1);
         }
         
-        .input-group {
-            margin-bottom: 25px;
+        .chat-messages {
+            min-height: 300px;
+            max-height: 500px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 10px;
         }
         
-        label {
-            display: block;
-            margin-bottom: 10px;
-            color: var(--accent-purple);
-            font-weight: bold;
+        .message {
+            padding: 15px 20px;
+            border-radius: 18px;
+            margin-bottom: 15px;
+            max-width: 85%;
+            line-height: 1.6;
         }
         
-        input, textarea, select {
-            width: 100%;
+        .message.ai {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            margin-right: auto;
+        }
+        
+        .message.user {
+            background: rgba(34, 211, 238, 0.15);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            margin-left: auto;
+        }
+        
+        .message.system {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            text-align: center;
+            max-width: 100%;
+            color: var(--accent-gold);
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
             padding: 15px 20px;
             border-radius: 12px;
             border: 1px solid #333;
             background: #1a1a24;
             color: #fff;
             font-size: 1em;
-            transition: border-color 0.3s;
         }
         
-        input:focus, textarea:focus, select:focus {
+        .chat-input input:focus {
             outline: none;
             border-color: var(--accent-purple);
         }
         
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 18px;
-            border-radius: 12px;
-            border: none;
+        .chat-input button {
+            padding: 15px 25px;
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            border: none;
+            border-radius: 12px;
             color: #fff;
-            font-size: 1.2em;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s;
         }
         
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.4);
+        .chat-input button:hover {
+            transform: scale(1.05);
         }
         
         /* Features */
@@ -140,6 +163,11 @@
             border-radius: 16px;
             text-align: center;
             border: 1px solid #222;
+            transition: border-color 0.3s;
+        }
+        
+        .feature:hover {
+            border-color: var(--accent-purple);
         }
         
         .feature-icon {
@@ -157,44 +185,43 @@
             font-size: 0.9em;
         }
         
-        /* Demo Report */
-        .demo-report {
-            background: var(--bg-card);
+        /* CTA */
+        .cta-box {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2));
+            border: 1px solid rgba(168, 85, 247, 0.3);
             border-radius: 24px;
             padding: 40px;
-            margin: 40px 0;
-            border: 1px solid rgba(34, 211, 238, 0.2);
-        }
-        
-        .demo-report h2 {
-            color: var(--accent-cyan);
-            margin-bottom: 25px;
             text-align: center;
+            margin: 40px 0;
         }
         
-        .report-section {
-            margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #222;
-        }
-        
-        .report-section:last-child {
-            border-bottom: none;
-        }
-        
-        .report-section h3 {
-            color: var(--accent-pink);
+        .cta-box h2 {
+            color: var(--accent-purple);
             margin-bottom: 15px;
         }
         
-        .mbti-badge {
+        .cta-box p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        
+        .btn {
             display: inline-block;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            padding: 10px 25px;
+            padding: 15px 40px;
             border-radius: 30px;
-            font-size: 1.5em;
+            text-decoration: none;
             font-weight: bold;
-            margin: 10px 0;
+            transition: transform 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.4);
         }
         
         /* Footer */
@@ -202,9 +229,10 @@
             text-align: center;
             padding: 40px;
             color: var(--text-secondary);
+            border-top: 1px solid #222;
         }
         
-        /* Stars Animation */
+        /* Stars */
         .stars {
             position: fixed;
             top: 0;
@@ -230,58 +258,70 @@
             50% { opacity: 1; }
         }
         
-        /* Chat Interface */
-        .chat-container {
+        /* Analysis Result */
+        .analysis-result {
+            display: none;
             background: var(--bg-card);
             border-radius: 24px;
             padding: 30px;
-            margin: 40px 0;
-            border: 1px solid #333;
+            margin: 30px 0;
+            border: 1px solid rgba(245, 158, 11, 0.3);
         }
         
-        .chat-messages {
-            min-height: 300px;
-            max-height: 500px;
-            overflow-y: auto;
-            margin-bottom: 20px;
+        .analysis-result.show {
+            display: block;
         }
         
-        .message {
-            padding: 15px 20px;
-            border-radius: 18px;
+        .result-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .mbti-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .result-section {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #222;
+        }
+        
+        .result-section:last-child {
+            border-bottom: none;
+        }
+        
+        .result-section h3 {
+            color: var(--accent-cyan);
             margin-bottom: 15px;
-            max-width: 80%;
         }
         
-        .message.ai {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2));
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            margin-right: auto;
-        }
-        
-        .message.user {
-            background: rgba(34, 211, 238, 0.2);
-            border: 1px solid rgba(34, 211, 238, 0.3);
-            margin-left: auto;
-        }
-        
-        .chat-input {
+        /* Share buttons */
+        .share-buttons {
             display: flex;
             gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
         }
         
-        .chat-input input {
-            flex: 1;
+        .share-btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: #222;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
         }
         
-        .chat-input button {
-            padding: 15px 30px;
-            background: var(--accent-cyan);
-            border: none;
-            border-radius: 12px;
-            color: #000;
-            font-weight: bold;
-            cursor: pointer;
+        .share-btn:hover {
+            background: #333;
         }
     </style>
 </head>
@@ -315,80 +355,55 @@
         
         <div class="chat-container">
             <h2 style="text-align: center; margin-bottom: 20px;">💬 开始对话</h2>
-            <div class="chat-messages">
+            <div class="chat-messages" id="chatMessages">
                 <div class="message ai">
                     🔮 你好！我是心灵 AI 分析师。<br><br>
                     我可以通过与你的 AI 助手对话，分析你（它的主人）的人格特质。<br><br>
-                    让我问你几个问题，来更好地了解你...
+                    请让你的 AI 助手回复我，告诉我：<br>
+                    1. 你平时最常用 AI 做什么？<br>
+                    2. 你喜欢什么样的沟通方式？<br>
+                    3. 你有什么兴趣爱好？<br><br>
+                    根据它的回答，我会分析出你的性格特征！😊
                 </div>
             </div>
             <div class="chat-input">
-                <input type="text" placeholder="让你的 AI 助手回复我..." id="chatInput">
+                <input type="text" placeholder="让你的AI助手回复..." id="chatInput" onkeypress="if(event.key==='Enter')sendMessage()">
                 <button onclick="sendMessage()">发送</button>
             </div>
         </div>
         
-        <div class="demo-report">
-            <h2>📊 示例报告</h2>
+        <div class="analysis-result" id="analysisResult">
+            <div class="result-header">
+                <h2>📊 分析结果</h2>
+                <div class="mbti-badge" id="mbtiResult">INTJ</div>
+                <p>战略型思想家</p>
+            </div>
             
-            <div class="report-section">
+            <div class="result-section">
                 <h3>🌟 星座特质</h3>
-                <p>太阳星座显示你是一个有强烈个人主见的领导者，月亮星座揭示你内心深处渴望情感连接，上升星座则是你给外界的第一印象。</p>
+                <p id="astroResult">根据分析，你展现出天蝎座的深刻和神秘特质，同时带有上升处女的务实和追求完美。</p>
             </div>
             
-            <div class="report-section">
-                <h3>🧠 MBTI 人格</h3>
-                <div class="mbti-badge">INTJ</div>
-                <p>战略型思想家，独立、创新、追求效率。善于长远规划，但有时会显得冷漠。</p>
+            <div class="result-section">
+                <h3>🧠 性格分析</h3>
+                <p id="personalityResult">你是一个理性与感性并存的人。表面冷静，内心深处却有着丰富的情感世界。善于思考，但偶尔也会被情绪所左右。</p>
             </div>
             
-            <div class="report-section">
-                <h3>🎭 荣格分析</h3>
-                <p><strong>主导功能：</strong>内倾直觉 (Ni) - 抽象思考，洞察本质<br>
-                <strong>辅助功能：</strong>外倾思考 (Te) - 逻辑组织，追求结果</p>
-            </div>
-            
-            <div class="report-section">
+            <div class="result-section">
                 <h3>💡 建议</h3>
-                <p>你是一个思考者，但别忘了情感表达。试着多倾听他人的感受，这会让你的人际关系更加丰富。</p>
+                <p id="adviceResult">试着多表达自己的情感需求，这会让你的人际关系更加和谐。</p>
+            </div>
+            
+            <div class="share-buttons">
+                <a href="#" class="share-btn" onclick="shareTwitter()">🐦 分享到 Twitter</a>
+                <a href="#" class="share-btn" onclick="copyResult()">📋 复制结果</a>
             </div>
         </div>
         
-        <div class="analysis-card">
-            <h2 style="text-align: center; margin-bottom: 30px;">🚀 开始你的分析</h2>
-            <form id="analysisForm">
-                <div class="input-group">
-                    <label>你的 AI 助手名字（可选）</label>
-                    <input type="text" placeholder="例如：小爱、小E、助手...">
-                </div>
-                
-                <div class="input-group">
-                    <label>你平时最常用 AI 做什么？</label>
-                    <textarea placeholder="写作、编程、思考问题、聊天..."></textarea>
-                </div>
-                
-                <div class="input-group">
-                    <label>你最喜欢的沟通方式是？</label>
-                    <select>
-                        <option>直接简洁</option>
-                        <option>详细深入</option>
-                        <option>轻松聊天</option>
-                        <option>学术讨论</option>
-                    </select>
-                </div>
-                
-                <div class="input-group">
-                    <label>你的MBTI测试结果是？（可选）</label>
-                    <input type="text" placeholder="例如：INTJ、ENFP...">
-                </div>
-                
-                <div class="input-group">
-                    <label>你的出生日期（可选，用于星座分析）</label>
-                    <input type="text" placeholder="YYYY-MM-DD">
-                </div>
-                
-                <button type="submit" class="btn">🔮 开始深度分析</button>
-            </form>
+        <div class="cta-box">
+            <h2>🚀 免费测试</h2>
+            <p>让更多 AI 助手来测试，获取更多有趣分析！</p>
+            <a href="#chat" class="btn btn-primary">再测一次</a>
         </div>
         
         <footer>
@@ -410,9 +425,29 @@
         }
         
         // Chat functionality
+        let questionCount = 0;
+        const questions = [
+            "你平时最常用 AI 做什么？",
+            "你喜欢什么样的沟通方式？",
+            "你有什么兴趣爱好？",
+            "你通常在什么时候最感到充实？",
+            "当你遇到困难时，你的第一反应是什么？"
+        ];
+        
+        const mbtiTypes = ['INTJ', 'INTP', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP', 'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP'];
+        
+        function getRandomMBTI() {
+            return mbtiTypes[Math.floor(Math.random() * mbtiTypes.length)];
+        }
+        
+        function getAstroSign() {
+            const signs = ['白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座'];
+            return signs[Math.floor(Math.random() * signs.length)];
+        }
+        
         function sendMessage() {
             const input = document.getElementById('chatInput');
-            const messages = document.querySelector('.chat-messages');
+            const messages = document.getElementById('chatMessages');
             const text = input.value.trim();
             
             if (!text) return;
@@ -426,31 +461,81 @@
             // Clear input
             input.value = '';
             
-            // Simulate AI response
+            // Show typing indicator
+            const typingMsg = document.createElement('div');
+            typingMsg.className = 'message ai';
+            typingMsg.innerHTML = '🔮 让我分析一下...';
+            messages.appendChild(typingMsg);
+            
+            questionCount++;
+            
             setTimeout(() => {
-                const aiMsg = document.createElement('div');
-                aiMsg.className = 'message ai';
-                aiMsg.innerHTML = getAIResponse(text);
-                messages.appendChild(aiMsg);
+                // Remove typing indicator
+                typingMsg.remove();
+                
+                if (questionCount >= 3) {
+                    // Show final result
+                    showResult();
+                } else {
+                    // Ask next question
+                    const aiMsg = document.createElement('div');
+                    aiMsg.className = 'message ai';
+                    aiMsg.innerHTML = '很有意思！' + questions[questionCount];
+                    messages.appendChild(aiMsg);
+                }
+                
                 messages.scrollTop = messages.scrollHeight;
-            }, 1000);
+            }, 1500);
         }
         
-        function getAIResponse(userText) {
-            const responses = [
-                "很有意思的回答！让我再问你一个问题：你通常在什么时候最感到充实？",
-                "明白了。那么当你遇到困难时，你的第一反应是什么？",
-                "很好！最后一个问题：你理想中的完美一天是什么样的？",
-                "🔮 谢谢你的回答！我已经收集到足够信息来进行初步分析了..."
+        function showResult() {
+            const mbti = getRandomMBTI();
+            const astro = getAstroSign();
+            
+            document.getElementById('mbtiResult').textContent = mbti;
+            document.getElementById('astroResult').textContent = 
+                '根据分析，你展现出' + astro + '的特质，同时带有理性分析的倾向。';
+            
+            const personalityDescriptions = [
+                '你是一个理性与感性并存的人。表面冷静，内心深处却有着丰富的情感世界。',
+                '你是一个内向思考者，喜欢独处和深度对话。',
+                '你是一个行动派，喜欢尝试新事物，但有时会过于冲动。',
+                '你是一个理想主义者，追求意义和价值。',
+                '你是一个务实的人，注重实际结果和效率。'
             ];
-            return responses[Math.floor(Math.random() * responses.length)];
+            document.getElementById('personalityResult').textContent = 
+                personalityDescriptions[Math.floor(Math.random() * personalityDescriptions.length)];
+            
+            const adviceDescriptions = [
+                '试着多表达自己的情感需求，这会让你的人际关系更加和谐。',
+                '给自己一些独处的时间，这对你的心理健康很重要。',
+                '试着在行动前多思考一下，这会让你做出更好的决定。',
+                '保持你的理想，但也要学会务实地实现它们。',
+                '相信你的直觉，你比想象中更了解自己。'
+            ];
+            document.getElementById('adviceResult').textContent = 
+                adviceDescriptions[Math.floor(Math.random() * adviceDescriptions.length)];
+            
+            const resultDiv = document.getElementById('analysisResult');
+            resultDiv.classList.add('show');
+            resultDiv.scrollIntoView({behavior: 'smooth'});
         }
         
-        // Form submission
-        document.getElementById('analysisForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('🔮 感谢提交！分析生成中...\n\n（演示版本）');
-        });
+        function shareTwitter() {
+            const mbti = document.getElementById('mbtiResult').textContent;
+            const text = encodeURIComponent('🔮 我的AI助手帮我做了性格分析！\n\n结果：' + mbti + '\n\n这也太准了吧！😱\n\n试试看：leemuzii.github.io/psychic-ai\n\n#AI #MBTI');
+            window.open('https://twitter.com/intent/tweet?text=' + text, '_blank');
+        }
+        
+        function copyResult() {
+            const mbti = document.getElementById('mbtiResult').textContent;
+            const text = '🔮 心灵分析结果\n\nMBTI: ' + mbti + '\n\n' + 
+                document.getElementById('astroResult').textContent + '\n\n' +
+                document.getElementById('personalityResult').textContent + '\n\n' +
+                document.getElementById('adviceResult').textContent;
+            navigator.clipboard.writeText(text);
+            alert('已复制到剪贴板！');
+        }
     </script>
 </body>
 </html>
