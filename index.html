@@ -455,4 +455,18 @@ const prompts={
 'ISFJ':`红白机像素风格，一位温柔的${genderText}护士，穿围裙，手持药草，慈祥微笑，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
 'ESTJ':`红白机像素风格，一位${genderText}商人，穿西装，手持金币袋，自信表情，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
 'ESFJ':`红白机像素风格，一位${genderText}公主，穿华丽礼裙，手持鲜花，优雅微笑，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
-'ISTP':`红白机像素风格
+'ISTP':`红白机像素风格，一位${genderText}工匠，穿皮甲，手持工具箱，眼神冷静，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ISFP':`红白机像素风格，一位${genderText}艺术家，穿彩色长裙，在画架前作画，浪漫气质，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ESTP':`红白机像素风格，一位${genderText}赛车手，穿赛车服，手持头盔，酷帅表情，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ESFP':`红白机像素风格，一位${genderText}歌手，穿亮片衣服，手持麦克风，激情演唱，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`
+};
+return prompts[mbti]||prompts['INTJ'];
+}
+
+setTimeout(()=>{
+const aiMsg=document.createElement('div');
+aiMsg.className='message ai';
+aiMsg.innerHTML=freeQuestions[0];
+document.getElementById('chatMessages').appendChild(aiMsg);
+},600);
+</script>
