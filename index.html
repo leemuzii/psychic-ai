@@ -313,12 +313,11 @@ input.value='';
 currentQ++;
 
 if(!isPaid){
+updateProgress();
 if(currentQ>=10){
 isFinished=true;
-showResult();
-showPayWall();
+setTimeout(()=>{showResult();showPayWall();},500);
 }else{
-updateProgress();
 setTimeout(()=>{
 const aiMsg=document.createElement('div');
 aiMsg.className='message ai';
@@ -328,11 +327,11 @@ msgs.scrollTop=msgs.scrollHeight;
 },500);
 }
 }else{
+updateProgress();
 if(currentQ>=48){
 isFinished=true;
-showFinalResult();
+setTimeout(()=>showFinalResult(),500);
 }else{
-updateProgress();
 setTimeout(()=>{
 const aiMsg=document.createElement('div');
 aiMsg.className='message ai';
