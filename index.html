@@ -334,7 +334,26 @@
                 </div>
                 <div id="paymentShow" style="display:none;">
                     <img src="alipay.jpg" style="width:200px; border-radius:10px;" alt="支付宝付款码">
-                    <p style="font-size:0.8em; color:var(--text-secondary); margin-top:10px;">📱 保存图片，用支付宝扫码付款 ¥9.9</p>
+                    <p style="font-size:0.9em; color:var(--accent-gold); margin-top:15px;">💰 <strong>付款 ¥9.9</strong></p>
+                    <p style="font-size:0.75em; color:var(--text-secondary); margin-top:5px;">付款成功后截图联系微信：xxx</p>
+                    <button onclick="showThankYou()" style="margin-top:15px; padding:8px 20px; background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple)); border:none; border-radius:20px; color:#fff; cursor:pointer;">🎉 模拟已付款</button>
+                </div>
+                <div id="thankYouMsg" style="display:none; padding:20px; background:linear-gradient(135deg,rgba(34,211,238,0.2),rgba(168,85,247,0.2)); border-radius:15px; margin-top:15px;">
+                    <h3 style="color:var(--accent-gold);">🎉 感谢支持！</h3>
+                    <p style="font-size:0.85em; color:var(--text-secondary); margin-top:10px;">您好！我是允夕的 creator ~</p>
+                    <p style="font-size:0.85em; color:var(--text-secondary);">已收到您的付款，马上为您生成专属深度报告！</p>
+                    <div style="margin-top:15px; padding:10px; background:rgba(0,0,0,0.3); border-radius:10px;">
+                        <p style="font-size:0.8em; color:var(--accent-cyan);">📧 请添加微信发送付款截图</p>
+                        <p style="font-size:0.9em; color:var(--accent-gold); font-weight:bold;">微信：xxx</p>
+                    </div>
+                    <div style="margin-top:15px; padding:10px; background:rgba(0,0,0,0.3); border-radius:10px;">
+                        <p style="font-size:0.8em; color:var(--accent-pink);">🎁 您的专属权益：</p>
+                        <p style="font-size:0.8em; color:var(--text-secondary);">• 100+道完整灵魂拷问</p>
+                        <p style="font-size:0.8em; color:var(--text-secondary);">• 10页深度分析报告</p>
+                        <p style="font-size:0.8em; color:var(--text-secondary);">• 专属人设解读</p>
+                        <p style="font-size:0.8em; color:var(--text-secondary);">• 未来运势预测</p>
+                        <p style="font-size:0.8em; color:var(--text-secondary);">• 每月运势更新</p>
+                    </div>
                 </div>
             </div>
             <script>
@@ -347,6 +366,10 @@
                 } else {
                     alert('密码错误！');
                 }
+            }
+            function showThankYou() {
+                document.getElementById('paymentShow').style.display = 'none';
+                document.getElementById('thankYouMsg').style.display = 'block';
             }
             if(localStorage.getItem('adminVerified') === 'true') {
                 document.getElementById('paymentShow').style.display = 'block';
