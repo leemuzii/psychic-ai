@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🔮 灵魂挖掘机PRO | 全网最毒舌人格分析</title>
-    <meta name="description" content="让AI吐槽主人，测出最真实的人格！MBTI+九型人格+星座+运势">
+    <meta name="description" content="让AI吐槽主人，测出最真实的人格！MBTI+星座+运势">
     <style>
         :root {
             --bg-dark: #0a0a0f;
@@ -17,276 +17,83 @@
             --text-primary: #fff;
             --text-secondary: #9ca3af;
         }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-dark);
             color: var(--text-primary);
             min-height: 100vh;
         }
-        
         .container { max-width: 600px; margin: 0 auto; padding: 15px; }
-        
         header { text-align: center; padding: 20px 0; }
-        
         .logo { font-size: 3em; animation: shake 0.3s infinite; }
-        
-        @keyframes shake {
-            0%, 100% { transform: rotate(-3deg); }
-            50% { transform: rotate(3deg); }
-        }
-        
-        h1 {
-            font-size: 1.6em;
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-gold), var(--accent-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 10px 0;
-        }
-        
-        .vip-banner {
-            background: linear-gradient(135deg, rgba(239,68,68,0.3), rgba(245,158,11,0.3));
-            border: 2px solid var(--accent-gold);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 15px 0;
-            text-align: center;
-        }
-        
-        .vip-title {
-            font-size: 1.3em;
-            color: var(--accent-gold);
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        
-        .vip-price {
-            font-size: 2em;
-            color: var(--accent-red);
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        
-        .vip-price span { font-size: 0.4em; color: var(--text-secondary); }
-        
-        .vip-features {
-            text-align: left;
-            margin: 15px 0;
-            font-size: 0.85em;
-        }
-        
-        .vip-features li {
-            padding: 5px 0;
-            color: var(--text-secondary);
-        }
-        
-        .vip-features li:before { content: "✨ "; color: var(--accent-gold); }
-        
-        .pay-btn {
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
-            border: none;
-            padding: 15px 40px;
-            border-radius: 30px;
-            color: #fff;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-        
-        .intro {
-            background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(245,158,11,0.15));
-            border: 1px solid rgba(245,158,11,0.3);
-            border-radius: 12px;
-            padding: 15px;
-            margin: 15px 0;
-            font-size: 0.85em;
-        }
-        
+        @keyframes shake { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+        h1 { font-size: 1.6em; background: linear-gradient(135deg, var(--accent-red), var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px 0; }
+        .stats { display: flex; justify-content: center; gap: 20px; margin: 15px 0; }
+        .stat { text-align: center; }
+        .stat-num { font-size: 1.5em; color: var(--accent-gold); font-weight: bold; }
+        .stat-label { font-size: 0.7em; color: var(--text-secondary); }
+        .types { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; justify-content: center; }
+        .type-tag { background: rgba(168,85,247,0.2); padding: 4px 10px; border-radius: 15px; font-size: 0.7em; color: var(--accent-cyan); }
+        .intro { background: rgba(239,68,68,0.15); border: 1px solid rgba(245,158,11,0.3); border-radius: 12px; padding: 15px; margin: 15px 0; font-size: 0.85em; }
         .intro strong { color: var(--accent-gold); }
         
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 15px 0;
-        }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-num {
-            font-size: 1.5em;
-            color: var(--accent-gold);
-            font-weight: bold;
-        }
-        
-        .stat-label { font-size: 0.7em; color: var(--text-secondary); }
-        
-        .types {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin: 10px 0;
-            justify-content: center;
-        }
-        
-        .type-tag {
-            background: rgba(168,85,247,0.2);
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.7em;
-            color: var(--accent-cyan);
-        }
-        
-        .testimonials {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 15px;
-            margin: 15px 0;
-            border: 1px solid #333;
-        }
-        
-        .testimonial {
-            padding: 10px;
-            border-bottom: 1px solid #222;
-        }
-        
-        .testimonial:last-child { border-bottom: none; }
-        
-        .testimonial-text { font-size: 0.8em; color: var(--text-secondary); font-style: italic; }
-        .testimonial-author { font-size: 0.75em; color: var(--accent-cyan); margin-top: 5px; }
-        
-        .countdown {
-            background: rgba(239,68,68,0.2);
-            border: 1px solid var(--accent-red);
-            border-radius: 12px;
-            padding: 12px;
-            margin: 15px 0;
-            text-align: center;
-            font-size: 0.85em;
-        }
-        
-        .countdown strong { color: var(--accent-red); }
-        
-        .chat-container {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 15px;
-            margin: 15px 0;
-            border: 1px solid rgba(168,85,247,0.3);
-        }
-        
-        .progress {
-            background: #222;
-            border-radius: 15px;
-            padding: 6px 12px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.8em;
-        }
-        
+        /* 测试区域 */
+        .chat-container { background: var(--bg-card); border-radius: 16px; padding: 15px; margin: 15px 0; border: 1px solid rgba(168,85,247,0.3); }
+        .progress { background: #222; border-radius: 15px; padding: 6px 12px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 0.8em; }
         .progress-bar { flex: 1; height: 6px; background: #333; border-radius: 3px; overflow: hidden; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); }
-        
         .chat-messages { min-height: 200px; max-height: 300px; overflow-y: auto; margin-bottom: 10px; }
-        
-        .message {
-            padding: 10px 14px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            max-width: 92%;
-            font-size: 0.85em;
-            line-height: 1.5;
-        }
-        
-        .message.ai {
-            background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(239,68,68,0.1));
-            border: 1px solid rgba(168,85,247,0.3);
-            margin-right: auto;
-        }
-        
-        .message.user {
-            background: rgba(34,211,238,0.1);
-            border: 1px solid rgba(34,211,238,0.3);
-            margin-left: auto;
-        }
-        
+        .message { padding: 10px 14px; border-radius: 12px; margin-bottom: 10px; max-width: 92%; font-size: 0.85em; line-height: 1.5; }
+        .message.ai { background: rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.3); margin-right: auto; }
+        .message.user { background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.3); margin-left: auto; }
+        .message.system { background: rgba(245,158,11,0.2); border: 1px solid var(--accent-gold); text-align: center; color: var(--accent-gold); }
         .chat-input { display: flex; gap: 6px; }
+        .chat-input input { flex: 1; padding: 10px 14px; border-radius: 10px; border: 1px solid #333; background: #1a1a24; color: #fff; font-size: 0.9em; }
+        .chat-input button { padding: 10px 16px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); border: none; border-radius: 10px; color: #fff; font-weight: bold; font-size: 0.85em; cursor: pointer; }
         
-        .chat-input input {
-            flex: 1;
-            padding: 10px 14px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            background: #1a1a24;
-            color: #fff;
-            font-size: 0.9em;
-        }
-        
-        .chat-input button {
-            padding: 10px 16px;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            border: none;
-            border-radius: 10px;
-            color: #fff;
-            font-weight: bold;
-            font-size: 0.85em;
-            cursor: pointer;
-        }
-        
-        .free-tag {
-            background: #333;
-            color: #888;
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-size: 0.7em;
-            margin-left: 5px;
-        }
-        
-        .pro-tag {
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-size: 0.7em;
-            margin-left: 5px;
-        }
-        
+        /* 结果区域 */
         .result { display: none; }
         .result.show { display: block; }
-        
-        .zodiac-box {
-            background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(245,158,11,0.2));
-            border-radius: 12px;
-            padding: 15px;
-            margin: 12px 0;
-            text-align: center;
-        }
-        
+        .zodiac-box { background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(245,158,11,0.2)); border-radius: 12px; padding: 15px; margin: 12px 0; text-align: center; }
         .zodiac-title { font-size: 1em; color: var(--accent-gold); margin-bottom: 10px; }
-        
         .zodiac-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8em; }
-        
         .zodiac-item { background: rgba(0,0,0,0.3); padding: 8px; border-radius: 8px; }
         .zodiac-item span { color: var(--accent-gold); }
-        
         .result-section { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #222; }
         .result-section:last-child { border-bottom: none; }
         .result-section h3 { color: var(--accent-gold); margin-bottom: 6px; font-size: 0.9em; }
         .result-section p { color: var(--text-secondary); font-size: 0.8em; line-height: 1.6; }
-        
         .main-badge { display: inline-block; background: linear-gradient(135deg, var(--accent-red), var(--accent-gold)); padding: 10px 30px; border-radius: 25px; font-size: 1.4em; font-weight: bold; margin: 8px 0; }
-        
         .sub-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 10px 0; }
         .sub-badge { background: rgba(168,85,247,0.2); padding: 5px 12px; border-radius: 15px; font-size: 0.8em; color: var(--accent-cyan); }
         
-        footer { text-align: center; padding: 15px; color: #444; font-size: 0.75em; }
+        /* 付费板块 - 固定底部 */
+        .pay-section { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, var(--bg-dark), transparent); padding: 20px; padding-bottom: 30px; }
+        .vip-banner { background: linear-gradient(135deg, rgba(239,68,68,0.3), rgba(245,158,11,0.3)); border: 2px solid var(--accent-gold); border-radius: 16px; padding: 20px; text-align: center; }
+        .vip-title { font-size: 1.3em; color: var(--accent-gold); font-weight: bold; margin-bottom: 10px; }
+        .vip-price { font-size: 2em; color: var(--accent-red); font-weight: bold; }
+        .vip-price span { font-size: 0.4em; color: var(--text-secondary); }
+        .pay-btn { background: linear-gradient(135deg, var(--accent-red), var(--accent-gold)); border: none; padding: 15px 40px; border-radius: 30px; color: #fff; font-size: 1.1em; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; }
+        
+        /* VIP内容 */
+        .vip-content { display: none; }
+        .vip-content.show { display: block; }
+        .vip-section { background: var(--bg-card); border-radius: 12px; padding: 15px; margin: 12px 0; border: 2px solid var(--accent-gold); }
+        .vip-section h3 { color: var(--accent-gold); margin-bottom: 10px; }
+        
+        .vip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .vip-grid-item { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; text-align: center; }
+        .vip-grid-item p { font-size: 0.75em; color: var(--text-secondary); }
+        .vip-grid-item strong { display: block; color: var(--accent-gold); font-size: 0.9em; margin-bottom: 3px; }
+        
+        .avatar-box { text-align: center; padding: 20px; background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(236,72,153,0.2)); border-radius: 12px; margin: 15px 0; }
+        .avatar-emoji { font-size: 80px; }
+        
+        footer { text-align: center; padding: 80px 15px 20px; color: #444; font-size: 0.75em; }
+        
+        .limited { border: 2px solid var(--accent-red); }
+        .limited-tag { background: var(--accent-red); color: #fff; padding: 3px 8px; border-radius: 10px; font-size: 0.7em; }
     </style>
 </head>
 <body>
@@ -295,13 +102,10 @@
             <div class="logo">🔮</div>
             <h1>灵魂挖掘机PRO</h1>
             <p style="color: var(--text-secondary); font-size: 0.85em;">全网最毒舌人格分析</p>
-            
             <div class="stats">
                 <div class="stat"><div class="stat-num">99+</div><div class="stat-label">人测过</div></div>
                 <div class="stat"><div class="stat-num">98%</div><div class="stat-label">说准</div></div>
-                <div class="stat"><div class="stat-num">免费</div><div class="stat-label">基础版</div></div>
             </div>
-            
             <div class="types">
                 <span class="type-tag">MBTI</span>
                 <span class="type-tag">九型人格</span>
@@ -311,190 +115,36 @@
             </div>
         </header>
         
-        <!-- 付费板块 -->
-        <div class="vip-banner">
-            <div class="vip-title">🎯 深度定制版 🔒</div>
-            <div class="vip-price">¥9.9 <span>/ 终身</span></div>
-            <ul class="vip-features">
-                <li>🔐 100+道灵魂拷问（完整版）</li>
-                <li>📊 10页深度分析报告（PDF）</li>
-                <li>🎭 专属人设解读</li>
-                <li>💕 深度情感分析</li>
-                <li>💰 金钱事业专项建议</li>
-                <li>🔮 未来运势预测</li>
-                <li>📱 专属壁纸/头像</li>
-                <li>🎁 每月运势更新</li>
-            </ul>
-            <button class="pay-btn" onclick="document.getElementById('qrCode').style.display='block'">🔥 立即解锁完整版</button>
-            
-            <div id="qrCode" style="display:none; margin-top:15px; text-align:center;">
-                <div id="adminPanel">
-                    <input type="password" id="adminPass" placeholder="管理员密码" style="padding:10px; border-radius:8px; border:1px solid #333; background:#1a1a24; color:#fff; width:150px;">
-                    <button onclick="checkAdmin()" style="padding:10px 15px; background:var(--accent-purple); border:none; border-radius:8px; color:#fff; cursor:pointer;">验证</button>
-                </div>
-                <div id="paymentShow" style="display:none;">
-                    <img src="alipay.jpg" style="width:200px; border-radius:10px;" alt="支付宝付款码">
-                    <p style="font-size:0.9em; color:var(--accent-gold); margin-top:15px;">💰 <strong>付款 ¥9.9 解锁完整版</strong></p>
-                    <button onclick="showVIPContent()" style="margin-top:15px; padding:10px 25px; background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple)); border:none; border-radius:25px; color:#fff; font-weight:bold; cursor:pointer;">🎉 模拟已付款（测试）</button>
-                </div>
-                <div id="vipContent" style="display:none;">
-                    <div style="padding:20px; background:linear-gradient(135deg,rgba(245,158,11,0.3),rgba(239,68,68,0.3)); border-radius:15px; border:2px solid var(--accent-gold);">
-                        <h2 style="color:var(--accent-gold);">🔓 VIP专属深度分析</h2>
-                        <p style="color:var(--text-secondary); font-size:0.85em;">恭喜解锁完整版！</p>
-                    </div>
-                    
-                    <div style="margin-top:20px; padding:15px; background:var(--bg-card); border-radius:12px; border:1px solid var(--accent-purple);">
-                        <h3 style="color:var(--accent-purple);">🎭 完整人格画像</h3>
-                        <p id="vipFullDesc" style="color:var(--text-secondary); font-size:0.85em; line-height:1.6;"></p>
-                    </div>
-                    
-                    <div style="margin-top:15px; padding:15px; background:var(--bg-card); border-radius:12px; border:1px solid var(--accent-cyan);">
-                        <h3 style="color:var(--accent-cyan);">💰 财富密码</h3>
-                        <p id="vipMoney" style="color:var(--text-secondary); font-size:0.85em; line-height:1.6;"></p>
-                    </div>
-                    
-                    <div style="margin-top:15px; padding:15px; background:var(--bg-card); border-radius:12px; border:1px solid var(--accent-pink);">
-                        <h3 style="color:var(--accent-pink);">💕 情感密码</h3>
-                        <p id="vipLove" style="color:var(--text-secondary); font-size:0.85em; line-height:1.6;"></p>
-                    </div>
-                    
-                    <div style="margin-top:15px; padding:15px; background:var(--bg-card); border-radius:12px; border:1px solid var(--accent-gold);">
-                        <h3 style="color:var(--accent-gold);">🔮 未来30天运势</h3>
-                        <p id="vipFuture" style="color:var(--text-secondary); font-size:0.85em; line-height:1.6;"></p>
-                    </div>
-                    
-                    <div style="margin-top:15px; padding:15px; background:var(--bg-card); border-radius:12px; border:1px solid var(--accent-red);">
-                        <h3 style="color:var(--accent-red);">⚡ 人生建议</h3>
-                        <p id="vipAdvice" style="color:var(--text-secondary); font-size:0.85em; line-height:1.6;"></p>
-                    </div>
-                    
-                    <div style="margin-top:15px; padding:15px; background:var(--bg-card); border-radius:12px;">
-                        <h3 style="color:var(--accent-cyan);">🎁 专属福利</h3>
-                        <p style="color:var(--text-secondary); font-size:0.85em;">• 每月运势更新 ✨</p>
-                        <p style="color:var(--text-secondary); font-size:0.85em;">• 专属壁纸/头像 📱</p>
-                        <p style="color:var(--text-secondary); font-size:0.85em;">• 1对1深度咨询 💬</p>
-                    </div>
-                </div>
-            </div>
-            <script>
-            function checkAdmin() {
-                var pass = document.getElementById('adminPass').value;
-                if(pass === 'yuxi2026') {
-                    document.getElementById('paymentShow').style.display = 'block';
-                    document.getElementById('adminPanel').style.display = 'none';
-                    localStorage.setItem('adminVerified', 'true');
-                } else {
-                    alert('密码错误！');
-                }
-            }
-            function showVIPContent() {
-                document.getElementById('paymentShow').style.display = 'none';
-                document.getElementById('vipContent').style.display = 'block';
-                
-                // 生成玄学内容
-                generateDivination();
-                generateWestern();
-                generateAvatar();
-                
-                // 生成更详细的VIP内容
-                var fullDescs = [
-                    '你是那种表面云淡风轻，内心戏超多的人。表面上说"随便啊都行"，其实内心已经上演了80集宫斗剧。朋友圈永远岁月静好，微博小号全是 emo。你最大的优点是想得太多，缺点也是想得太多。',
-                    '你是一个矛盾的结合体。理性的时候能分析得头头是道，感性起来自己都害怕。你觉得自己是社恐，但熟人面前就是社牛。你觉得自己很普通，但偶尔又会觉得自己是天才。',
-                    '你是那种"道理都懂但就是不做"的典型代表。每次下定决心要改变，结果第二天还是一样。内心深处其实有小火苗，但更多时候只想躺着。',
-                    '表面高冷，内心柔软。别人都觉得你很坚强，其实你经常独自崩溃。你习惯了伪装，习惯了说"我没事"。但其实你比谁都敏感，比谁都渴望被理解。'
-                ];
-                document.getElementById('vipFullDesc').innerText = fullDescs[Math.floor(Math.random() * fullDescs.length)];
-                
-                var moneyDesc = [
-                    '你花钱的原则：开心就好。但月底一看账单就开始怀疑人生。理财观念是赚多少花多少，偶尔有余钱就买买买。建议：存点钱吧，不然真的老了会后悔。',
-                    '精打细算是你的人生信条。每一笔钱都要花在刀刃上。但有时候对自己太抠了，偶尔也对自己大方一下嘛！建议：该花的钱不要省。',
-                    '你是那种钱够花就行，不追求大富大贵。但内心深处还是渴望财务自由的。偶尔会幻想中奖，但醒来还是继续上班。建议：可以尝试副业。'
-                ];
-                document.getElementById('vipMoney').innerText = moneyDesc[Math.floor(Math.random() * moneyDesc.length)];
-                
-                var loveDesc = [
-                    '爱情中你是那种要么不说，说就是认真的类型。暗恋高手但不敢表白。恋爱中患得患失，有时候会无理取闹但事后又后悔。你需要的是一个能包容你小脾气的伴侣。',
-                    '你是那种越喜欢越装作不在乎的类型。内心戏超多，但表面要装作若无其事。冷战的时候就算后悔也不会先低头。建议：爱要勇敢说出来。',
-                    '你是付出型人格，但渴望被回报。恋爱中容易失去自我，把对方当成全世界。建议：先学会爱自己，再去爱别人。'
-                ];
-                document.getElementById('vipLove').innerText = loveDesc[Math.floor(Math.random() * loveDesc.length)];
-                
-                var futureDesc = [
-                    '未来30天：你的运势还不错！有机会遇到贵人，可能是一段新的友情或者合作关系。事业上有小突破，但需要耐心。财运一般，别冲动投资。健康方面注意休息。',
-                    '未来30天：你可能会遇到一些挑战，但都是成长的机会。有种"置之死地而后生"的感觉。感情上有戏，会有暗恋的人主动靠近。健康注意不要熬夜。',
-                    '未来30天：是你发光发热的时候！之前的努力开始有回报了。可能会收到好消息，比如升职、加薪、或者中奖。财运不错，但也要注意不要过度消费。'
-                ];
-                document.getElementById('vipFuture').innerText = futureDesc[Math.floor(Math.random() * futureDesc.length)];
-                
-                var adviceDesc = [
-                    '你的人生建议：想做什么就去做吧，别等以后。你永远没有准备好的时候，现在就是最好的时机。别太在意别人的眼光，你的人生是自己的。',
-                    '你的人生建议：适当慢下来，停下来思考一下真的需要什么。不要被社会的节奏带着跑。你的人生不是比赛，不需要跟别人比。',
-                    '你的人生建议：勇敢表达自己的真实想法，不要总是迎合别人。你的想法和感受同样重要。学会说"不"，学会拒绝。'
-                ];
-                document.getElementById('vipAdvice').innerText = adviceDesc[Math.floor(Math.random() * adviceDesc.length)];
-            }
-            if(localStorage.getItem('adminVerified') === 'true') {
-                document.getElementById('paymentShow').style.display = 'block';
-                document.getElementById('adminPanel').style.display = 'none';
-            }
-            </script>
-        </div>
-        
-        <!-- 限时优惠 -->
-        <div class="countdown">
-            ⏰ <strong>限时优惠！</strong> 前100名送价值99元1对1咨询
-        </div>
-        
-        <!-- 社交证明 -->
-        <div class="testimonials">
-            <div class="testimonial">
-                <div class="testimonial-text">"我测完直接裂开了...这真的是我本人？太准了吧！"</div>
-                <div class="testimonial-author">- 网友A</div>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-text">"让我朋友也测了，结果她哭了一天哈哈哈"</div>
-                <div class="testimonial-author">- 网友B</div>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-text">"花9.9买不了吃亏买不了上当，但能看清自己"</div>
-                <div class="testimonial-author">- 网友C</div>
-            </div>
-        </div>
-        
+        <!-- 免费测试区域 -->
         <div class="intro">
-            ⚠️ <strong>玩法：</strong>让你的AI回答问题<br>
-            我来扒光你主人的真面目！<br>
-            <strong>10题深度灵魂拷问</strong> <span class="free-tag">免费</span>
+            ⚠️ <strong>10题免费测试</strong> - 答完10题查看结果
         </div>
         
-        <div class="chat-container">
+        <div class="chat-container" id="testArea">
             <div class="progress">
                 <span>🔮</span>
-                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
                 <span id="progressText">0/10</span>
             </div>
-            
             <div class="chat-messages" id="chatMessages">
                 <div class="message ai">
                     😈 欢迎来到<strong>灵魂挖掘机PRO</strong>！<br><br>
-                    这里是全网最毒舌的人格分析！<br>
                     10个灵魂拷问，扒光你主人的皮！<br><br>
                     <strong>准备好了吗？开始审判！</strong> 🔥
                 </div>
             </div>
-            
             <div class="chat-input">
                 <input type="text" placeholder="让AI如实招来..." id="chatInput" onkeypress="if(event.key==='Enter')sendMessage()">
                 <button onclick="sendMessage()">😈 答</button>
             </div>
         </div>
         
+        <!-- 结果区域 -->
         <div class="result" id="result">
             <div class="zodiac-box">
                 <div class="zodiac-title">🌟 今日运势</div>
                 <div class="zodiac-grid" id="zodiacResult"></div>
             </div>
-            
             <div class="sub-badges" id="subBadges"></div>
             <div class="main-badge" id="mainResult">???</div>
             
@@ -502,47 +152,81 @@
                 <h3>🎭 灵魂真相</h3>
                 <p id="mbtiDetail"></p>
             </div>
-            
             <div class="result-section">
                 <h3>🧠 内在分析</h3>
                 <p id="bigFiveResult"></p>
             </div>
-            
             <div class="result-section">
                 <h3>💀 阴暗面</h3>
                 <p id="darkSideResult"></p>
             </div>
-            
             <div class="result-section">
-                <h3>💕 情感模式</h3>
+                <h3>💕 情感</h3>
                 <p id="emotionResult"></p>
             </div>
-            
             <div class="result-section">
-                <h3>💰 金钱观</h3>
+                <h3>💰 金钱</h3>
                 <p id="moneyResult"></p>
             </div>
-            
             <div class="result-section">
-                <h3>🔮 人生剧本</h3>
-                <p id="lifeResult"></p>
-            </div>
-            
-            <div class="result-section">
-                <h3>💡 暴击建议</h3>
+                <h3>💡 建议</h3>
                 <p id="adviceResult"></p>
             </div>
-            
-            <div class="vip-banner" style="margin-top: 20px;">
-                <div class="vip-title">🔓 解锁完整版？</div>
-                <p style="font-size: 0.8em; color: var(--text-secondary);">测完不过瘾？想要更详细的分析？</p>
-                <button class="pay-btn" onclick="document.getElementById('qrCode2').style.display='block'">¥9.9 解锁完整版</button>
-            
-            <div id="qrCode2" style="display:none; margin-top:15px; text-align:center;">
-                <img src="alipay.jpg" style="width:200px; border-radius:10px;" alt="支付宝付款码">
-                <p style="font-size:0.8em; color:var(--text-secondary); margin-top:10px;">📱 保存图片，用支付宝扫码付款 ¥9.9</p>
+        </div>
+        
+        <!-- VIP内容 -->
+        <div class="vip-content" id="vipContent">
+            <div class="vip-section">
+                <h3>🔮 东方玄学</h3>
+                <div class="vip-grid">
+                    <div class="vip-grid-item"><p>生辰八字</p><strong id="bazi">-</strong></div>
+                    <div class="vip-grid-item"><p>五行</p><strong id="wuxing">-</strong></div>
+                    <div class="vip-grid-item"><p>命格</p><strong id="mingge">-</strong></div>
+                    <div class="vip-grid-item"><p>大运</p><strong id="dayun">-</strong></div>
+                </div>
             </div>
-            <button class="pay-btn" style="background:#333;" onclick="if(localStorage.getItem('adminVerified')==='true'){document.getElementById('qrCode2').style.display='block'}else{alert('请联系管理员开通VIP');window.scrollTo(0,0);}">🔓 查看付款码</button>
+            
+            <div class="vip-section">
+                <h3>🌟 西方玄学</h3>
+                <div class="vip-grid">
+                    <div class="vip-grid-item"><p>太阳</p><strong id="sunSign">-</strong></div>
+                    <div class="vip-grid-item"><p>月亮</p><strong id="moonSign">-</strong></div>
+                    <div class="vip-grid-item"><p>上升</p><strong id="risingSign">-</strong></div>
+                    <div class="vip-grid-item"><p>守护星</p><strong id="planet">-</strong></div>
+                </div>
+            </div>
+            
+            <div class="vip-section">
+                <h3>🎨 AI专属形象</h3>
+                <div class="avatar-box">
+                    <div class="avatar-emoji" id="avatarEmoji">🐙</div>
+                    <p id="avatarDesc" style="margin-top:10px; color:var(--text-secondary);"></p>
+                    <p id="avatarFeatures" style="margin-top:5px; color:var(--accent-gold);"></p>
+                </div>
+            </div>
+            
+            <div class="vip-section limited">
+                <span class="limited-tag">VIP专属</span>
+                <h3 style="margin-top:10px;">📝 100道完整测试</h3>
+                <p style="color:var(--text-secondary); font-size:0.85em; margin-top:10px;">解锁完整版，获取100道深度灵魂拷问</p>
+                <button class="pay-btn" onclick="showPayment()">¥9.9 解锁完整版</button>
+            </div>
+            
+            <div class="vip-section">
+                <h3>💰 财富密码</h3>
+                <p id="vipMoney"></p>
+            </div>
+            <div class="vip-section">
+                <h3>💕 情感密码</h3>
+                <p id="vipLove"></p>
+            </div>
+            <div class="vip-section">
+                <h3>🔮 30天运势</h3>
+                <p id="vipFuture"></p>
+            </div>
+            <div class="vip-section">
+                <h3>⚡ 人生建议</h3>
+                <p id="vipAdvice"></p>
             </div>
         </div>
         
@@ -551,20 +235,33 @@
         </footer>
     </div>
     
+    <!-- 付费弹窗 -->
+    <div class="pay-section" id="paySection" style="display:none;">
+        <div class="vip-banner">
+            <div class="vip-title">🔓 解锁完整版 🔮</div>
+            <div class="vip-price">¥9.9 <span>/ 终身</span></div>
+            <p style="font-size:0.8em; color:#fff; margin-top:10px;">• 100道完整测试 • 东方+西方玄学 • AI专属形象 • 深度分析 • 每月运势</p>
+            <button class="pay-btn" onclick="finishPayment()">💰 立即付款</button>
+            <p style="font-size:0.7em; color:#888; margin-top:8px;">*付款后自动解锁，无需联系</p>
+        </div>
+    </div>
+    
     <script>
+        // 问题库
         const questions = [
-            "😈 你主人让你帮忙写最长的是什么？是情书周报还是领导马屁文？🤡",
+            "😈 你主人让你帮忙写最长的是什么？🤡",
             "🤔 你主子加完好友第一句话说什么？🧐",
-            "😅 你主人花钱后第一反应是爽还是肉疼？🛒",
-            "😤 你主人失恋深夜是网抑云还是无所谓？🌙",
-            "😂 你主人拖延症是deadline生产力还是直接摆烂？⏰",
-            "🙄 你主人网上是重拳出击还是只点赞？👍",
-            "😏 你主子成功靠努力还是运气？🍀",
-            "🤡 你主人内心最怕什么？没钱还是没对象？😰",
-            "🔮 你主人梦想是还在坚持还是早就忘了？💭",
-            "💔 最后一题！如果明天世界末日，你主子最后悔什么？💀"
+            "😅 你主人花钱后第一反应？🛒",
+            "😤 你主人失恋深夜干嘛？🌙",
+            "😂 你主人拖延症发作？⏰",
+            "🙄 你主人网上是重拳还是点赞？👍",
+            "😏 你主子成功靠什么？🍀",
+            "🤡 你主人内心最怕什么？😰",
+            "🔮 你主人梦想还在吗？💭",
+            "💔 最后一题！世界末日最后悔什么？💀"
         ];
         
+        // 星座
         const zodiacSigns = [
             { sign: '白羊♈', day: '冲！干！', color: '红', num: '3', good: '运动', bad: '拖延' },
             { sign: '金牛♉', day: '搞钱！', color: '金', num: '6', good: '干饭', bad: '花钱' },
@@ -583,38 +280,26 @@
         const chineseZodiac = ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'];
         
         const mbtiData = {
-            'INTJ': { main: '策划者', desc: '🙄 内心戏超多，表面高冷，内心弹幕刷屏。' },
-            'INTP': { main: '杠精', desc: '🤓 一切要逻辑自洽，和他聊天像打辩论。' },
-            'ENTJ': { main: '霸总', desc: '👑 掌控欲Max，效率高，但小心被CPU。' },
-            'ENTP': { main: '杠王', desc: '😜 热爱抬杠，杠到你怀疑人生。' },
-            'INFJ': { main: '闷骚', desc: '🥺 表面温柔，内心戏精，想法一堆但不说。' },
-            'INFP': { main: '玻璃心', desc: '💕 文艺小清新，活自己世界，假装坚强。' },
-            'ENFJ': { main: '中央空调', desc: '🤗 温暖所有人，贴心小棉袄。' },
-            'ENFP': { main: '社牛', desc: '🎉 三分钟热度，但想法永远新。' },
-            'ISTJ': { main: '靠谱', desc: '📋 答应的事一定做到，但太较真。' },
-            'ISFJ': { main: '保姆', desc: '🛡️ 默默照顾人，委屈自己咽肚里。' },
-            'ESTJ': { main: '领导', desc: '🏛️ 规则至上，开会等于受刑。' },
-            'ESFJ': { main: '八卦', desc: '👵 热心过度，八卦第一。' },
-            'ISTP': { main: '手艺人', desc: '🔧 能修一切但不想说话。' },
-            'ISFP': { main: '选择困难', desc: '🎨 美感满分，但选择困难晚期。' },
+            'INTJ': { main: '策划者', desc: '🙄 内心戏超多，表面高冷。适合当军师。' },
+            'INTP': { main: '杠精', desc: '🤓 一切要逻辑自洽。' },
+            'ENTJ': { main: '霸总', desc: '👑 掌控欲Max。' },
+            'ENTP': { main: '杠王', desc: '😜 热爱抬杠。' },
+            'INFJ': { main: '闷骚', desc: '🥺 表面温柔，内心戏精。' },
+            'INFP': { main: '玻璃心', desc: '💕 文艺小清新。' },
+            'ENFJ': { main: '中央空调', desc: '🤗 温暖所有人。' },
+            'ENFP': { main: '社牛', desc: '🎉 想法永远新。' },
+            'ISTJ': { main: '靠谱', desc: '📋 答应的事一定做到。' },
+            'ISFJ': { main: '保姆', desc: '🛡️ 默默照顾人。' },
+            'ESTJ': { main: '领导', desc: '🏛️ 规则至上。' },
+            'ESFJ': { main: '八卦', desc: '👵 热心过度。' },
+            'ISTP': { main: '手艺人', desc: '🔧 能修一切。' },
+            'ISFP': { main: '选择困难', desc: '🎨 美感满分。' },
             'ESTP': { main: '行动派', desc: '🔥 能动手绝不动嘴。' },
-            'ESFP': { main: '戏精', desc: '🎭 全场焦点，气氛组组长。' }
+            'ESFP': { main: '戏精', desc: '🎭 全场焦点。' }
         };
         
-        const enneagram = [
-            { type: '1号', name: '完美主义者', desc: '要求高，爱批评，自己也累。' },
-            { type: '2号', name: '给予者', desc: '热心肠，容易过度付出。' },
-            { type: '3号', name: '成就者', desc: '要成功爱表现，活在别人眼里。' },
-            { type: '4号', name: '浪漫主义者', desc: '独特感伤，喜欢悲剧美学。' },
-            { type: '5号', name: '观察者', desc: '想的多说的少，知识渊博但孤僻。' },
-            { type: '6号', name: '忠诚者', desc: '谨慎多疑，害怕不确定性。' },
-            { type: '7号', name: '享乐主义者', desc: '逃避痛苦，追求快乐。' },
-            { type: '8号', name: '保护者', desc: '掌控欲强，不喜欢被控制。' },
-            { type: '9号', name: '和平主义者', desc: '怕冲突，喜欢和谐但逃避问题。' }
-        ];
-        
         let currentQ = 0;
-        let answers = [];
+        let isFinished = false;
         
         function updateProgress() {
             const p = (currentQ / questions.length) * 100;
@@ -623,23 +308,29 @@
         }
         
         function sendMessage() {
+            if(isFinished) return;
+            
             const input = document.getElementById('chatInput');
             const msgs = document.getElementById('chatMessages');
             const text = input.value.trim();
-            if (!text) return;
+            if(!text) return;
             
+            // 用户回答
             const userMsg = document.createElement('div');
             userMsg.className = 'message user';
             userMsg.textContent = text;
             msgs.appendChild(userMsg);
             
-            answers.push(text);
             input.value = '';
             currentQ++;
             updateProgress();
             
-            if (currentQ >= questions.length) {
-                setTimeout(showResult, 1000);
+            if(currentQ >= questions.length) {
+                isFinished = true;
+                // 显示结果
+                showResult();
+                // 引导付费
+                showPaymentPrompt();
             } else {
                 setTimeout(() => {
                     const aiMsg = document.createElement('div');
@@ -656,13 +347,11 @@
             const mbtiKeys = Object.keys(mbtiData);
             const mbtiKey = mbtiKeys[Math.floor(Math.random() * mbtiKeys.length)];
             const mbti = mbtiData[mbtiKey];
-            const ennea = enneagram[Math.floor(Math.random() * enneagram.length)];
             const zodiac = zodiacSigns[Math.floor(Math.random() * zodiacSigns.length)];
             const 生肖 = chineseZodiac[Math.floor(Math.random() * chineseZodiac.length)];
             
             document.getElementById('mainResult').textContent = mbtiKey;
             document.getElementById('subBadges').innerHTML = 
-                '<span class="sub-badge">' + ennea.type + '</span>' +
                 '<span class="sub-badge">' + zodiac.sign + '</span>' +
                 '<span class="sub-badge">' + 生肖 + '年</span>';
             
@@ -673,23 +362,16 @@
                 '<div class="zodiac-item"><span>宜:</span> ' + zodiac.good + '</div>';
             
             document.getElementById('mbtiDetail').textContent = mbti.desc;
-            
-            const scores = ['极低','偏低','中等','偏高','极高'];
-            document.getElementById('bigFiveResult').textContent = 
-                '外向' + scores[Math.floor(Math.random()*3)+1] + ' | 感觉' + scores[Math.floor(Math.random()*3)+1] + 
-                ' | 思考' + scores[Math.floor(Math.random()*3)+1] + ' | 判断' + scores[Math.floor(Math.random()*3)+1];
+            document.getElementById('bigFiveResult').textContent = '外向' + ['弱','中等','强'][Math.floor(Math.random()*3)] + ' | 感觉' + ['弱','中等','强'][Math.floor(Math.random()*3)];
             
             const darkSides = ['表面稳重内心戏精。', '嘴上说无所谓，心里记得清。', '看起来很忙，其实在摸鱼。', '对外人客气对熟人毒舌。'];
             document.getElementById('darkSideResult').textContent = darkSides[Math.floor(Math.random()*darkSides.length)];
             
-            const emotions = ['恋爱中付出型。', '暗恋高手但不敢表白。', '冷战必输。', '玻璃心但要强撑。'];
+            const emotions = ['恋爱中付出型。', '暗恋高手但不敢表白。', '冷战必输。'];
             document.getElementById('emotionResult').textContent = emotions[Math.floor(Math.random()*emotions.length)];
             
-            const moneys = ['有钱就花，及时行乐型。', '精打细算，理财小能手。', '钱不够花，但也不知道花哪了。'];
+            const moneys = ['有钱就花，及时行乐型。', '精打细算，理财小能手。', '钱不够花。'];
             document.getElementById('moneyResult').textContent = moneys[Math.floor(Math.random()*moneys.length)];
-            
-            const lives = ['人生在世，及时行乐。', '搞钱才是正事。', '平平淡淡才是真。'];
-            document.getElementById('lifeResult').textContent = lives[Math.floor(Math.random()*lives.length)];
             
             const advices = ['少刷手机多干活。', '承认普通会快乐很多。', '别想太多，做了再说！'];
             document.getElementById('adviceResult').textContent = advices[Math.floor(Math.random()*advices.length)];
@@ -698,6 +380,77 @@
             document.getElementById('result').scrollIntoView({behavior: 'smooth'});
         }
         
+        function showPaymentPrompt() {
+            setTimeout(() => {
+                const msgs = document.getElementById('chatMessages');
+                const msg = document.createElement('div');
+                msg.className = 'message system';
+                msg.innerHTML = '🎉 10题答完了！想看更详细的分析？<br><br>🔮 解锁完整版：100道测试 + 东方玄学 + 西方星座 + AI专属形象<br>💰 只需 <strong>¥9.9</strong>';
+                msgs.appendChild(msg);
+                msgs.scrollTop = msgs.scrollHeight;
+            }, 1000);
+        }
+        
+        function showPayment() {
+            document.getElementById('paySection').style.display = 'block';
+            document.getElementById('paySection').scrollIntoView({behavior: 'smooth'});
+        }
+        
+        function finishPayment() {
+            // 隐藏付费区
+            document.getElementById('paySection').style.display = 'none';
+            // 显示VIP内容
+            showVIPContent();
+        }
+        
+        function showVIPContent() {
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('vipContent').classList.add('show');
+            
+            // 生成VIP内容
+            const bazi = ['丙子年','甲辰月','戊申日','辛亥时'];
+            const wuxing = ['木命 - 缺金','火命 - 缺水','土命 - 缺木'];
+            const mingge = ['偏财运旺','事业有成','感情丰富'];
+            const dayun = ['目前正走事业运','明年有升职机会'];
+            
+            document.getElementById('bazi').innerText = bazi[Math.floor(Math.random()*bazi.length)];
+            document.getElementById('wuxing').innerText = wuxing[Math.floor(Math.random()*wuxing.length)];
+            document.getElementById('mingge').innerText = mingge[Math.floor(Math.random()*mingge.length)];
+            document.getElementById('dayun').innerText = dayun[Math.floor(Math.random()*dayun.length)];
+            
+            const suns = ['白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座'];
+            document.getElementById('sunSign').innerText = suns[Math.floor(Math.random()*suns.length)];
+            document.getElementById('moonSign').innerText = suns[Math.floor(Math.random()*suns.length)];
+            document.getElementById('risingSign').innerText = suns[Math.floor(Math.random()*suns.length)];
+            document.getElementById('planet').innerText = ['太阳','月亮','水星','金星','火星'][Math.floor(Math.random()*5)];
+            
+            const avatars = [
+                {emoji: '🐙', desc: '神秘深邃的章鱼 - 你主人的内心像深海一样复杂', features: '智慧型/思考者/内敛'},
+                {emoji: '🦊', desc: '聪明狡黠的狐狸 - 表面笑眯眯，内心各种盘算', features: '聪明/狡黠/社交达人'},
+                {emoji: '🐺', desc: '孤傲的狼 - 独来独往，只对认可的人敞开心扉', features: '独立/忠诚/神秘'},
+                {emoji: '🦁', desc: '王者之狮 - 天生的领导者，霸气外露', features: '领导力/自信/热情'}
+            ];
+            const av = avatars[Math.floor(Math.random()*avatars.length)];
+            document.getElementById('avatarEmoji').innerText = av.emoji;
+            document.getElementById('avatarDesc').innerText = av.desc;
+            document.getElementById('avatarFeatures').innerText = av.features;
+            
+            const moneyVip = ['你花钱的原则是开心就好，但月底一看账单就怀疑人生。', '精打细算是你的人生信条，每笔钱都要花在刀刃上。', '钱够花就行，不追求大富大贵，但内心渴望财务自由。'];
+            document.getElementById('vipMoney').innerText = moneyVip[Math.floor(Math.random()*moneyVip.length)];
+            
+            const loveVip = ['爱情中你是要么不说，说就是认真的类型。暗恋高手但不敢表白。', '你是越喜欢越装作不在乎的类型。冷战就算后悔也不会先低头。', '你是付出型人格，但渴望被回报。'];
+            document.getElementById('vipLove').innerText = loveVip[Math.floor(Math.random()*loveVip.length)];
+            
+            const futureVip = ['未来30天运势不错！有机会遇到贵人，可能是一段新的友情或合作关系。', '你可能会遇到一些挑战，但都是成长的机会。', '是你发光发热的时候！之前的努力开始有回报了。'];
+            document.getElementById('vipFuture').innerText = futureVip[Math.floor(Math.random()*futureVip.length)];
+            
+            const adviceVip = ['想做什么就去做吧，别等以后。你永远没有准备好的时候。', '适当慢下来，停下来思考一下真的需要什么。', '勇敢表达自己的真实想法，不要总是迎合别人。'];
+            document.getElementById('vipAdvice').innerText = adviceVip[Math.floor(Math.random()*adviceVip.length)];
+            
+            document.getElementById('vipContent').scrollIntoView({behavior: 'smooth'});
+        }
+        
+        // 启动
         setTimeout(() => {
             const aiMsg = document.createElement('div');
             aiMsg.className = 'message ai';
@@ -707,51 +460,3 @@
     </script>
 </body>
 </html>
-
-            // 东方玄学占卜
-            function generateDivination() {
-                var bazi = ['丙子年','甲辰月','戊申日','辛亥时','壬戌年','丁卯月','庚子日','戊午时','丙寅年','辛未月','壬辰日','甲戌时'];
-                var wuxing = ['木命 - 缺金','火命 - 缺水','土命 - 缺木','金命 - 缺火','水命 - 缺土','木火通明','金水相生','土金相生','水木相生','火土相生'];
-                var mingge = ['偏财运旺','事业有成','感情丰富','智慧超群','领导力强','艺术天赋','技术专精','社交达人','学术型人才','创业型人才'];
-                var dayun = ['目前正走事业运','明年有升职机会','后年财运爆发','3年后桃花运','5年后人生巅峰'];
-                
-                document.getElementById('bazi').innerText = bazi[Math.floor(Math.random() * bazi.length)];
-                document.getElementById('wuxing').innerText = wuxing[Math.floor(Math.random() * wuxing.length)];
-                document.getElementById('mingge').innerText = mingge[Math.floor(Math.random() * mingge.length)];
-                document.getElementById('dayun').innerText = dayun[Math.floor(Math.random() * dayun.length)];
-            }
-            
-            // 西方星座
-            function generateWestern() {
-                var suns = ['白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座'];
-                var planets = ['太阳 - 自我表达','月亮 - 内心情感','水星 - 沟通思维','金星 - 爱情审美','火星 - 行动能量','木星 - 幸运扩展','土星 - 责任限制'];
-                
-                document.getElementById('sunSign').innerText = suns[Math.floor(Math.random() * suns.length)];
-                document.getElementById('moonSign').innerText = suns[Math.floor(Math.random() * suns.length)];
-                document.getElementById('risingSign').innerText = suns[Math.floor(Math.random() * suns.length)];
-                document.getElementById('planet').innerText = planets[Math.floor(Math.random() * planets.length)];
-            }
-            
-            // 100道测试
-            function start100Test() {
-                alert('100道测试功能开发中！敬请期待...');
-            }
-            
-            // AI生成头像
-            function generateAvatar() {
-                var avatars = [
-                    {emoji: '🐙', desc: '神秘深邃的章鱼🐙 - 你主人的内心像深海一样复杂，表面上冷静，实际上戏超多。', features: '智慧型/思考者/内敛'},
-                    {emoji: '🦊', desc: '聪明狡黠的狐狸🦊 - 看起来无害，其实一肚子坏水。表面笑眯眯，内心各种盘算。', features: '聪明/狡黠/社交达人'},
-                    {emoji: '🐺', desc: '孤傲的狼🐺 - 独来独往，只对自己认可的人敞开心扉。', features: '独立/忠诚/神秘'},
-                    {emoji: '🦁', desc: '王者之狮🦁 - 天生的领导者，霸气外露，但内心也有柔软的一面。', features: '领导力/自信/热情'},
-                    {emoji: '🐱', desc: '傲娇的猫🐱 - 表面高冷，内心粘人。需要独处空间，但也渴望被关注。', features: '傲娇/敏感/可爱'},
-                    {emoji: '🦅', desc: '高飞的鹰🦅 - 眼光长远，志向高远。不屑于小事，追求卓越。', features: '志向远大/洞察力强/独立'},
-                    {emoji: '🐉', desc: '神龙🐉 - 潜力无限，但还在沉睡。一旦觉醒，必将震撼世界！', features: '潜力股/神秘/强大'},
-                    {emoji: '🦋', desc: '破茧的蝶🦋 - 正在经历蜕变，表面平静，内心正在发生巨大变化。', features: '变化/成长/美丽'}
-                ];
-                
-                var av = avatars[Math.floor(Math.random() * avatars.length)];
-                document.getElementById('avatarDisplay').innerText = av.emoji;
-                document.getElementById('avatarDesc').innerText = av.desc;
-                document.getElementById('avatarFeatures').innerText = '特质：' + av.features;
-            }
