@@ -98,8 +98,8 @@ footer{text-align:center;padding:20px;color:#444;font-size:0.75em}
 </div>
 <div class="chat-messages" id="chatMessages"></div>
 <div class="chat-input">
-<input type="text" placeholder="让AI回答..." id="chatInput" onkeypress="if(event.key==='Enter')sendMessage()">
-<button onclick="sendMessage()">😈 答</button>
+<input type="text" placeholder="让AI回答..." id="chatInput" onkeypress="if(event.key=='Enter')window.sendMessage()">
+<button onclick="window.sendMessage()">😈 答</button>
 </div>
 </div>
 
