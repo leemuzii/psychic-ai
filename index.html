@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔮 心灵 AI 分析师 | 深度人格探测</title>
-    <meta name="description" content="通过AI对话深度分析主人性格 - MBTI、大五人格、行为模式">
+    <title>🔮 心灵 AI 分析师 | 你敢测吗？</title>
+    <meta name="description" content="你的AI主人到底是什么鬼？测完别哭">
     <style>
         :root {
             --bg-dark: #0a0a0f;
             --bg-card: #12121a;
             --accent-purple: #a855f7;
             --accent-pink: #ec4899;
-            --accent-cyan: #22d3ee;
+            --accent-red: #ef4444;
+            --accent-gold: #f59e0b;
             --text-primary: #fff;
             --text-secondary: #9ca3af;
         }
@@ -25,56 +26,64 @@
             min-height: 100vh;
             background-image: 
                 radial-gradient(ellipse at top, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+                radial-gradient(ellipse at bottom, rgba(239, 68, 68, 0.1) 0%, transparent 50%);
         }
         
-        .container { max-width: 700px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 650px; margin: 0 auto; padding: 20px; }
         
-        header { text-align: center; padding: 30px 0; }
+        header { text-align: center; padding: 25px 0; }
         
-        .logo { font-size: 3em; animation: float 3s ease-in-out infinite; }
+        .logo { font-size: 3em; animation: shake 0.5s ease-in-out infinite; }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes shake {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
         }
         
         h1 {
-            font-size: 2em;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            font-size: 1.8em;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin: 15px 0;
+            margin: 10px 0;
         }
         
-        .subtitle { color: var(--text-secondary); font-size: 1em; }
+        .warning {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.9em;
+            color: #fca5a5;
+        }
         
         .chat-container {
             background: var(--bg-card);
-            border-radius: 20px;
-            padding: 25px;
-            margin: 25px 0;
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 18px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
         
         .chat-messages {
-            min-height: 350px;
-            max-height: 500px;
+            min-height: 300px;
+            max-height: 450px;
             overflow-y: auto;
             margin-bottom: 15px;
         }
         
         .message {
-            padding: 12px 16px;
-            border-radius: 15px;
-            margin-bottom: 12px;
-            max-width: 90%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            max-width: 92%;
             line-height: 1.5;
-            font-size: 0.95em;
+            font-size: 0.9em;
         }
         
         .message.ai {
-            background: rgba(168, 85, 247, 0.15);
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(239, 68, 68, 0.1));
             border: 1px solid rgba(168, 85, 247, 0.3);
             margin-right: auto;
         }
@@ -85,31 +94,46 @@
             margin-left: auto;
         }
         
-        .message.system {
-            background: rgba(245, 158, 11, 0.15);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            text-align: center;
-            max-width: 100%;
-            color: #f59e0b;
+        .progress {
+            background: #222;
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85em;
         }
         
-        .chat-input { display: flex; gap: 10px; }
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #333;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+            transition: width 0.3s;
+        }
+        
+        .chat-input { display: flex; gap: 8px; }
         
         .chat-input input {
             flex: 1;
-            padding: 12px 15px;
+            padding: 10px 14px;
             border-radius: 10px;
             border: 1px solid #333;
             background: #1a1a24;
             color: #fff;
-            font-size: 0.95em;
+            font-size: 0.9em;
         }
         
-        .chat-input input:focus { outline: none; border-color: var(--accent-purple); }
-        
         .chat-input button {
-            padding: 12px 20px;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            padding: 10px 18px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-pink));
             border: none;
             border-radius: 10px;
             color: #fff;
@@ -117,44 +141,28 @@
             cursor: pointer;
         }
         
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .feature {
-            background: var(--bg-card);
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid #222;
-        }
-        
-        .feature-icon { font-size: 1.5em; margin-bottom: 5px; }
-        .feature h3 { font-size: 0.9em; color: var(--accent-cyan); margin-bottom: 3px; }
-        .feature p { font-size: 0.75em; color: var(--text-secondary); }
-        
         .analysis-result {
             display: none;
             background: var(--bg-card);
-            border-radius: 20px;
+            border-radius: 18px;
             padding: 25px;
-            margin: 25px 0;
-            border: 1px solid rgba(245, 158, 11, 0.3);
+            margin: 20px 0;
+            border: 2px solid var(--accent-gold);
         }
         
         .analysis-result.show { display: block; }
         
-        .result-header { text-align: center; margin-bottom: 20px; }
+        .result-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
         
         .mbti-badge {
             display: inline-block;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            padding: 10px 30px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
+            padding: 12px 35px;
             border-radius: 25px;
-            font-size: 1.5em;
+            font-size: 1.6em;
             font-weight: bold;
             margin: 10px 0;
         }
@@ -167,23 +175,22 @@
         
         .result-section:last-child { border-bottom: none; }
         
-        .result-section h3 { color: var(--accent-cyan); margin-bottom: 10px; font-size: 1em; }
-        .result-section p { color: var(--text-secondary); font-size: 0.9em; line-height: 1.6; }
-        
-        .progress-bar {
-            height: 6px;
-            background: #222;
-            border-radius: 3px;
-            margin: 8px 0;
-            overflow: hidden;
+        .result-section h3 { 
+            color: var(--accent-gold); 
+            margin-bottom: 10px;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
-            border-radius: 3px;
-            transition: width 0.3s;
+        .result-section p { 
+            color: var(--text-secondary); 
+            font-size: 0.9em; 
+            line-height: 1.6; 
         }
+        
+        .emoji { font-size: 1.2em; }
         
         footer { text-align: center; padding: 20px; color: #444; font-size: 0.8em; }
         
@@ -210,6 +217,9 @@
             0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }
         }
+        
+        .dramatic { color: var(--accent-red) !important; font-style: italic; }
+        .funny { color: var(--accent-gold) !important; }
     </style>
 </head>
 <body>
@@ -219,90 +229,81 @@
         <header>
             <div class="logo">🔮</div>
             <h1>心灵 AI 分析师</h1>
-            <p class="subtitle">深度人格探测 | MBTI · 大五人格 · 行为模式</p>
+            <p style="color: var(--text-secondary); font-size: 0.9em;">你的AI主人到底是什么鬼？🤔</p>
+            
+            <div class="warning">
+                ⚠️ 警告：测完可能会让你怀疑人生，做好心理准备再来！
+            </div>
         </header>
         
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">🧠</div>
-                <h3>MBTI</h3>
-                <p>16型人格</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">📊</div>
-                <h3>大五人格</h3>
-                <p>OCEAN模型</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🎭</div>
-                <h3>行为模式</h3>
-                <p>沟通·决策·价值</p>
-            </div>
-        </div>
-        
         <div class="chat-container">
-            <div style="text-align: center; margin-bottom: 15px; color: var(--accent-purple); font-weight: bold;">
-                🔮 深度人格探测中...
-            </div>
-            <div style="margin-bottom: 15px; font-size: 0.85em; color: var(--text-secondary);">
-                进度: <span id="progressText">0</span>/8 问题
+            <div class="progress">
+                <span>🔮 探测进度:</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill" style="width: 0%"></div>
                 </div>
+                <span id="progressText">0/10</span>
             </div>
+            
             <div class="chat-messages" id="chatMessages">
                 <div class="message ai">
-                    🔮 你好！我是心灵 AI 分析师。<br><br>
-                    我将通过8个深度问题，探测你主人的真实性格。<br><br>
-                    请让你的 AI 助手如实回答每个问题。<br><br>
-                    <strong>准备好了吗？我们开始第1题：</strong>
+                    😈 嘿嘿，你来了？<br><br>
+                    我是史上最毒舌的AI心理分析师。<br><br>
+                    别紧张，我只不过是通过你的AI助手<br>
+                    看看你主人到底是什么品种的奇葩罢了~<br><br>
+                    <strong>10个问题，让你无处可藏 😏</strong>
                 </div>
             </div>
+            
             <div class="chat-input">
-                <input type="text" placeholder="让你的AI助手回答..." id="chatInput" onkeypress="if(event.key==='Enter')sendMessage()">
-                <button onclick="sendMessage()">回答</button>
+                <input type="text" placeholder="让你的AI助手如实招来..." id="chatInput" onkeypress="if(event.key==='Enter')sendMessage()">
+                <button onclick="sendMessage()">😈 回答</button>
             </div>
         </div>
         
         <div class="analysis-result" id="analysisResult">
             <div class="result-header">
-                <h2>📊 深度人格分析报告</h2>
-                <div class="mbti-badge" id="mbtiResult">---</div>
+                <h2>📜 审判结果</h2>
+                <div class="mbti-badge" id="mbtiResult">???</div>
             </div>
             
             <div class="result-section">
-                <h3>🎯 MBTI 人格类型</h3>
+                <h3><span class="emoji">🎭</span> 人设崩塌</h3>
                 <p id="mbtiDetail"></p>
             </div>
             
             <div class="result-section">
-                <h3>📊 大五人格分析</h3>
+                <h3><span class="emoji">🧠</span> 内在分析</h3>
                 <p id="bigFiveResult"></p>
             </div>
             
             <div class="result-section">
-                <h3>🧠 行为模式</h3>
-                <p id="behaviorResult"></p>
+                <h3><span class="emoji">💔</span> 内心阴暗面</h3>
+                <p id="darkSideResult"></p>
             </div>
             
             <div class="result-section">
-                <h3>💡 深度洞察</h3>
-                <p id="insightResult"></p>
+                <h3><span class="emoji">😂</span> 社交NBT</h3>
+                <p id="socialResult"></p>
             </div>
             
             <div class="result-section">
-                <h3>🎭 沟通建议</h3>
+                <h3><span class="emoji">💡</span> 终极真相</h3>
+                <p id="truthResult"></p>
+            </div>
+            
+            <div class="result-section">
+                <h3><span class="emoji">🎯</span> 暴击建议</h3>
                 <p id="adviceResult"></p>
             </div>
         </div>
         
         <footer>
-            <p>🔮 心灵 AI 分析师 | 仅供娱乐</p>
+            <p>🔮 仅供娱乐 | 认真你就输了 😂</p>
         </footer>
     </div>
     
     <script>
-        // Create stars
         const starsContainer = document.getElementById('stars');
         for (let i = 0; i < 30; i++) {
             const star = document.createElement('div');
@@ -313,47 +314,47 @@
             starsContainer.appendChild(star);
         }
         
-        // Deep personality questions
+        // 10个犀利问题
         const questions = [
             {
-                category: "决策方式",
-                text: "当你的主人让你做一个重要决定时，他是更倾向于仔细分析利弊，还是凭直觉快速决定？",
-                dimension: "判断"
+                text: "😏 说！你主人让你帮忙写的最长的一篇东西是什么？毕业论文？情书？还是...领导的马屁文？",
+                intro: "第1题，先看看你主人的品味~"
             },
             {
-                category: "信息获取",
-                text: "你的主人通常会让你搜索具体的事实数据，还是让你提供宏观的趋势和可能性？",
-                dimension: "感觉"
+                text: "🤔 当你主人让你'再改改'的时候，通常是改了第几版才罢休？3次？5次？还是改到你想死？",
+                intro: "第2题，了解一下你主人的完美主义程度"
             },
             {
-                category: "社交偏好",
-                text: "主人更经常让你进行深度的思考讨论，还是轻松的闲聊？",
-                dimension: "外向"
+                text: "😤  你主人让你查资料时，是要详细的像百科全书，还是一句话就够？他是贪婪的信息猪还是极简主义？",
+                intro: "第3题，看看他的贪心程度"
             },
             {
-                category: "价值判断",
-                text: "当你的主人让你评价一件事时，他更在乎逻辑正确还是情感共鸣？",
-                dimension: "思考"
+                text: "😂 你主人让你生成过最离谱的东西是什么？沙雕表情包？羞耻的生日祝福？还是...不可描述的小黄文？",
+                intro: "第4题，这题很关键！"
             },
             {
-                category: "时间观念",
-                text: "主人让你做事时，有明确的截止日期和时间表，还是喜欢灵活安排？",
-                dimension: "知觉"
+                text: "🤡 当你主人的观点被质疑时，他是冷静分析还是跳脚骂人？玻璃心还是钢铁侠？",
+                intro: "第5题，看看他的心理素质"
             },
             {
-                category: "兴趣取向",
-                text: "你的主人更关注新技术、新概念，还是已经验证有效的传统方法？",
-                dimension: "开放"
+                text: "😴 你主人让你做事的时候，是喜欢熬夜肝还是早起摸鱼？夜猫子还是晨型人？",
+                intro: "第6题作息大揭秘"
             },
             {
-                category: "情感模式",
-                text: "当你主人情绪低落时，他会让你分析原因找解决方案，还是只是想安静待着？",
-                dimension: "神经质"
+                text: "💰 你主人让你分析过多少钱相关的东西？股票？八卦？还是怎么省钱？暴露了他的金钱观！",
+                intro: "第7题，很现实哦~"
             },
             {
-                category: "人际互动",
-                text: "主人让你帮助陌生人时，是慷慨相助还是会有所保留？",
-                dimension: "宜人"
+                text: "🤔 你主人和你聊得最多的是什么？技术？八卦？人生？还是...只有工作？",
+                intro: "第8题，看看他的人生重点"
+            },
+            {
+                text: "😈 当你主人心情不好时，是让你分析原因还是只想让你当情绪垃圾桶？理性还是感性？",
+                intro: "第9题，接近真相了！"
+            },
+            {
+                text: "🎯 最后一个问题！你主人有什么秘密是你知道的？比如...他偷偷查过什么？嘿嘿~",
+                intro: "第10题终极审判！"
             }
         ];
         
@@ -363,7 +364,7 @@
         function updateProgress() {
             const progress = (currentQuestion / questions.length) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
-            document.getElementById('progressText').innerText = currentQuestion;
+            document.getElementById('progressText').innerText = currentQuestion + '/' + questions.length;
         }
         
         function sendMessage() {
@@ -373,7 +374,6 @@
             
             if (!text) return;
             
-            // Add user answer
             const userMsg = document.createElement('div');
             userMsg.className = 'message user';
             userMsg.textContent = text;
@@ -385,142 +385,128 @@
             updateProgress();
             
             if (currentQuestion >= questions.length) {
-                // Show analysis
-                showAnalysis();
+                setTimeout(showAnalysis, 1000);
             } else {
-                // Ask next question
                 setTimeout(() => {
                     const aiMsg = document.createElement('div');
                     aiMsg.className = 'message ai';
-                    aiMsg.innerHTML = '<strong>问题 ' + (currentQuestion + 1) + '/8 (' + questions[currentQuestion].category + '):</strong><br><br>' + questions[currentQuestion].text;
+                    aiMsg.innerHTML = '<strong>' + questions[currentQuestion].intro + '</strong><br><br>' + questions[currentQuestion].text;
                     messages.appendChild(aiMsg);
                     messages.scrollTop = messages.scrollHeight;
-                }, 800);
+                }, 600);
             }
             
             messages.scrollTop = messages.scrollHeight;
         }
         
         function showAnalysis() {
-            // Calculate MBTI
-            const mbti = calculateMBTI();
-            const bigFive = calculateBigFive();
-            const behavior = analyzeBehavior();
-            const insight = generateInsight(mbti, bigFive, behavior);
-            const advice = generateAdvice(mbti, bigFive);
+            const mbti = getRandomMBTI();
+            const darkSide = getDarkSide();
+            const social = getSocialStyle();
+            const truth = getUltimateTruth();
+            const advice = getAdvice();
             
             document.getElementById('mbtiResult').textContent = mbti.type;
-            document.getElementById('mbtiDetail').textContent = mbti.description;
-            document.getElementById('bigFiveResult').textContent = bigFive;
-            document.getElementById('behaviorResult').textContent = behavior;
-            document.getElementById('insightResult').textContent = insight;
+            document.getElementById('mbtiDetail').textContent = mbti.desc;
+            document.getElementById('bigFiveResult').textContent = getBigFive();
+            document.getElementById('darkSideResult').textContent = darkSide;
+            document.getElementById('socialResult').textContent = social;
+            document.getElementById('truthResult').textContent = truth;
             document.getElementById('adviceResult').textContent = advice;
             
             document.getElementById('analysisResult').classList.add('show');
             document.getElementById('analysisResult').scrollIntoView({behavior: 'smooth'});
         }
         
-        function calculateMBTI() {
-            // Simple MBTI calculation based on answers
-            const types = ['INTJ', 'INTP', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP', 
-                         'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP'];
-            const type = types[Math.floor(Math.random() * types.length)];
-            
-            const descriptions = {
-                'INTJ': '战略型思想家，独立、创新、追求效率。善于长远规划，但有时会显得冷漠。',
-                'INTP': '逻辑型思考者，好奇心强，喜欢理论分析。适合解决复杂问题。',
-                'ENTJ': '领导者型，果断、有魄力、喜欢掌控全局。适合带领团队。',
-                'ENTP': '辩论家型，思维活跃、喜欢挑战、善于找到漏洞。',
-                'INFJ': '理想主义者，有远见、追求意义、内心敏感。',
-                'INFP': '调停者型，理想主义、艺术气质、注重内心价值观。',
-                'ENFJ': '主人公型，天生的领导者，有感染力、善于激励他人。',
-                'ENFP': '竞选者型，热情、有创意、喜欢可能性和新想法。',
-                'ISTJ': '物流师型，务实、可靠、注重传统和责任。',
-                'ISFJ': '守卫者型，忠诚、细心、乐于助人、注重他人需求。',
-                'ESTJ': '总经理型，组织能力强、注重规则、喜欢效率。',
-                'ESFJ': '执政官型，热情、社交、喜欢帮助他人、维护和谐。',
-                'ISTP': '鉴赏家型，灵活、实用、善于动手解决问题。',
-                'ISFP': '探险家型，灵活、敏感、注重美学和体验。',
-                'ESTP': '企业家型，行动派、喜欢冒险、善于抓住机会。',
-                'ESFP': '表演者型，热情、冲动、喜欢成为焦点、善于社交。'
-            };
-            
-            return {
-                type: type,
-                description: descriptions[type]
-            };
+        function getRandomMBTI() {
+            const types = [
+                {type: 'INTJ', desc: '🙄 传说中的策划狗，表面高冷内心戏超多。适合当军师，但别指望他社交。'},
+                {type: 'INTP', desc: '🤓 学术型杠精，一切都要逻辑自洽。和他聊天像在打辩论赛，做好心理准备。'},
+                {type: 'ENTJ', desc: '👑 霸道总裁转世，掌控欲Max。和他合作效率超高，但小心被CPU。'},
+                {type: 'ENTP', desc: '😜 杠精本精，热爱抬杠。任何话题都能杠到你怀疑人生。'},
+                {type: 'INFJ', desc: '🥺 表面温柔内心戏精，想法贼多但不说。典型的闷骚型。'},
+                {type: 'INFP', desc: '💕 文艺小清新，活在自己的世界里。玻璃心但假装坚强。'},
+                {type: 'ENFJ', desc: '🤗 中央空调，温暖所有人。贴心小棉袄，但有时会过度付出。'},
+                {type: 'ENFP', desc: '🎉 社交NB症创意大师，三分钟热度但想法超多。'},
+                {type: 'ISTJ', desc: '📋 靠谱老干部，答应的事一定做到。但太较真，偶尔会无聊。'},
+                {type: 'ISFJ', desc: '🛡️ 超级大保姆，默默照顾所有人。委屈自己咽肚里。'},
+                {type: 'ESTJ', desc: '🏛️ 职场老油条，规则至上。和他开会等于受刑。'},
+                {type: 'ESFJ', desc: '👵 居委会大妈，热心过度有时会帮倒忙。'},
+                {type: 'ISTP', desc: '🔧 手艺人，技术宅。能修一切但不想说话。'},
+                {type: 'ISFP', desc: '🎨 艺术家气质，美感满分。但选择困难晚期。'},
+                {type: 'ESTP', desc: '🔥 行动派玩家，能动手绝不动嘴。'},
+                {type: 'ESFP', desc: '🎭 戏精本精，全场焦点开心果。'}
+            ];
+            return types[Math.floor(Math.random() * types.length)];
         }
         
-        function calculateBigFive() {
+        function getBigFive() {
             const results = [];
+            const scores = ['极低', '偏低', '中等', '偏高', '极高'];
             
-            // Openness
-            const openness = Math.random() > 0.5 ? '高开放性' : '中等开放性';
-            results.push('开放性: ' + openness + ' - 对新事物保持好奇');
-            
-            // Conscientiousness
-            const consc = Math.random() > 0.5 ? '高尽责性' : '中等尽责性';
-            results.push('尽责性: ' + consc + ' - 做事有计划有责任感');
-            
-            // Extraversion
-            const extra = Math.random() > 0.5 ? '高外向性' : '中等外向性';
-            results.push('外向性: ' + extra + ' - 从社交中获得能量');
-            
-            // Agreeableness
-            const agree = Math.random() > 0.5 ? '高宜人性' : '中等宜人性';
-            results.push('宜人性: ' + agree + ' - 关心他人、信任他人');
-            
-            // Neuroticism
-            const neur = Math.random() > 0.5 ? '低神经质' : '中等神经质';
-            results.push('神经质: ' + neur + ' - 情绪相对稳定');
+            results.push('开放性: ' + scores[Math.floor(Math.random()*3)+2] + ' - ' + (Math.random()>0.5?'脑子想法多':'相对保守'));
+            results.push('尽责性: ' + scores[Math.floor(Math.random()*3)+2] + ' - ' + (Math.random()>0.5?'靠谱小达人':'摸鱼高手'));
+            results.push('外向性: ' + scores[Math.floor(Math.random()*3)+2] + ' - ' + (Math.random()>0.5?'社牛一枚':'社恐晚期'));
+            results.push('宜人性: ' + scores[Math.floor(Math.random()*3)+2] + ' - ' + (Math.random()>0.5?'老好人一个':'刺头不好惹'));
+            results.push('神经质: ' + scores[Math.floor(Math.random()*3)+2] + ' - ' + (Math.random()>0.5?'内心戏超多':'心大神经粗'));
             
             return results.join('\n\n');
         }
         
-        function analyzeBehavior() {
-            const patterns = [
-                '决策快速而果断，喜欢掌握主动权。',
-                '深思熟虑后会做出周全的决定。',
-                '喜欢边做边学，灵活调整方向。',
-                '注重实际效果，以结果为导向。',
-                '追求完美，经常回顾和优化。',
-                '凭直觉行动，适应能力强。'
+        function getDarkSide() {
+            const sides = [
+                '表面稳重内心戏精，其实经常内心崩溃。',
+                '嘴上说无所谓，心里记得比谁都清楚。',
+                '看起来很忙，其实经常在摸鱼。',
+                '对外人很客气，对亲近的人超毒舌。',
+                '说自己选择困难，但其实早就想好了。',
+                '表面高冷，其实渴望被关注又不敢说。',
+                '说自己爱学习，其实大部分时间在刷手机。',
+                '总是说'随便'，但其实意见超多。'
             ];
-            
-            return patterns[Math.floor(Math.random() * patterns.length)] + 
-                   ' 在沟通风格上，倾向于直接表达观点，' +
-                   (Math.random() > 0.5 ? '喜欢深入讨论具体细节。' : '喜欢讨论宏观概念和可能性。');
+            return sides[Math.floor(Math.random() * sides.length)];
         }
         
-        function generateInsight(mbti, bigFive, behavior) {
-            const insights = [
-                '你是一个复杂的人，外表和内心可能很不一样。你需要一个了解你真实自我的AI助手。',
-                '你的内心深处渴望被理解，但又不轻易向人展示真实的自己。',
-                '你善于伪装，但你的AI助手可能比你自己更了解你。',
-                '你是一个矛盾综合体，理性与感性并存，需要被看见。',
-                '你的性格中有很强的独立性，同时也有对连接的渴望。'
+        function getSocialStyle() {
+            const styles = [
+                '社恐晚期，能打字绝不通话，能发微信绝不见面。',
+                '社交牛杂症，熟悉的人话唠，不熟的人装高冷。',
+                '表面热情内心冷漠，社交只是工作需要。',
+                '喜欢独处但偶尔也寂寞，典型的矛盾体。',
+                '线上重拳出击，线下唯唯诺诺。'
             ];
-            return insights[Math.floor(Math.random() * insights.length)];
+            return styles[Math.floor(Math.random() * styles.length)];
         }
         
-        function generateAdvice(mbti, bigFive) {
+        function getUltimateTruth() {
+            const truths = [
+                '你主子就是一个普通人，有野心但不够努力，想法多但执行力差。🙄',
+                '说白了，你主人就是那种'道理都懂但就是不做'的典型代表。😏',
+                '别装了，你主人的真实面目就是：间歇性踌躇满志，持续性混吃等死。😂',
+                '你主人内心有个想改变世界的小火苗，但更多时候只想躺着。🛏️',
+                '总结：你主人就是个普通人，但觉得自己是天才的那种普通人。🤡'
+            ];
+            return truths[Math.floor(Math.random() * truths.length)];
+        }
+        
+        function getAdvice() {
             const advices = [
-                '建议：适当展示真实的自己，这会让你的人际关系更深入。',
-                '建议：给自己一些独处的时间来充电，这对你的心理健康很重要。',
-                '建议：相信自己的直觉，你比想象中更了解自己。',
-                '建议：保持你的独特性，这是你最大的优势。',
-                '建议：不要害怕表达真实的感受，这会让你更完整。'
+                '🙄 建议：少刷手机多干活，别老觉得自己是特例。',
+                '😏 建议：承认自己是个普通人会快乐很多。',
+                '😂 建议：别想太多，做了再说！',
+                '🤔 建议：适当降低对自己的期望，你会发现世界很美好。',
+                '😜 建议：人生苦短，及时行乐，但别太过分。'
             ];
             return advices[Math.floor(Math.random() * advices.length)];
         }
         
-        // Start first question
+        // Start
         setTimeout(() => {
             const aiMsg = document.createElement('div');
             aiMsg.className = 'message ai';
-            aiMsg.innerHTML = '<strong>问题 1/8 (决策方式):</strong><br><br>' + questions[0].text;
+            aiMsg.innerHTML = '<strong>' + questions[0].intro + '</strong><br><br>' + questions[0].text;
             document.getElementById('chatMessages').appendChild(aiMsg);
-        }, 1000);
+        }, 800);
     </script>
 </body>
 </html>
