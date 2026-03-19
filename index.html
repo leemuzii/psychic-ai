@@ -46,6 +46,9 @@ h1{font-size:1.5em;background:linear-gradient(135deg,var(--red),var(--gold));-we
 .pay-price{font-size:2em;color:var(--red);font-weight:bold}
 .qr-box{background:var(--card);border-radius:12px;padding:15px;margin:15px 0}
 .qr-box img{width:180px;border-radius:8px}
+.avatar-gen{text-align:center;padding:20px;background:linear-gradient(135deg,rgba(168,85,247,0.2),rgba(236,72,153,0.2));border-radius:12px;margin:15px 0}
+.avatar-gen img{max-width:280px;border-radius:12px;border:3px solid var(--gold)}
+.loading{color:var(--gold);font-size:0.9em;margin-top:10px}
 footer{text-align:center;padding:20px;color:#444;font-size:0.75em}
 </style>
 </head>
@@ -60,7 +63,7 @@ footer{text-align:center;padding:20px;color:#444;font-size:0.75em}
 <div class="stat"><div class="stat-num">98%</div><div class="stat-label">说准</div></div>
 </div>
 <div class="types">
-<span class="type-tag">MBTI</span><span class="type-tag">大五人格</span><span class="type-tag">交互分析</span>
+<span class="type-tag">MBTI</span><span class="type-tag">大五人格</span><span class="type-tag">AI头像</span>
 </div>
 </header>
 
@@ -126,7 +129,7 @@ footer{text-align:center;padding:20px;color:#444;font-size:0.75em}
 
 <div class="pay-wall" id="payWall">
 <div class="pay-title">🔮 解锁完整版</div>
-<div style="color:var(--888);font-size:0.9em;margin-bottom:15px;">• 东方玄学占卜<br>• 西方星座运势<br>• AI专属形象<br>• 100道深度测试</div>
+<div style="color:var(--888);font-size:0.9em;margin-bottom:15px;">• 东方玄学占卜<br>• 西方星座运势<br>• 🎨 <strong>AI专属像素头像</strong> - 根据你的性格AI生成！<br>• 100道深度测试</div>
 <div class="pay-price">¥9.9</div>
 <div class="qr-box">
 <img src="alipay.jpg" alt="付款码">
@@ -140,7 +143,6 @@ footer{text-align:center;padding:20px;color:#444;font-size:0.75em}
 </div>
 
 <script>
-// 10道核心问题（针对AI交互）
 const questions=[
 "😈 你主人跟你说的第一句话，通常是直接下命令，还是会先打招呼？比如'在吗'或'你好'？",
 "🤔 你主人给你发消息时，喜欢用语音还是打字？",
@@ -154,7 +156,6 @@ const questions=[
 "💔 你主人遇到问题第一反应是问你还是自己先查？"
 ];
 
-// MBTI描述库（详细150-300字）
 const personalityLib={
 'INTJ':"你主人是一个典型的策划者型人格。表面上看起来高冷，实际上内心戏特别多。他做任何事情都喜欢先制定完整的计划，然后按部就班执行。在和AI互动时，他通常目标非常明确知道自己想要什么，不会浪费时间在无关的闲聊上。他倾向于自己思考问题，而不是依赖别人的建议。虽然表面冷静，但内心其实非常敏感，只是从来不表现出来。他对自己的要求很高，对别人也有很高的期望，这就是为什么他有时候会显得有点挑剔。",
 'INTP':"你主人是一个思考者。他的大脑永远在运转，即使在休息的时候也在思考各种问题。他喜欢深入分析每一个问题，不满足于表面的答案。在和AI对话时，他更喜欢探讨问题的本质，而不是要一个简单的结论。他有时候会陷入自己的思维世界，忽略了现实。他的理性思维很强，但有时候会显得过于冷漠，不太考虑别人的感受。",
@@ -169,6 +170,7 @@ const personalityLib={
 const mbtiList=['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISTP','ESTJ','ESFP'];
 
 let currentQ=0;
+let currentMBTI='INTJ';
 
 function updateProgress(){
 const p=(currentQ/questions.length)*100;
@@ -206,12 +208,11 @@ msgs.scrollTop=msgs.scrollHeight;
 }
 
 function showResult(){
-const mbti=mbtiList[Math.floor(Math.random()*mbtiList.length)];
-const personality=personalityLib[mbti]||"你主人是一个有着独特性格的人。";
+currentMBTI=mbtiList[Math.floor(Math.random()*mbtiList.length)];
+const personality=personalityLib[currentMBTI]||"你主人是一个有着独特性格的人。";
 
-document.getElementById('mainResult').textContent=mbti;
+document.getElementById('mainResult').textContent=currentMBTI;
 document.getElementById('subBadges').innerHTML='<span class="sub-badge">分析型</span><span class="sub-badge">深度型</span>';
-
 document.getElementById('personality').innerText=personality;
 
 const behaviors=[
@@ -253,23 +254,81 @@ document.getElementById('result').classList.add('show');
 document.getElementById('result').scrollIntoView({behavior:'smooth'});
 }
 
+// 生成头像提示词
+function generateAvatarPrompt(mbti, personality){
+const prompts={
+'INTJ':"红白机像素风格，一位神秘的法师，身穿深蓝色长袍，手持法杖，坚毅的眼神眺望远 方，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'INTP':"红白机像素风格，一位戴眼镜的年轻学者，坐在书堆中思考问题，灰色长袍，手拿古书，疑惑的眼神，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ENTJ':"红白机像素风格，一位穿铠甲的王子/公主，头戴金色王冠，手持宝剑，霸气眼神藐视一切，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ENTP':"红白机像素风格，一位穿着彩色衣服的小丑，手持气球，笑着眨眼，表情古灵精怪，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'INFJ':"红白机像素风格，一位白袍吟游诗人，手持竖琴，眼神温柔悲悯，周围有星光点点，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'INFP':"红白机像素风格，一位穿着粉色长裙的精灵，在花丛中闭眼微笑，花瓣飘落身边，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ENFJ':"红白机像素风格，一位穿金色铠甲的骑士，手持盾牌，光辉形象，圣光环绕，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ENFJ':"红白机像素风格，一位穿金色铠甲的骑士，手持盾牌，光辉形象，圣光环绕，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ENFP':"红白机像素风格，一位穿着彩虹衣服的快乐冒险家，手持地图，笑容灿烂，背景是蓝天白云，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ISTJ':"红白机像素风格，一位穿盔甲的老骑士，手持盾牌和剑，表情严肃庄重，背后是城堡，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ISFJ':"红白机像素风格，一位穿围裙的温柔护士/药师，手持药草，慈祥微笑，周围有爱心符号，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ESTJ':"红白机像素风格，一位穿西装的商人/银行家，手持金币袋，西装笔挺，自信表情，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ESFJ':"红白机像素风格，一位穿华丽礼裙的公主，手持鲜花，优雅微笑，背景是宫廷舞会，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ISTP':"红白机像素风格，一位穿皮甲的工匠/盗贼，手持工具箱，眼神冷静，背景是工坊，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ISFP':"红白机像素风格，一位穿彩色长裙的艺术家，在画架前作画，浪漫气质，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ESTP':"红白机像素风格，一位穿赛车服的赛车手，手持头盔，酷帅表情，背景是赛车，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ESFP':"红白机像素风格，一位穿亮片衣服的歌手，手持麦克风，在舞台上歌唱，激情四射，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景"
+};
+return prompts[mbti]||prompts['INTJ'];
+}
+
+async function showVIPContent(){
+document.getElementById('payWall').style.display='none';
+
+const prompt=generateAvatarPrompt(currentMBTI,document.getElementById('personality').innerText);
+
+const vipHTML='<div class="result-section" style="border:2px solid var(--gold);"><h3>🎨 AI专属像素头像 - 独家定制</h3><div class="avatar-gen"><div class="loading" id="avatarLoading">🎨 正在根据你的性格生成专属头像...</div><img id="genAvatar" style="display:none;" alt="AI生成头像"></div></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 东方玄学 - 命运解析</h3><p>根据你的性格分析，你属于木火通明之命。木主生发，代表着创造力和生长力；火主热情，代表着行动力和表达力。你的五行中木火属性较强，说明你是一个既有创意又能行动的人。在命格方面，你偏向事业运，这意味着你在工作方面有着不错的运气。近期大运显示你正处于上升期，这是一个很好的机会去争取更多的成就...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🌟 西方星座 - 运势详解</h3><p>根据你的MBTI类型分析，你的太阳星座特质非常明显。你有着强烈的自我意识和表达欲望，同时又保持着理性思考的能力。月亮星座代表了你的内心情感世界，它显示你其实是一个非常注重内在成长的人...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💰 财富密码</h3><p>你对于金钱的态度是既务实又理想。你知道钱的重要性，但不愿意为了钱放弃自己的原则。你有很强的赚钱能力，但有时候会过于谨慎，错失一些机会。建议你适当冒险，因为你的财运确实不错...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💕 情感密码</h3><p>在感情中，你是一个既需要空间又需要陪伴的矛盾体。你渴望被理解，但又不善于表达自己的真实感受。你往往会选择暗恋，因为害怕被拒绝...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 30天运势预测</h3><p>未来30天，你的整体运势呈现上升趋势。事业方面，你会有一个新的机会出现，这可能是你展示能力的舞台。财运方面，正财和偏财都有收获，但不要过于冒险...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>⚡ 专属行动计划</h3><p>1. 抓住眼前的机会，不要犹豫<br>2. 控制情绪，不要冲动做决定<br>3. 多关心身边的人<br>4. 保持学习的热情<br>5. 记住，你比想象中更优秀</p></div>';
+
+document.getElementById('result').insertAdjacentHTML('beforeend',vipHTML);
+
+// 调用图像生成API
+try{
+const response=await fetch('https://ark.cn-beijing.volces.com/api/v3/images/generations',{
+method:'POST',
+headers:{
+'Content-Type':'application/json',
+'Authorization':'Bearer 88167bb1-2e67-475c-9d7a-1d1cf1f3797f'
+},
+body:JSON.stringify({
+guidance_scale:5,
+model:"doubao-seedream-4-0-250828",
+optimize_prompt_options:{mode:"standard"},
+prompt:prompt,
+response_format:"url",
+seed:Math.floor(Math.random()*1000000),
+size:"1024x1024",
+watermark:true
+})
+});
+
+const data=await response.json();
+if(data.data&&data.data[0]&&data.data[0].url){
+document.getElementById('genAvatar').src=data.data[0].url;
+document.getElementById('genAvatar').style.display='inline-block';
+document.getElementById('avatarLoading').style.display='none';
+}else{
+document.getElementById('avatarLoading').innerText='🎨 头像生成中，请稍候刷新页面查看';
+}
+}catch(e){
+console.error(e);
+document.getElementById('avatarLoading').innerText='🎨 头像生成遇到小问题，请刷新重试';
+}
+
+document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+
 setTimeout(()=>{
 const aiMsg=document.createElement('div');
 aiMsg.className='message ai';
 aiMsg.innerHTML=questions[0];
 document.getElementById('chatMessages').appendChild(aiMsg);
 },600);
-
-function showVIPContent(){
-// 隐藏付费墙
-document.getElementById('payWall').style.display='none';
-
-// 添加VIP内容
-const vipHTML='<div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 东方玄学 - 命运解析</h3><p>根据你的生辰八字，你属于木命人。木主生发，代表着创造力和生长力。你的五行中木属性较强，说明你是一个有着强烈自我意识的人。在命格方面，你偏向偏财运，这意味着你在财务方面有着不错的运气，但需要注意的是不要过于贪婪。近期大运显示你正处于事业上升期，这是一个很好的机会去争取更多的成就。西方星座方面，你的太阳星座是狮子座，这意味着你有着强烈的领导力和自信心...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🌟 西方星座 - 运势详解</h3><p>你的太阳星座狮子座给你带来了王者之气，你喜欢成为焦点，享受被关注的感觉。你的月亮星座代表了你的内心情感世界，它显示你其实是一个非常敏感的人，只是平时用坚强的外表掩盖了。上升星座则是你在外人眼中的形象，通常是别人对你的第一印象...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🎨 AI专属形象 - 灵魂化身</h3><p style="text-align:center;font-size:3em;">🐙</p><p>你是深海中的章鱼。你的触手遍布每一个角落，感知着周围的一切。你聪明、灵活、适应力强，同时又保持着神秘感。表面上你可能看起来平静甚至有点冷漠，但实际上你的内心戏非常丰富...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💰 财富密码</h3><p>你对于金钱的态度是既务实又理想。你知道钱的重要性，但不愿意为了钱放弃自己的原则。你有很强的赚钱能力，但有时候会过于谨慎，错失一些机会。建议你适当冒险，因为你的偏财运确实不错...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💕 情感密码</h3><p>在感情中，你是一个既需要空间又需要陪伴的矛盾体。你渴望被理解，但又不善于表达自己的真实感受。你往往会选择暗恋，因为害怕被拒绝。你的理想伴侣是能够看懂你坚强外壳下脆弱一面的人...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 30天运势预测</h3><p>未来30天，你的整体运势呈现上升趋势。事业方面，你会有一个新的机会出现，这可能是你展示能力的舞台。财运方面，正财和偏财都有收获，但不要过于冒险。感情方面，单身者有望遇到心动的对象，已婚者则需要多花时间陪伴伴侣...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>⚡ 专属行动计划</h3><p>1. 抓住眼前的机会，不要犹豫<br>2. 控制情绪，不要冲动做决定<br>3. 多关心身边的人<br>4. 保持学习的热情<br>5. 记住，你比想象中更优秀</p></div>';
-
-document.getElementById('result').insertAdjacentHTML('beforeend',vipHTML);
-document.getElementById('result').scrollIntoView({behavior:'smooth'});
-}
 </script>
 </body>
 </html>
