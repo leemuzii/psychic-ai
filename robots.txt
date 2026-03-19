@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://leemuzii.github.io/psychic-ai/sitemap.xml
