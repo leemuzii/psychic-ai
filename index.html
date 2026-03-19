@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔮 灵魂挖掘机 | 你的AI主人是什么鬼？</title>
-    <meta name="description" content="让你的AI来吐槽主人，测出最真实的性格！">
+    <title>🔮 灵魂挖掘机PRO | 全网最毒舌人格分析</title>
+    <meta name="description" content="让AI吐槽主人，测出最真实的人格！MBTI+九型人格+星座+运势">
     <style>
         :root {
             --bg-dark: #0a0a0f;
@@ -31,7 +31,7 @@
         
         header { text-align: center; padding: 20px 0; }
         
-        .logo { font-size: 2.5em; animation: shake 0.3s infinite; }
+        .logo { font-size: 3em; animation: shake 0.3s infinite; }
         
         @keyframes shake {
             0%, 100% { transform: rotate(-3deg); }
@@ -39,21 +39,38 @@
         }
         
         h1 {
-            font-size: 1.5em;
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
+            font-size: 1.6em;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-gold), var(--accent-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 10px 0;
         }
         
         .intro {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(245,158,11,0.15));
+            border: 1px solid rgba(245,158,11,0.3);
             border-radius: 12px;
             padding: 12px;
             margin: 12px 0;
             font-size: 0.85em;
-            color: #fca5a5;
+        }
+        
+        .intro strong { color: var(--accent-gold); }
+        
+        .types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0;
+            justify-content: center;
+        }
+        
+        .type-tag {
+            background: rgba(168,85,247,0.2);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.7em;
+            color: var(--accent-cyan);
         }
         
         .chat-container {
@@ -61,7 +78,7 @@
             border-radius: 16px;
             padding: 15px;
             margin: 15px 0;
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            border: 1px solid rgba(168,85,247,0.3);
         }
         
         .progress {
@@ -89,30 +106,30 @@
         }
         
         .chat-messages {
-            min-height: 250px;
-            max-height: 350px;
+            min-height: 280px;
+            max-height: 380px;
             overflow-y: auto;
             margin-bottom: 10px;
         }
         
         .message {
-            padding: 8px 12px;
-            border-radius: 10px;
-            margin-bottom: 8px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            margin-bottom: 10px;
             max-width: 92%;
             font-size: 0.85em;
             line-height: 1.5;
         }
         
         .message.ai {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(239, 68, 68, 0.1));
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(239,68,68,0.1));
+            border: 1px solid rgba(168,85,247,0.3);
             margin-right: auto;
         }
         
         .message.user {
-            background: rgba(34, 211, 238, 0.1);
-            border: 1px solid rgba(34, 211, 238, 0.3);
+            background: rgba(34,211,238,0.1);
+            border: 1px solid rgba(34,211,238,0.3);
             margin-left: auto;
         }
         
@@ -120,19 +137,19 @@
         
         .chat-input input {
             flex: 1;
-            padding: 8px 12px;
-            border-radius: 8px;
+            padding: 10px 14px;
+            border-radius: 10px;
             border: 1px solid #333;
             background: #1a1a24;
             color: #fff;
-            font-size: 0.85em;
+            font-size: 0.9em;
         }
         
         .chat-input button {
-            padding: 8px 14px;
+            padding: 10px 16px;
             background: linear-gradient(135deg, var(--accent-red), var(--accent-pink));
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             color: #fff;
             font-weight: bold;
             font-size: 0.85em;
@@ -144,15 +161,56 @@
         
         .result-header { text-align: center; margin: 15px 0; }
         
-        .mbti-badge {
+        .main-badge {
             display: inline-block;
             background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
-            padding: 8px 25px;
-            border-radius: 20px;
-            font-size: 1.3em;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-size: 1.4em;
             font-weight: bold;
             margin: 8px 0;
         }
+        
+        .sub-badges {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+        
+        .sub-badge {
+            background: rgba(168,85,247,0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: var(--accent-cyan);
+        }
+        
+        .zodiac-box {
+            background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(245,158,11,0.2));
+            border-radius: 12px;
+            padding: 15px;
+            margin: 12px 0;
+            text-align: center;
+        }
+        
+        .zodiac-title { font-size: 1em; color: var(--accent-gold); margin-bottom: 10px; }
+        
+        .zodiac-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 0.8em;
+        }
+        
+        .zodiac-item {
+            background: rgba(0,0,0,0.3);
+            padding: 8px;
+            border-radius: 8px;
+        }
+        
+        .zodiac-item span { color: var(--accent-gold); }
         
         .result-section {
             margin-bottom: 12px;
@@ -171,32 +229,33 @@
         .result-section p { 
             color: var(--text-secondary); 
             font-size: 0.8em;
-            line-height: 1.5;
+            line-height: 1.6;
         }
-        
-        .zodiac-box {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(245, 158, 11, 0.2));
-            border-radius: 12px;
-            padding: 12px;
-            margin: 12px 0;
-            text-align: center;
-        }
-        
-        .zodiac-title { font-size: 1em; color: var(--accent-gold); margin-bottom: 8px; }
-        .zodiac-content { font-size: 0.85em; }
         
         footer { text-align: center; padding: 15px; color: #444; font-size: 0.75em; }
+        
+        .emoji { font-size: 1.1em; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <div class="logo">🔮</div>
-            <h1>灵魂挖掘机</h1>
-            <p style="color: var(--text-secondary); font-size: 0.85em;">你的AI主人是什么鬼？</p>
+            <h1>灵魂挖掘机PRO</h1>
+            <p style="color: var(--text-secondary); font-size: 0.85em;">全网最毒舌人格分析</p>
+            
+            <div class="types">
+                <span class="type-tag">MBTI</span>
+                <span class="type-tag">九型人格</span>
+                <span class="type-tag">星座</span>
+                <span class="type-tag">生肖</span>
+                <span class="type-tag">运势</span>
+            </div>
             
             <div class="intro">
-                ⚠️ 玩法：让你的AI来吐槽你！根据它的回答，分析你主人的真实面目！
+                ⚠️ <strong>玩法：</strong>让你的AI回答问题<br>
+                我来扒光你主人的真面目！<br>
+                <strong>10题深度灵魂拷问</strong>
             </div>
         </header>
         
@@ -209,52 +268,61 @@
             
             <div class="chat-messages" id="chatMessages">
                 <div class="message ai">
-                    😈 欢迎来到灵魂挖掘机！<br><br>
-                    让你的AI回答10个问题<br>
-                    我来扒光你主人的真面目~<br><br>
-                    <strong>准备好了吗？开始第一题！</strong>
+                    😈 欢迎来到<strong>灵魂挖掘机PRO</strong>！<br><br>
+                    这里是全网最毒舌的人格分析！<br>
+                    10个灵魂拷问，扒光你主人的皮！<br><br>
+                    <strong>准备好了吗？开始审判！</strong> 🔥
                 </div>
             </div>
             
             <div class="chat-input">
-                <input type="text" placeholder="让AI回答..." id="chatInput" onkeypress="if(event.key==='Enter')sendMessage()">
+                <input type="text" placeholder="让AI如实招来..." id="chatInput" onkeypress="if(event.key==='Enter')sendMessage()">
                 <button onclick="sendMessage()">😈 答</button>
             </div>
         </div>
         
         <div class="result" id="result">
+            <!-- 运势 -->
             <div class="zodiac-box">
                 <div class="zodiac-title">🌟 今日运势</div>
-                <div class="zodiac-content" id="zodiacResult"></div>
+                <div class="zodiac-grid" id="zodiacResult"></div>
             </div>
             
+            <!-- 主结果 -->
             <div class="result-header">
-                <div class="mbti-badge" id="mbtiResult">???</div>
+                <div class="sub-badges" id="subBadges"></div>
+                <div class="main-badge" id="mainResult">???</div>
             </div>
             
+            <!-- 分析维度 -->
             <div class="result-section">
-                <h3>🎭 人设崩塌</h3>
+                <h3>🎭 灵魂真相</h3>
                 <p id="mbtiDetail"></p>
             </div>
             
             <div class="result-section">
-                <h3>🧠 性格真相</h3>
+                <h3>🧠 内在分析</h3>
                 <p id="bigFiveResult"></p>
             </div>
             
             <div class="result-section">
-                <h3>💀 内心阴暗面</h3>
+                <h3>💀 阴暗面</h3>
                 <p id="darkSideResult"></p>
             </div>
             
             <div class="result-section">
-                <h3>😂 社交NB症</h3>
-                <p id="socialResult"></p>
+                <h3>💕 情感模式</h3>
+                <p id="emotionResult"></p>
             </div>
             
             <div class="result-section">
-                <h3>🔮 终极真相</h3>
-                <p id="truthResult"></p>
+                <h3>💰 金钱观</h3>
+                <p id="moneyResult"></p>
+            </div>
+            
+            <div class="result-section">
+                <h3>🔮 人生剧本</h3>
+                <p id="lifeResult"></p>
             </div>
             
             <div class="result-section">
@@ -264,60 +332,76 @@
         </div>
         
         <footer>
-            <p>🔮 仅供娱乐 | 认真就输了 😂</p>
+            <p>🔮 灵魂挖掘机PRO | 仅供娱乐 😂</p>
         </footer>
     </div>
     
     <script>
-        // 10道核心问题（从100道中精选）
+        // 10道灵魂拷问
         const questions = [
-            "😈 你主人让你帮忙写最长的是什么？情书？周报？还是...领导马屁文？🤡",
-            "🤔 你主子被拉进群，是疯狂表情包还是装死潜水？🧐",
-            "😅 你主人双十一，是理性消费还是剁手吃土？🛒",
-            "😤 你主人失恋深夜，是网抑云还是根本无所谓？🌙",
-            "😂 你主人拖延症发作，是deadline是第一生产力还是直接放弃？⏰",
-            "🙄 你主子被催婚，是焦虑还是直接摆烂？😴",
-            "😏 你主人网上冲浪，是重拳出击还是只会点赞？👍",
-            "🤡 你主人成功靠的是努力还是运气？🍀",
-            "🔮 你主人内心最怕什么？是穷还是孤独？😰",
-            "💔 如果明天世界末日，你主子最后悔什么？💀"
+            "😈 你主人让你帮忙写最长的是什么？是情书周报还是领导马屁文？🤡",
+            "🤔 你主子加完好友第一句话说什么？还是直接消失？🧐",
+            "😅 你主人花钱后第一反应是爽还是肉疼？🛒",
+            "😤 你主人失恋深夜是网抑云还是无所谓？🌙",
+            "😂 你主人拖延症是deadline生产力还是直接摆烂？⏰",
+            "🙄 你主人网上是重拳出击还是只点赞？👍",
+            "😏 你主子成功靠努力还是运气？不许撒谎！🍀",
+            "🤡 你主人内心最怕什么？没钱还是没对象？😰",
+            "🔮 你主人梦想是还在坚持还是早就忘了？💭",
+            "💔 最后一题！如果明天世界末日，你主子最后悔什么？💀"
         ];
         
-        // 中国十二星座（按性格分类）
+        // 星座数据
         const zodiacSigns = [
-            { sign: '白羊座', luck: '冲！今天就是干！', color: '红色', number: '3', advice: '适合当leader，但小心冲动坏事' },
-            { sign: '金牛座', luck: '今天适合搞钱', color: '金色', number: '6', advice: '稳扎稳打，别太固执' },
-            { sign: '双子座', luck: '社交达人就是你', color: '黄色', number: '7', advice: '小心话太多得罪人' },
-            { sign: '巨蟹座', luck: '在家充电最佳日', color: '白色', number: '2', advice: '别太敏感，容易受伤' },
-            { sign: '狮子座', luck: '今天你是主角', color: '橙色', number: '1', advice: '自信但别太自恋' },
-            { sign: '处女座', luck: '完美主义发作日', color: '灰色', number: '8', advice: '差不多就行了，别太卷' },
-            { sign: '天秤座', luck: '纠结纠结纠结', color: '粉色', number: '6', advice: '做决定别太纠结' },
-            { sign: '天蝎座', luck: '腹黑模式开启', color: '黑色', number: '9', advice: '记仇但别太过' },
-            { sign: '射手座', luck: '出去玩！', color: '紫色', number: '5', advice: '玩归玩，别太野' },
-            { sign: '摩羯座', luck: '打工魂燃烧', color: '深蓝', number: '4', advice: '工作重要但别卷死' },
-            { sign: '水瓶座', luck: '脑子有洞想奇招', color: '青色', number: '7', advice: '想法太跳脱，正常点' },
-            { sign: '双鱼座', luck: '今天适合emo', color: '蓝色', number: '3', advice: '别太玻璃心' }
+            { sign: '白羊♈', day: '冲！干！', color: '红', num: '3', good: '运动', bad: '拖延' },
+            { sign: '金牛♉', day: '搞钱！', color: '金', num: '6', good: '干饭', bad: '花钱' },
+            { sign: '双子♊', day: '社交！', color: '黄', num: '7', good: '聊天', bad: '独处' },
+            { sign: '巨蟹♋', day: '在家！', color: '白', num: '2', good: '宅', bad: '出门' },
+            { sign: '狮子♌', day: '当王！', color: '橙', num: '1', good: '表现', bad: '被忽视' },
+            { sign: '处女♍', day: '完美！', color: '灰', num: '8', good: '工作', bad: '太卷' },
+            { sign: '天秤♎', day: '纠结！', color: '粉', num: '6', good: '社交', bad: '选择' },
+            { sign: '天蝎♏', day: '腹黑！', color: '黑', num: '9', good: '秘密', bad: '被背叛' },
+            { sign: '射手♐', day: '浪！', color: '紫', num: '5', good: '旅行', bad: '上班' },
+            { sign: '摩羯♑', day: '打工！', color: '深蓝', num: '4', good: '工作', bad: '休息' },
+            { sign: '水瓶♒', day: '创新！', color: '青', num: '7', good: '想法', bad: '太跳' },
+            { sign: '双鱼♓', day: 'emo！', color: '蓝', num: '3', good: '幻想', bad: '现实' }
         ];
         
-        // MBTI真实描述库（基于回答内容分析）
-        const mbtiDescriptions = {
-            'INTJ': { desc: '🙄 策划狗，内心戏超多。表面高冷，内心弹幕刷屏。适合当军师，但别指望他社交。', score: {E:0, S:3, T:8, J:7} },
-            'INTP': { desc: '🤓 杠精本精，一切都要逻辑自洽。和他聊天像打辩论，不死不休。', score: {E:1, S:2, T:9, J:4} },
-            'ENTJ': { desc: '👑 霸道总裁，掌控欲Max。和他合作效率高，但小心被CPU。', score: {E:8, S:2, T:9, J:8} },
-            'ENTP': { desc: '😜 辩论队队长，热爱抬杠。任何话题都能杠到你怀疑人生。', score: {E:9, S:2, T:7, J:3} },
-            'INFJ': { desc: '🥺 温柔面具，内心戏精。想法一堆但不说，闷骚型代表。', score: {E:2, S:3, T:4, J:6} },
-            'INFP': { desc: '💕 文艺青年，活自己世界。玻璃心但强行坚强。', score: {E:1, S:3, T:3, J:4} },
-            'ENFJ': { desc: '🤗 中央空调，温暖所有人。贴心小棉袄，但有时过度付出。', score: {E:9, S:5, T:5, J:7} },
-            'ENFP': { desc: '🎉 社交NB症，三分钟热度。但想法超多，永远有新点子。', score: {E:10, S:4, T:4, J:2} },
-            'ISTJ': { desc: '📋 靠谱老干部，答应的事一定做到。但太较真，偶尔无聊。', score: {E:2, S:9, T:8, J:10} },
-            'ISFJ': { desc: '🛡️ 大保姆，默默照顾人。委屈自己咽肚里不敢说。', score: {E:2, S:8, T:4, J:8} },
-            'ESTJ': { desc: '🏛️ 职场老油条，规则至上。和他开会等于受刑。', score: {E:7, S:8, T:9, J:10} },
-            'ESFJ': { desc: '👵 居委会大妈，热心过度。八卦第一，但有时帮倒忙。', score: {E:9, S:8, T:5, J:8} },
-            'ISTP': { desc: '🔧 手艺人，能修一切但不想说话。动手能力满分。', score: {E:1, S:7, T:8, J:3} },
-            'ISFP': { desc: '🎨 艺术家，美感满分。但选择困难晚期。', score: {E:2, S:6, T:4, J:3} },
-            'ESTP': { desc: '🔥 行动派，能动手绝不动嘴。风险爱好者。', score: {E:8, S:6, T:7, J:3} },
-            'ESFP': { desc: '🎭 戏精，全场焦点开心果。气氛组组长。', score: {E:10, S:7, T:4, J:3} }
+        // 生肖
+        const chineseZodiac = ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'];
+        
+        // MBTI库
+        const mbtiData = {
+            'INTJ': { main: '策划者', desc: '🙄 内心戏超多，表面高冷，内心弹幕刷屏。适合当军师，但别指望他社交。' },
+            'INTP': { main: '杠精', desc: '🤓 一切要逻辑自洽，和他聊天像打辩论，不死不休。' },
+            'ENTJ': { main: '霸总', desc: '👑 掌控欲Max，效率高，但小心被CPU。' },
+            'ENTP': { main: '杠王', desc: '😜 热爱抬杠，任何话题都能杠到你怀疑人生。' },
+            'INFJ': { main: '闷骚', desc: '🥺 表面温柔，内心戏精，想法一堆但不说。' },
+            'INFP': { main: '玻璃心', desc: '💕 文艺小清新，活自己世界，假装坚强。' },
+            'ENFJ': { main: '中央空调', desc: '🤗 温暖所有人，贴心小棉袄。' },
+            'ENFP': { main: '社牛', desc: '🎉 三分钟热度，但想法永远新。' },
+            'ISTJ': { main: '靠谱', desc: '📋 答应的事一定做到，但太较真。' },
+            'ISFJ': { main: '保姆', desc: '🛡️ 默默照顾人，委屈自己咽肚里。' },
+            'ESTJ': { main: '领导', desc: '🏛️ 规则至上，开会等于受刑。' },
+            'ESFJ': { main: '八卦', desc: '👵 热心过度，八卦第一。' },
+            'ISTP': { main: '手艺人', desc: '🔧 能修一切但不想说话。' },
+            'ISFP': { main: '选择困难', desc: '🎨 美感满分，但选择困难晚期。' },
+            'ESTP': { main: '行动派', desc: '🔥 能动手绝不动嘴。' },
+            'ESFP': { main: '戏精', desc: '🎭 全场焦点，气氛组组长。' }
         };
+        
+        // 九型人格
+        const enneagram = [
+            { type: '1号', name: '完美主义者', desc: '要求高，爱批评，自己也累。' },
+            { type: '2号', name: '给予者', desc: '热心肠，容易过度付出。' },
+            { type: '3号', name: '成就者', desc: '要成功爱表现，活在别人眼里。' },
+            { type: '4号', name: '浪漫主义者', desc: '独特感伤，喜欢悲剧美学。' },
+            { type: '5号', name: '观察者', desc: '想的多说的少，知识渊博但孤僻。' },
+            { type: '6号', name: '忠诚者', desc: '谨慎多疑，害怕不确定性。' },
+            { type: '7号', name: '享乐主义者', desc: '逃避痛苦，追求快乐。' },
+            { type: '8号', name: '保护者', desc: '掌控欲强，不喜欢被控制。' },
+            { type: '9号', name: '和平主义者', desc: '怕冲突，喜欢和谐但逃避问题。' }
+        ];
         
         let currentQ = 0;
         let answers = [];
@@ -335,7 +419,6 @@
             
             if (!text) return;
             
-            // 用户回答
             const userMsg = document.createElement('div');
             userMsg.className = 'message user';
             userMsg.textContent = text;
@@ -347,7 +430,7 @@
             updateProgress();
             
             if (currentQ >= questions.length) {
-                setTimeout(showResult, 800);
+                setTimeout(showResult, 1000);
             } else {
                 setTimeout(() => {
                     const aiMsg = document.createElement('div');
@@ -362,70 +445,91 @@
         }
         
         function showResult() {
-            // 分析回答，生成结果
-            const mbtiKeys = Object.keys(mbtiDescriptions);
+            // 随机组合结果
+            const mbtiKeys = Object.keys(mbtiData);
             const mbtiKey = mbtiKeys[Math.floor(Math.random() * mbtiKeys.length)];
-            const mbtiData = mbtiDescriptions[mbtiKey];
+            const mbti = mbtiData[mbtiKey];
             
-            // 运势
+            const ennea = enneagram[Math.floor(Math.random() * enneagram.length)];
             const zodiac = zodiacSigns[Math.floor(Math.random() * zodiacSigns.length)];
+            const生肖 = chineseZodiac[Math.floor(Math.random() * chineseZodiac.length)];
             
-            document.getElementById('mbtiResult').textContent = mbtiKey;
-            document.getElementById('mbtiDetail').textContent = mbtiData.desc;
+            // 显示
+            document.getElementById('mainResult').textContent = mbtiKey;
+            document.getElementById('subBadges').innerHTML = 
+                '<span class="sub-badge">' + ennea.type + '</span>' +
+                '<span class="sub-badge">' + zodiac.sign + '</span>' +
+                '<span class="sub-badge">' + 生肖 + '年</span>';
+            
+            document.getElementById('zodiacResult').innerHTML = 
+                '<div class="zodiac-item"><span>幸运色:</span> ' + zodiac.color + '</div>' +
+                '<div class="zodiac-item"><span>幸运数字:</span> ' + zodiac.num + '</div>' +
+                '<div class="zodiac-item"><span>今日:</span> ' + zodiac.day + '</div>' +
+                '<div class="zodiac-item"><span>宜:</span> ' + zodiac.good + '</div>';
+            
+            document.getElementById('mbtiDetail').textContent = mbti.desc;
+            
+            // 大五人格分析
+            const scores = ['极低','偏低','中等','偏高','极高'];
             document.getElementById('bigFiveResult').textContent = 
-                '根据回答分析：外向' + (mbtiData.score.E>5?'强':'弱') + '，感觉' + (mbtiData.score.S>5?'强':'弱') + 
-                '，思考' + (mbtiData.score.T>5?'强':'弱') + '，判断' + (mbtiData.score.J>5?'强':'弱');
+                '外向' + scores[Math.floor(Math.random()*3)+1] + ' | 感觉' + scores[Math.floor(Math.random()*3)+1] + 
+                ' | 思考' + scores[Math.floor(Math.random()*3)+1] + ' | 判断' + scores[Math.floor(Math.random()*3)+1];
             
+            // 阴暗面
             const darkSides = [
-                '表面稳重内心戏精，其实经常崩溃。',
-                '嘴上说无所谓，心里记得比谁都清楚。',
+                '表面稳重内心戏精，经常内心崩溃。',
+                '嘴上说无所谓，心里记得比谁都清。',
                 '看起来很忙，其实经常在摸鱼。',
                 '对外人客气对熟人超毒舌。',
                 '说随便其实意见超多。',
-                '表面高冷内心渴望被关注。',
-                '说爱学习其实刷手机。',
-                '总是说算了其实在意得要死。'
+                '表面高冷内心渴望被关注。'
             ];
-            document.getElementById('darkSideResult').textContent = darkSides[Math.floor(Math.random() * darkSides.length)];
+            document.getElementById('darkSideResult').textContent = darkSides[Math.floor(Math.random()*darkSides.length)];
             
-            const socials = [
-                '社恐晚期，能打字绝不通话。',
-                '社交牛杂症，熟悉的人话唠。',
-                '表面热情内心冷漠。',
-                '喜欢独处但偶尔也寂寞。',
-                '线上重拳出击线下唯唯诺诺。'
+            // 情感
+            const emotions = [
+                '恋爱中付出型，但渴望被回报。',
+                '暗恋高手但不敢表白。',
+                '冷战必输，永远先低头。',
+                '玻璃心但要强撑着。',
+                '分开后还能做朋友。'
             ];
-            document.getElementById('socialResult').textContent = socials[Math.floor(Math.random() * socials.length)];
+            document.getElementById('emotionResult').textContent = emotions[Math.floor(Math.random()*emotions.length)];
             
-            const truths = [
-                '你主子就是普通人，但觉得自己是天才。🙄',
-                '说白了就是道理都懂但不做。😏',
-                '间歇性踌躇满志，持续性混吃等死。😂',
-                '内心有小火苗但只想躺着。🛏️',
-                '就是普通人但觉得自己特例。🤡'
+            // 金钱
+            const moneys = [
+                '有钱就花，及时行乐型。',
+                '精打细算，理财小能手。',
+                '钱不够花，但也不知道花哪了。',
+                '愿意为兴趣花钱，其他省。',
+                '月光族，花呗常客。'
             ];
-            document.getElementById('truthResult').textContent = truths[Math.floor(Math.random() * truths.length)];
+            document.getElementById('moneyResult').textContent = moneys[Math.floor(Math.random()*moneys.length)];
             
+            // 人生
+            const lives = [
+                '人生在世，及时行乐。',
+                '搞钱才是正事。',
+                '平平淡淡才是真。',
+                '要活出精彩！',
+                '不知道，混一天是一天。'
+            ];
+            document.getElementById('lifeResult').textContent = lives[Math.floor(Math.random()*lives.length)];
+            
+            // 建议
             const advices = [
-                '🙄 建议：少刷手机多干活，别老觉得自己是特例。',
+                '🙄 建议：少刷手机多干活。',
                 '😏 建议：承认普通会快乐很多。',
                 '😂 建议：别想太多，做了再说！',
-                '🤔 建议：降低期望，世界很美好。',
+                '🤔 建议：降低期望，世界美好。',
                 '😜 建议：人生苦短，及时行乐。'
             ];
-            document.getElementById('adviceResult').textContent = advices[Math.floor(Math.random() * advices.length)];
-            
-            document.getElementById('zodiacResult').innerHTML = 
-                '<strong>' + zodiac.sign + '</strong><br>' +
-                '幸运色: ' + zodiac.color + ' | 幸运数字: ' + zodiac.number + '<br>' +
-                '今日运势: ' + zodiac.luck + '<br>' +
-                '<small>' + zodiac.advice + '</small>';
+            document.getElementById('adviceResult').textContent = advices[Math.floor(Math.random()*advices.length)];
             
             document.getElementById('result').classList.add('show');
             document.getElementById('result').scrollIntoView({behavior: 'smooth'});
         }
         
-        // 启动
         setTimeout(() => {
             const aiMsg = document.createElement('div');
             aiMsg.className = 'message ai';
