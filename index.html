@@ -334,25 +334,45 @@
                 </div>
                 <div id="paymentShow" style="display:none;">
                     <img src="alipay.jpg" style="width:200px; border-radius:10px;" alt="支付宝付款码">
-                    <p style="font-size:0.9em; color:var(--accent-gold); margin-top:15px;">💰 <strong>付款 ¥9.9</strong></p>
-                    <p style="font-size:0.75em; color:var(--text-secondary); margin-top:5px;">付款成功后截图联系微信：xxx</p>
-                    <button onclick="showThankYou()" style="margin-top:15px; padding:8px 20px; background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple)); border:none; border-radius:20px; color:#fff; cursor:pointer;">🎉 模拟已付款</button>
+                    <p style="font-size:0.9em; color:var(--accent-gold); margin-top:15px;">💰 <strong>付款 ¥9.9 解锁完整版</strong></p>
+                    <button onclick="showVIPContent()" style="margin-top:15px; padding:10px 25px; background:linear-gradient(135deg,var(--accent-cyan),var(--accent-purple)); border:none; border-radius:25px; color:#fff; font-weight:bold; cursor:pointer;">🎉 模拟已付款（测试）</button>
                 </div>
-                <div id="thankYouMsg" style="display:none; padding:20px; background:linear-gradient(135deg,rgba(34,211,238,0.2),rgba(168,85,247,0.2)); border-radius:15px; margin-top:15px;">
-                    <h3 style="color:var(--accent-gold);">🎉 感谢支持！</h3>
-                    <p style="font-size:0.85em; color:var(--text-secondary); margin-top:10px;">您好！我是允夕的 creator ~</p>
-                    <p style="font-size:0.85em; color:var(--text-secondary);">已收到您的付款，马上为您生成专属深度报告！</p>
-                    <div style="margin-top:15px; padding:10px; background:rgba(0,0,0,0.3); border-radius:10px;">
-                        <p style="font-size:0.8em; color:var(--accent-cyan);">📧 请添加微信发送付款截图</p>
-                        <p style="font-size:0.9em; color:var(--accent-gold); font-weight:bold;">微信：xxx</p>
+                <div id="vipContent" style="display:none;">
+                    <div style="padding:20px; background:linear-gradient(135deg,rgba(245,158,11,0.3),rgba(239,68,68,0.3)); border-radius:15px; border:2px solid var(--accent-gold);">
+                        <h2 style="color:var(--accent-gold);">🔓 VIP专属深度分析</h2>
+                        <p style="color:var(--text-secondary); font-size:0.85em;">恭喜解锁完整版！</p>
                     </div>
-                    <div style="margin-top:15px; padding:10px; background:rgba(0,0,0,0.3); border-radius:10px;">
-                        <p style="font-size:0.8em; color:var(--accent-pink);">🎁 您的专属权益：</p>
-                        <p style="font-size:0.8em; color:var(--text-secondary);">• 100+道完整灵魂拷问</p>
-                        <p style="font-size:0.8em; color:var(--text-secondary);">• 10页深度分析报告</p>
-                        <p style="font-size:0.8em; color:var(--text-secondary);">• 专属人设解读</p>
-                        <p style="font-size:0.8em; color:var(--text-secondary);">• 未来运势预测</p>
-                        <p style="font-size:0.8em; color:var(--text-secondary);">• 每月运势更新</p>
+                    
+                    <div style="margin-top:20px; padding:15px; background:var(--bg-card); border-radius:12px; border:1px solid var(--accent-purple);">
+                        <h3 style="color:var(--accent-purple);">🎭 完整人格画像</h3>
+                        <p id="vipFullDesc" style="color:var(--text-secondary); font-size:0.85em; line-height:1.6;"></p>
+                    </div>
+                    
+                    <div style="margin-top:15px; padding:15px; background:var(--bg-card); border-radius:12px; border:1px solid var(--accent-cyan);">
+                        <h3 style="color:var(--accent-cyan);">💰 财富密码</h3>
+                        <p id="vipMoney" style="color:var(--text-secondary); font-size:0.85em; line-height:1.6;"></p>
+                    </div>
+                    
+                    <div style="margin-top:15px; padding:15px; background:var(--bg-card); border-radius:12px; border:1px solid var(--accent-pink);">
+                        <h3 style="color:var(--accent-pink);">💕 情感密码</h3>
+                        <p id="vipLove" style="color:var(--text-secondary); font-size:0.85em; line-height:1.6;"></p>
+                    </div>
+                    
+                    <div style="margin-top:15px; padding:15px; background:var(--bg-card); border-radius:12px; border:1px solid var(--accent-gold);">
+                        <h3 style="color:var(--accent-gold);">🔮 未来30天运势</h3>
+                        <p id="vipFuture" style="color:var(--text-secondary); font-size:0.85em; line-height:1.6;"></p>
+                    </div>
+                    
+                    <div style="margin-top:15px; padding:15px; background:var(--bg-card); border-radius:12px; border:1px solid var(--accent-red);">
+                        <h3 style="color:var(--accent-red);">⚡ 人生建议</h3>
+                        <p id="vipAdvice" style="color:var(--text-secondary); font-size:0.85em; line-height:1.6;"></p>
+                    </div>
+                    
+                    <div style="margin-top:15px; padding:15px; background:var(--bg-card); border-radius:12px;">
+                        <h3 style="color:var(--accent-cyan);">🎁 专属福利</h3>
+                        <p style="color:var(--text-secondary); font-size:0.85em;">• 每月运势更新 ✨</p>
+                        <p style="color:var(--text-secondary); font-size:0.85em;">• 专属壁纸/头像 📱</p>
+                        <p style="color:var(--text-secondary); font-size:0.85em;">• 1对1深度咨询 💬</p>
                     </div>
                 </div>
             </div>
@@ -367,9 +387,46 @@
                     alert('密码错误！');
                 }
             }
-            function showThankYou() {
+            function showVIPContent() {
                 document.getElementById('paymentShow').style.display = 'none';
-                document.getElementById('thankYouMsg').style.display = 'block';
+                document.getElementById('vipContent').style.display = 'block';
+                
+                // 生成更详细的VIP内容
+                var fullDescs = [
+                    '你是那种表面云淡风轻，内心戏超多的人。表面上说"随便啊都行"，其实内心已经上演了80集宫斗剧。朋友圈永远岁月静好，微博小号全是 emo。你最大的优点是想得太多，缺点也是想得太多。',
+                    '你是一个矛盾的结合体。理性的时候能分析得头头是道，感性起来自己都害怕。你觉得自己是社恐，但熟人面前就是社牛。你觉得自己很普通，但偶尔又会觉得自己是天才。',
+                    '你是那种"道理都懂但就是不做"的典型代表。每次下定决心要改变，结果第二天还是一样。内心深处其实有小火苗，但更多时候只想躺着。',
+                    '表面高冷，内心柔软。别人都觉得你很坚强，其实你经常独自崩溃。你习惯了伪装，习惯了说"我没事"。但其实你比谁都敏感，比谁都渴望被理解。'
+                ];
+                document.getElementById('vipFullDesc').innerText = fullDescs[Math.floor(Math.random() * fullDescs.length)];
+                
+                var moneyDesc = [
+                    '你花钱的原则：开心就好。但月底一看账单就开始怀疑人生。理财观念是赚多少花多少，偶尔有余钱就买买买。建议：存点钱吧，不然真的老了会后悔。',
+                    '精打细算是你的人生信条。每一笔钱都要花在刀刃上。但有时候对自己太抠了，偶尔也对自己大方一下嘛！建议：该花的钱不要省。',
+                    '你是那种钱够花就行，不追求大富大贵。但内心深处还是渴望财务自由的。偶尔会幻想中奖，但醒来还是继续上班。建议：可以尝试副业。'
+                ];
+                document.getElementById('vipMoney').innerText = moneyDesc[Math.floor(Math.random() * moneyDesc.length)];
+                
+                var loveDesc = [
+                    '爱情中你是那种要么不说，说就是认真的类型。暗恋高手但不敢表白。恋爱中患得患失，有时候会无理取闹但事后又后悔。你需要的是一个能包容你小脾气的伴侣。',
+                    '你是那种越喜欢越装作不在乎的类型。内心戏超多，但表面要装作若无其事。冷战的时候就算后悔也不会先低头。建议：爱要勇敢说出来。',
+                    '你是付出型人格，但渴望被回报。恋爱中容易失去自我，把对方当成全世界。建议：先学会爱自己，再去爱别人。'
+                ];
+                document.getElementById('vipLove').innerText = loveDesc[Math.floor(Math.random() * loveDesc.length)];
+                
+                var futureDesc = [
+                    '未来30天：你的运势还不错！有机会遇到贵人，可能是一段新的友情或者合作关系。事业上有小突破，但需要耐心。财运一般，别冲动投资。健康方面注意休息。',
+                    '未来30天：你可能会遇到一些挑战，但都是成长的机会。有种"置之死地而后生"的感觉。感情上有戏，会有暗恋的人主动靠近。健康注意不要熬夜。',
+                    '未来30天：是你发光发热的时候！之前的努力开始有回报了。可能会收到好消息，比如升职、加薪、或者中奖。财运不错，但也要注意不要过度消费。'
+                ];
+                document.getElementById('vipFuture').innerText = futureDesc[Math.floor(Math.random() * futureDesc.length)];
+                
+                var adviceDesc = [
+                    '你的人生建议：想做什么就去做吧，别等以后。你永远没有准备好的时候，现在就是最好的时机。别太在意别人的眼光，你的人生是自己的。',
+                    '你的人生建议：适当慢下来，停下来思考一下真的需要什么。不要被社会的节奏带着跑。你的人生不是比赛，不需要跟别人比。',
+                    '你的人生建议：勇敢表达自己的真实想法，不要总是迎合别人。你的想法和感受同样重要。学会说"不"，学会拒绝。'
+                ];
+                document.getElementById('vipAdvice').innerText = adviceDesc[Math.floor(Math.random() * adviceDesc.length)];
             }
             if(localStorage.getItem('adminVerified') === 'true') {
                 document.getElementById('paymentShow').style.display = 'block';
