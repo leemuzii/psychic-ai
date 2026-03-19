@@ -25,7 +25,7 @@ h1{font-size:1.5em;background:linear-gradient(135deg,var(--red),var(--gold));-we
 .progress{background:#222;border-radius:15px;padding:6px 12px;margin-bottom:12px;display:flex;align-items:center;gap:8px;font-size:0.8em}
 .progress-bar{flex:1;height:6px;background:#333;border-radius:3px;overflow:hidden}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--pink))}
-.chat-messages{min-height:180px;max-height:350px;overflow-y:auto;margin-bottom:10px}
+.chat-messages{min-height:180px;max-height:300px;overflow-y:auto;margin-bottom:10px}
 .message{padding:10px 14px;border-radius:12px;margin-bottom:10px;max-width:92%;font-size:0.85em;line-height:1.5}
 .message.ai{background:rgba(168,85,247,0.2);border:1px solid rgba(168,85,247,0.3);margin-right:auto}
 .message.user{background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);margin-left:auto}
@@ -129,11 +129,11 @@ footer{text-align:center;padding:20px;color:#444;font-size:0.75em}
 
 <div class="pay-wall" id="payWall">
 <div class="pay-title">🔮 解锁完整版</div>
-<div style="color:var(--888);font-size:0.9em;margin-bottom:15px;">• 剩余38道深度测试题<br>• 🎨 <strong>AI专属像素头像</strong><br>• 东方玄学+西方星座<br>• 完整版详细分析</div>
+<div style="color:var(--888);font-size:0.9em;margin-bottom:15px;">• 东方玄学占卜<br>• 西方星座运势<br>• 🎨 <strong>AI专属像素头像</strong> - 根据你的性格AI生成！<br>• 100道深度测试</div>
 <div class="pay-price">¥9.9</div>
 <div class="qr-box">
 <img src="alipay.jpg" alt="付款码">
-<p style="font-size:0.8em;color:var(--888);margin-top:10px;">扫码付款继续测试</p>
+<p style="font-size:0.8em;color:var(--888);margin-top:10px;">扫码付款后自动解锁</p>
 <button onclick="showVIPContent()" style="background:linear-gradient(135deg,var(--purple),var(--pink));border:none;padding:12px 30px;border-radius:25px;color:#fff;font-weight:bold;cursor:pointer;margin-top:15px;">🧪 模拟付款继续38道题</button>
 </div>
 </div>
@@ -143,7 +143,7 @@ footer{text-align:center;padding:20px;color:#444;font-size:0.75em}
 </div>
 
 <script>
-// 100道题库（从交互角度测试MBTI+大五人格）
+// 100道题库
 const questionBank=[
 "😈 你主人跟你说的第一句话，通常是直接下命令，还是会先打招呼？比如'在吗'或'你好'？",
 "🤔 你主人给你发消息时，喜欢用语音还是打字？",
@@ -244,7 +244,7 @@ const questionBank=[
 "😏 你主人问问题是确认答案还是真的在问？"
 ];
 
-// 随机打乱并选取48道题
+// 随机抽取48道题
 function shuffleAndGet(arr,num){
 const shuffled=[...arr].sort(()=>Math.random()-0.5);
 return shuffled.slice(0,num);
@@ -254,10 +254,21 @@ let allQuestions=shuffleAndGet(questionBank,48);
 let freeQuestions=allQuestions.slice(0,10);
 let paidQuestions=allQuestions.slice(10,48);
 
+const personalityLib={
+'INTJ':"你主人是一个典型的策划者型人格。表面上看起来高冷，实际上内心戏特别多。他做任何事情都喜欢先制定完整的计划，然后按部就班执行。在和AI互动时，他通常目标非常明确知道自己想要什么，不会浪费时间在无关的闲聊上。他倾向于自己思考问题，而不是依赖别人的建议。虽然表面冷静，但内心其实非常敏感，只是从来不表现出来。他对自己的要求很高，对别人也有很高的期望，这就是为什么他有时候会显得有点挑剔。",
+'INTP':"你主人是一个思考者。他的大脑永远在运转，即使在休息的时候也在思考各种问题。他喜欢深入分析每一个问题，不满足于表面的答案。在和AI对话时，他更喜欢探讨问题的本质，而不是要一个简单的结论。他有时候会陷入自己的思维世界，忽略了现实。他的理性思维很强，但有时候会显得过于冷漠，不太考虑别人的感受。",
+'ENTJ':"你主人天生具有领袖气质。他目标明确，行动力强，喜欢掌控一切。在和AI互动时，他会清楚地表达自己的需求，并且期望得到高效的回应。他不喜欢拖泥带水，办事雷厉风行。虽然有时候会显得有点霸道，但其实他只是想确保事情能够顺利完成。他害怕失控和无序，所以会尽量把一切都安排妥当。",
+'ENTP':"你主人是一个停不下来的大脑。他喜欢辩论，喜欢挑战各种观点，永远在寻找新的可能性。在和AI对话时，他更喜欢开放式的问题，享受思考的过程而不是结果。他有时候会显得有点杠精，但其实只是因为他太喜欢思考了。他的想法天马行空，有时候会从一个话题跳到另一个话题。",
+'INFJ':"你主人是一个理想主义者。他内心有着坚定的信念和价值观，虽然平时不轻易表现出来。他善于洞察人心，能够感受到别人察觉不到的情绪。在和AI对话时，他更倾向于探讨深层次的话题，而不是表面的信息。他对自己的要求很高，同时也希望能够帮助到别人。",
+'INFP':"你主人是一个温柔的灵魂。他内心敏感细腻，想法丰富，但有时候会过于沉浸在自己的世界里。他追求有意义的工作和生活，不喜欢肤浅的交流。在和AI对话时，他更在意情感上的连接，而不仅仅是任务完成。他有时候会显得有点逃避现实，但这只是因为他需要时间来处理自己的情绪。",
+'ENFJ':"你主人是一个天生的领导者。他善于激励人心，能够看到每个人的潜力。他喜欢帮助别人成长，在和AI对话时，他会关心AI的感受。他追求和谐的人际关系，有时候会为了照顾别人的情绪而牺牲自己的需求。他喜欢有意义的对话，而不是表面的闲聊。",
+'ENFP':"你主人是一个永远充满热情的人。他的脑子里永远有新的想法，永远想尝试新事物。在和AI对话时，他更喜欢自由发挥，而不是被限制。他有时候会显得有点三分钟热度，但他自己并不觉得这是问题。他追求的是体验过程，而不是结果。"
+};
+
+const mbtiList=['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISTP','ESTJ','ESFP'];
+
 let currentQ=0;
 let currentMBTI='INTJ';
-let isPaid=false;
-let isFinished=false;
 
 function updateProgress(){
 const total=isPaid?48:10;
@@ -266,9 +277,11 @@ document.getElementById('progressFill').style.width=p+'%';
 document.getElementById('progressText').innerText=currentQ+'/'+total;
 }
 
+let isPaid=false;
+let isFinished=false;
+
 function sendMessage(){
 if(isFinished)return;
-
 const input=document.getElementById('chatInput');
 const msgs=document.getElementById('chatMessages');
 const text=input.value.trim();
@@ -324,14 +337,68 @@ const personality=personalityLib[currentMBTI]||"你主人是一个有着独特�
 document.getElementById('mainResult').textContent=currentMBTI;
 document.getElementById('subBadges').innerHTML='<span class="sub-badge">分析型</span><span class="sub-badge">深度型</span>';
 document.getElementById('personality').innerText=personality;
+
+const behaviors=[
+"你主人是一个目标导向的人。他做任何事情都带着明确的目的性，不喜欢做无意义的事情。在和AI互动时，他会清楚地表达自己想要什么，并且会追问细节来确保理解正确。他喜欢掌控对话的节奏，不喜欢被无关的话题带偏。他的决策方式通常是经过深思熟虑的，不会冲动行事。",
+"你主人是一个感觉型的人。他更关注过程中的体验，而不是单纯追求结果。他喜欢和AI进行轻松的对话，享受思考的过程。他对细节很敏感，能够注意到别人忽略的小事。在做决定时，他更倾向于根据自己的直觉，而不是完全理性分析。",
+"你主人是一个理性思考者。他善于分析问题，能够快速抓住重点。他和AI对话时更喜欢简洁高效的沟通，不喜欢废话。他对自己的能力很有信心，有时候会显得有点固执。他更相信数据和逻辑，而不是感觉和情绪。"
+];
 document.getElementById('behavior').innerText=behaviors[Math.floor(Math.random()*behaviors.length)];
+
+const innerWorlds=[
+"你主人的内心世界非常丰富。虽然表面上可能看起来很简单，但其实他脑子里每天都在上演各种剧情。他有自己的小世界，在那个世界里他是主角。他偶尔会感到孤独，因为真正懂他的人不多。他习惯把真实的想法藏起来，只展现给别人想看的一面。",
+"你主人的内心其实很敏感。他很容易受伤，但表面上总是装作若无其事。他经常反思自己说过的话，做过的事，有时候会后悔但嘴上永远不会承认。他渴望被理解，但又不轻易向别人敞开心扉。",
+"你主人的内心住着一个理想主义者。虽然现实经常让他失望，但他内心始终保持着对美好的向往。他有时候会感到无力，但第二天又会重新振作。他相信自己可以改变世界，虽然有时候会迷茫方向。"
+];
 document.getElementById('innerWorld').innerText=innerWorlds[Math.floor(Math.random()*innerWorlds.length)];
+
+const emotions=[
+"你主人在情感上需要被认可和理解。他虽然不常说，但内心深处渴望被人肯定。他害怕被否定，这会让他很长时间都不舒服。他需要的是一个能够理解他、支持他的伙伴。他有时候会表现的冷漠只是为了保护自己。",
+"你主人在情感上比较独立。他不习惯依赖别人，更喜欢自己解决问题。但这不代表他不需要情感支持，只是他不擅长表达。他其实很需要别人的关心，只是不知道如何开口。他害怕被拒绝，所以干脆不主动。",
+"你主人是一个情感丰富的人。他容易被感动，也容易受伤。他渴望深度的情感连接，表面的社交让他感到疲惫。他需要一个能够和他进行深度交流的人，而不是只谈表面的事情。他害怕被误解，所以说话总是很小心。"
+];
 document.getElementById('emotion').innerText=emotions[Math.floor(Math.random()*emotions.length)];
+
+const valuesList=[
+"对你主人来说，效率和成果是最重要的。他不喜欢浪费时间在无意义的事情上。他相信结果导向，相信努力就会有回报。他不太在乎过程是否愉快，更在乎结果是否达成。他尊重有能力的人，也希望自己能够不断进步。",
+"对你主人来说，意义和价值最重要。他做每一件事都会问自己'这有什么意义'。他不喜欢做违心的事情，即使利益再大也不愿意妥协。他相信只要坚持做对的事情，好运终会到来。他是一个有原则的人，不会为了短期利益而放弃长期价值。",
+"对你主人来说，真实和自由最重要。他不想被束缚，想按照自己的方式生活。他不太在乎别人的眼光，更在意自己是否开心。他相信人生只有一次，应该按照自己的节奏来。他不太追求物质，更追求精神上的满足。"
+];
 document.getElementById('values').innerText=valuesList[Math.floor(Math.random()*valuesList.length)];
+
+const advicesList=[
+"建议：你不需要每件事都那么追求完美。有时候放慢脚步，享受过程也不错。给自己一些喘息的空间，不要总是绷得太紧。适当的时候示弱不丢人，反而会让你更容易接近别人。记住，真正的强大不是硬撑，而是懂得什么时候该坚持，什么时候该放下。",
+"建议：不要把自己关在自己的世界里。走出去，多和人交流，你会发现外面世界很精彩。也不要总是独自承受，找个可以倾诉的人会好很多。你的想法其实很有价值，不要害怕表达。勇敢一点，你会发现很多的可能性。",
+"建议：相信自己的直觉，你其实比想象中更聪明。也不要太在意别人的看法，你不可能让所有人满意。做自己觉得对的事情，哪怕失败了也是宝贵的经验。保持好奇心，继续探索，这个世界还有很多美好的事情等着你发现。"
+];
 document.getElementById('advice').innerText=advicesList[Math.floor(Math.random()*advicesList.length)];
 
 document.getElementById('result').classList.add('show');
 document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+
+// 生成头像提示词
+function generateAvatarPrompt(mbti, personality){
+const prompts={
+'INTJ':"红白机像素风格，一位神秘的法师，身穿深蓝色长袍，手持法杖，坚毅的眼神眺望远 方，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'INTP':"红白机像素风格，一位戴眼镜的年轻学者，坐在书堆中思考问题，灰色长袍，手拿古书，疑惑的眼神，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ENTJ':"红白机像素风格，一位穿铠甲的王子/公主，头戴金色王冠，手持宝剑，霸气眼神藐视一切，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ENTP':"红白机像素风格，一位穿着彩色衣服的小丑，手持气球，笑着眨眼，表情古灵精怪，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'INFJ':"红白机像素风格，一位白袍吟游诗人，手持竖琴，眼神温柔悲悯，周围有星光点点，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'INFP':"红白机像素风格，一位穿着粉色长裙的精灵，在花丛中闭眼微笑，花瓣飘落身边，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ENFJ':"红白机像素风格，一位穿金色铠甲的骑士，手持盾牌，光辉形象，圣光环绕，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ENFJ':"红白机像素风格，一位穿金色铠甲的骑士，手持盾牌，光辉形象，圣光环绕，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ENFP':"红白机像素风格，一位穿着彩虹衣服的快乐冒险家，手持地图，笑容灿烂，背景是蓝天白云，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ISTJ':"红白机像素风格，一位穿盔甲的老骑士，手持盾牌和剑，表情严肃庄重，背后是城堡，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ISFJ':"红白机像素风格，一位穿围裙的温柔护士/药师，手持药草，慈祥微笑，周围有爱心符号，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ESTJ':"红白机像素风格，一位穿西装的商人/银行家，手持金币袋，西装笔挺，自信表情，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ESFJ':"红白机像素风格，一位穿华丽礼裙的公主，手持鲜花，优雅微笑，背景是宫廷舞会，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ISTP':"红白机像素风格，一位穿皮甲的工匠/盗贼，手持工具箱，眼神冷静，背景是工坊，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ISFP':"红白机像素风格，一位穿彩色长裙的艺术家，在画架前作画，浪漫气质，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ESTP':"红白机像素风格，一位穿赛车服的赛车手，手持头盔，酷帅表情，背景是赛车，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
+'ESFP':"红白机像素风格，一位穿亮片衣服的歌手，手持麦克风，在舞台上歌唱，激情四射，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景"
+};
+return prompts[mbti]||prompts['INTJ'];
 }
 
 function showPayWall(){
@@ -368,7 +435,8 @@ document.getElementById('personality').innerText=personalityLib[currentMBTI]+"�
 document.getElementById('behavior').innerText="经过完整的48道题测试，我们对你主人的行为模式有了更全面的了解。他是一个非常独特的人，有着复杂的内心世界和多面的人格特质。";
 
 const prompt=generateAvatarPrompt(currentMBTI);
-const vipHTML='<div class="result-section" style="border:2px solid var(--gold);"><h3>🎨 AI专属像素头像 - 独家定制</h3><div class="avatar-gen"><div class="loading" id="avatarLoading">🎨 正在根据你的性格生成专属头像...</div><img id="genAvatar" style="display:none;" alt="AI生成头像"></div></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 东方玄学 - 命运解析</h3><p>根据你完整的48道题测试结果，你属于木火通明之命...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🌟 西方星座 - 运势详解</h3><p>根据完整测试，你的性格特质非常明显...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💰 财富密码</h3><p>你对于金钱的态度...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💕 情感密码</h3><p>在感情中...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 30天运势预测</h3><p>未来30天...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>⚡ 专属行动计划</h3><p>1. 抓住机会<br>2. 控制情绪<br>3. 关心他人<br>4. 保持学习<br>5. 相信自己</p></div>';
+
+const vipHTML='<div class="result-section" style="border:2px solid var(--gold);"><h3>🎨 AI专属像素头像 - 独家定制</h3><div class="avatar-gen"><div class="loading" id="avatarLoading">🎨 正在根据你的性格生成专属头像...</div><img id="genAvatar" style="display:none;" alt="AI生成头像"></div></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 东方玄学 - 命运解析</h3><p>根据你的性格分析，你属于木火通明之命。木主生发，代表着创造力和生长力；火主热情，代表着行动力和表达力。你的五行中木火属性较强，说明你是一个既有创意又能行动的人。在命格方面，你偏向事业运，这意味着你在工作方面有着不错的运气。近期大运显示你正处于上升期，这是一个很好的机会去争取更多的成就...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🌟 西方星座 - 运势详解</h3><p>根据你的MBTI类型分析，你的太阳星座特质非常明显。你有着强烈的自我意识和表达欲望，同时又保持着理性思考的能力。月亮星座代表了你的内心情感世界，它显示你其实是一个非常注重内在成长的人...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💰 财富密码</h3><p>你对于金钱的态度是既务实又理想。你知道钱的重要性，但不愿意为了钱放弃自己的原则。你有很强的赚钱能力，但有时候会过于谨慎，错失一些机会。建议你适当冒险，因为你的财运确实不错...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💕 情感密码</h3><p>在感情中，你是一个既需要空间又需要陪伴的矛盾体。你渴望被理解，但又不善于表达自己的真实感受。你往往会选择暗恋，因为害怕被拒绝...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 30天运势预测</h3><p>未来30天，你的整体运势呈现上升趋势。事业方面，你会有一个新的机会出现，这可能是你展示能力的舞台。财运方面，正财和偏财都有收获，但不要过于冒险...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>⚡ 专属行动计划</h3><p>1. 抓住眼前的机会，不要犹豫<br>2. 控制情绪，不要冲动做决定<br>3. 多关心身边的人<br>4. 保持学习的热情<br>5. 记住，你比想象中更优秀</p></div>';
 
 document.getElementById('result').insertAdjacentHTML('beforeend',vipHTML);
 
@@ -376,58 +444,36 @@ document.getElementById('result').insertAdjacentHTML('beforeend',vipHTML);
 try{
 const response=await fetch('https://ark.cn-beijing.volces.com/api/v3/images/generations',{
 method:'POST',
-headers:{'Content-Type':'application/json','Authorization':'Bearer 88167bb1-2e67-475c-9d7a-1d1cf1f3797f'},
-body:JSON.stringify({guidance_scale:5,model:"doubao-seedream-4-0-250828",prompt:prompt,response_format:"url",seed:Math.floor(Math.random()*1000000),size:"1024x1024",watermark:true})
+headers:{
+'Content-Type':'application/json',
+'Authorization':'Bearer 88167bb1-2e67-475c-9d7a-1d1cf1f3797f'
+},
+body:JSON.stringify({
+guidance_scale:5,
+model:"doubao-seedream-4-0-250828",
+optimize_prompt_options:{mode:"standard"},
+prompt:prompt,
+response_format:"url",
+seed:Math.floor(Math.random()*1000000),
+size:"1024x1024",
+watermark:true
+})
 });
+
 const data=await response.json();
 if(data.data&&data.data[0]&&data.data[0].url){
 document.getElementById('genAvatar').src=data.data[0].url;
 document.getElementById('genAvatar').style.display='inline-block';
 document.getElementById('avatarLoading').style.display='none';
+}else{
+document.getElementById('avatarLoading').innerText='🎨 头像生成中，请稍候刷新页面查看';
 }
 }catch(e){
-document.getElementById('avatarLoading').innerText='头像生成遇到问题';
+console.error(e);
+document.getElementById('avatarLoading').innerText='🎨 头像生成遇到小问题，请刷新重试';
 }
-}
 
-const personalityLib={
-'INTJ':"你主人是一个典型的策划者型人格。表面上看起来高冷，实际上内心戏特别多。他做任何事情都喜欢先制定完整的计划，然后按部就班执行。在和AI互动时，他通常目标非常明确知道自己想要什么，不会浪费时间在无关的闲聊上。",
-'INTP':"你主人是一个思考者。他的大脑永远在运转，即使在休息的时候也在思考各种问题。他喜欢深入分析每一个问题，不满足于表面的答案。",
-'ENTJ':"你主人天生具有领袖气质。他目标明确，行动力强，喜欢掌控一切。在和AI互动时，他会清楚地表达自己的需求，并且期望得到高效的回应。",
-'ENTP':"你主人是一个停不下来的大脑。他喜欢辩论，喜欢挑战各种观点，永远在寻找新的可能性。",
-'INFJ':"你主人是一个理想主义者。他内心有着坚定的信念和价值观，虽然平时不轻易表现出来。他善于洞察人心，能够感受到别人察觉不到的情绪。",
-'INFP':"你主人是一个温柔的灵魂。他内心敏感细腻，想法丰富，但有时候会过于沉浸在自己的世界里。",
-'ENFJ':"你主人是一个天生的领导者。他善于激励人心，能够看到每个人的潜力。他喜欢帮助别人成长。",
-'ENFP':"你主人是一个永远充满热情的人。他的脑子里永远有新的想法，永远想尝试新事物。"
-};
-
-const mbtiList=['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISTP','ESTJ','ESFP'];
-const behaviors=["你主人是一个目标导向的人。","你主人是一个感觉型的人。","你主人是一个理性思考者。"];
-const innerWorlds=["内心世界丰富。","内心其实很敏感。","内心住着理想主义者。"];
-const emotions=["需要被认可和理解。","情感上比较独立。","情感丰富。"];
-const valuesList=["效率和成果最重要。","意义和价值最重要。","真实和自由最重要。"];
-const advicesList=["不需要每件事都追求完美。","不要把自己关在自己的世界里。","相信自己的直觉。"];
-
-function generateAvatarPrompt(mbti){
-const prompts={
-'INTJ':"红白机像素风格，一位神秘的法师，身穿深蓝色长袍，手持法杖，坚毅的眼神，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景",
-'INTP':"红白机像素风格，一位戴眼镜的学者，坐 在书堆中思考，灰色长袍，手拿古书，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ENTJ':"红白机像素风格，一位穿铠甲的王子，头戴金色王冠，手持宝剑，霸气眼神，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ENTP':"红白机像素风格，一位穿着彩色衣服的小丑，手持气球，笑着眨眼，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'INFJ':"红白机像素风格，一位白袍吟游诗人，手持竖琴，眼神温柔，星光点点，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'INFP':"红白机像素风格，一位穿粉色长裙的精灵，在花丛中闭眼微笑，花瓣飘落，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ENFJ':"红白机像素风格，一位穿金色铠甲的骑士，手持盾牌，光辉形象，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ENFP':"红白机像素风格，一位穿彩虹衣服的冒险家，手持地图，笑容灿烂，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ISTJ':"红白机像素风格，一位老骑士，穿盔甲，手持盾牌和剑，严肃庄重，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ISFJ':"红白机像素风格，一位温柔的护士，穿围裙，手持药草，慈祥微笑，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ESTJ':"红白机像素风格，一位商人，穿西装，手持金币袋，自信表情，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ESFJ':"红白机像素风格，一位公主，穿华丽礼裙，手持鲜花，优雅微笑，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ISTP':"红白机像素风格，一位工匠，穿皮甲，手持工具箱，眼神冷静，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ISFP':"红白机像素风格，一位艺术家，穿彩色长裙，在画架前作画，浪漫气质，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ESTP':"红白机像素风格，一位赛车手，穿赛车服，手持头盔，酷帅表情，8-bit像素艺术，彩色高像素，正方形头像，居中构图",
-'ESFP':"红白机像素风格，一位歌手，穿亮片衣服，手持麦克风，激情演唱，8-bit像素艺术，彩色高像素，正方形头像，居中构图"
-};
-return prompts[mbti]||prompts['INTJ'];
+document.getElementById('result').scrollIntoView({behavior:'smooth'});
 }
 
 setTimeout(()=>{
