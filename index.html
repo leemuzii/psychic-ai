@@ -372,6 +372,7 @@ document.getElementById('payWall').scrollIntoView({behavior:'smooth'});
 // VIP内容
 function showVIPContent(){
 isPaid=true;
+isFinished=false; // 重置状态，允许继续答题
 document.getElementById('payWall').style.display='none';
 
 const msgs=document.getElementById('chatMessages');
