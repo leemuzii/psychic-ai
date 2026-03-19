@@ -331,6 +331,7 @@ updateProgress();
 if(currentQ>=48){
 isFinished=true;
 setTimeout(()=>showFinalResult(),500);
+return;
 }else{
 setTimeout(()=>{
 const aiMsg=document.createElement('div');
