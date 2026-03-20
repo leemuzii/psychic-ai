@@ -51,9 +51,9 @@ h1{font-size:1.5em;background:linear-gradient(135deg,var(--red),var(--gold));-we
 .showcase{width:100%;max-width:570px;margin-left:auto;margin-right:auto}
 .showcase{background:var(--card);border:1px solid rgba(168,85,247,0.3);border-radius:16px;padding:15px;margin:15px 0;box-sizing:border-box;width:100%;max-width:570px;margin-left:auto;margin-right:auto}
 /* AI头像发光动效 */
-.showcase img.avt{position:relative;border-radius:8px;transition:transform 0.3s ease;cursor:pointer;z-index:1}
-.showcase img.avt::before{content:'';position:absolute;inset:-3px;border-radius:12px;background:conic-gradient(from 0deg,#f59e0b,#22d3ee,#a855f7,#f59e0b);z-index:-1;animation:spinGlow 3s linear infinite;opacity:0;transition:opacity 0.3s ease}
-.showcase img.avt:hover::before{opacity:1}
+.showcase img.avt{position:relative!important;border-radius:8px;transition:transform 0.3s ease;cursor:pointer;z-index:1!important}
+.showcase img.avt::before{content:''!important;position:absolute!important;inset:-3px;border-radius:12px;background:conic-gradient(from 0deg,#f59e0b,#22d3ee,#a855f7,#f59e0b)!important;z-index:-1!important;animation:spinGlow 3s linear infinite;opacity:0;transition:opacity 0.3s ease}
+.showcase img.avt:hover::before{opacity:1!important}
 @keyframes spinGlow{to{transform:rotate(360deg)}}
 .showcase img.avt:hover{animation:avatarBounce 0.6s ease infinite alternate}
 @keyframes avatarBounce{0%{transform:scale(1.05) translateX(-3px)}100%{transform:scale(1.1) translateX(3px)}}
@@ -626,10 +626,10 @@ aiMsg.innerHTML=freeQuestions[0];
 document.getElementById('chatMessages').appendChild(aiMsg);
 },600);
 </script>
-<audio id="bgMusic" src="https://incompetech.com/music/royalty-free/mp3-royaltyfree/Pixelland.mp3" preload="auto" autoplay loop></audio>
+<audio id="bgMusic" src="https://incompetech.com/music/royalty-free/mp3-royaltyfree/Obsidian.mp3" preload="auto" autoplay loop></audio>
 <button id="musicToggle" onclick="toggleMusic()" title="切换背景音乐">🎵</button>
 <script>
-function toggleMusic(){const m=document.getElementById('bgMusic'),b=document.getElementById('musicToggle');if(m.paused){m.play();b.textContent='🔊';b.classList.add('playing');m.addEventListener('canplay',function(){m.play()})}else{m.pause();m.currentTime=0;b.textContent='🎵';b.classList.remove('playing')}}
+function toggleMusic(){const m=document.getElementById('bgMusic'),b=document.getElementById('musicToggle');if(m.paused){b.textContent='🔊';b.classList.add('playing');m.play().catch(()=>{})}else{m.pause();b.textContent='🎵';b.classList.remove('playing')}};window.addEventListener('load',function(){const m=document.getElementById('bgMusic');if(!m.paused){document.getElementById('musicToggle').textContent='🔊';document.getElementById('musicToggle').classList.add('playing')}});
 </script>
 </body>
 </html>
