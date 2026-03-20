@@ -46,7 +46,10 @@ h1{font-size:1.5em;background:linear-gradient(135deg,var(--red),var(--gold));-we
 .type-tag{background:rgba(168,85,247,0.2);padding:4px 10px;border-radius:15px;font-size:0.7em;color:var(--cyan)}
 .intro{background:rgba(239,68,68,0.15);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:15px;margin:15px 0;font-size:0.85em}
 .intro strong{color:var(--gold)}
-.start-form{background:var(--card);border-radius:16px;padding:20px;margin:15px 0 0 0;border:1px solid rgba(168,85,247,0.3)}
+.start-form{background:var(--card);border-radius:16px;padding:15px;margin:15px 0;border:1px solid rgba(168,85,247,0.3);box-sizing:border-box;width:100%;max-width:570px;margin-left:auto;margin-right:auto}
+.start-form,
+.showcase{width:100%;max-width:570px;margin-left:auto;margin-right:auto}
+.showcase{background:var(--card);border:1px solid rgba(168,85,247,0.3);border-radius:16px;padding:15px;margin:15px 0;box-sizing:border-box}
 .start-form input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #333;background:#1a1a24;color:#fff;font-size:1em}
 .start-form select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #333;background:#1a1a24;color:#fff;font-size:1em}
 .start-form button{width:100%;padding:14px;background:linear-gradient(135deg,var(--purple),var(--pink));border:none;border-radius:10px;color:#fff;font-weight:bold;font-size:1em;cursor:pointer;margin-top:10px}
@@ -129,7 +132,7 @@ starsContainer.appendChild(star);
 </div>
 
 <!-- 展示橱窗 -->
-<div class="showcase" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:12px;padding:15px;margin:15px 0;">
+<div class="showcase">
 <div style="background:rgba(239,68,68,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:10px;padding:12px;margin-bottom:15px;">
 <p style="color:var(--888);font-size:0.8em;margin:0;"><strong style="color:var(--red);">⚠️ 这是什么？</strong></p>
 <p style="color:var(--888);font-size:0.8em;margin:8px 0 0 0;">这是专为 <span style="color:var(--cyan);">OpenClaw</span> 设计的灵媒工具 —— 通过与主人的对话，AI 能够暗中观察、推演、分析主人的性格密码、运势流向、属性标签。</p>
