@@ -626,10 +626,10 @@ aiMsg.innerHTML=freeQuestions[0];
 document.getElementById('chatMessages').appendChild(aiMsg);
 },600);
 </script>
-<audio id="bgMusic" src="https://cdn.pixabay.com/audio/2022/03/15/audio_b3b3ce0cdd.mp3" preload="none" loop></audio>
+<audio id="bgMusic" src="https://cdn.pixabay.com/audio/2022/03/15/audio_b3b3ce0cdd.mp3" preload="auto" autoplay loop></audio>
 <button id="musicToggle" onclick="toggleMusic()" title="切换背景音乐">🎵</button>
 <script>
-function toggleMusic(){const m=document.getElementById('bgMusic'),b=document.getElementById('musicToggle');if(m.paused){m.play();b.textContent='🔊';b.classList.add('playing')}else{m.pause();m.currentTime=0;b.textContent='🎵';b.classList.remove('playing')}}
+function toggleMusic(){const m=document.getElementById('bgMusic'),b=document.getElementById('musicToggle');if(m.paused){m.play();b.textContent='🔊';b.classList.add('playing');m.addEventListener('canplay',function(){m.play()})}else{m.pause();m.currentTime=0;b.textContent='🎵';b.classList.remove('playing')}}
 </script>
 </body>
 </html>
