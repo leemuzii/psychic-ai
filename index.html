@@ -52,10 +52,10 @@ h1{font-size:1.5em;background:linear-gradient(135deg,var(--red),var(--gold));-we
 .showcase{background:var(--card);border:1px solid rgba(168,85,247,0.3);border-radius:16px;padding:15px;margin:15px 0;box-sizing:border-box;width:100%;max-width:570px;margin-left:auto;margin-right:auto}
 /* AI头像发光动效 */
 .showcase img.avt{position:relative!important;border-radius:8px;transition:transform 0.3s ease;cursor:pointer;z-index:1!important}
-.showcase img.avt::before{content:''!important;position:absolute!important;inset:-3px;border-radius:12px;background:conic-gradient(from 0deg,#f59e0b,#22d3ee,#a855f7,#f59e0b)!important;animation:spinGlow 3s linear infinite;opacity:0;transition:opacity 0.3s ease}
+.showcase img.avt::before{content:''!important;position:absolute!important;inset:-3px;border-radius:12px;background:conic-gradient(from 0deg,#f59e0b,#22d3ee,#a855f7,#f59e0b)!important;z-index:0!important;animation:spinGlow 3s linear infinite;opacity:0;transition:opacity 0.3s ease}
 .showcase img.avt:hover::before{opacity:1!important}
 @keyframes spinGlow{to{transform:rotate(360deg)}}
-.showcase img.avt:hover{animation:avatarBounce 0.6s ease infinite alternate}
+.showcase img.avt:hover{animation:avatarBounce 0.6s ease infinite alternate!important;transform:scale(1.05)!important}
 @keyframes avatarBounce{0%{transform:scale(1.05) translateX(-3px)}100%{transform:scale(1.1) translateX(3px)}}
 .start-form input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #333;background:#1a1a24;color:#fff;font-size:1em}
 .start-form select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #333;background:#1a1a24;color:#fff;font-size:1em}
