@@ -93,6 +93,11 @@ h1{font-size:1.5em;background:linear-gradient(135deg,var(--red),var(--gold));-we
 @keyframes avatarPop{0%{transform:scale(0)rotate(-20deg);opacity:0}50%{transform:scale(1.2)rotate(10deg)}70%{transform:scale(0.9)rotate(-5deg)}100%{transform:scale(1)rotate(0)}}
 .avatar-pop{animation:avatarPop 0.8s ease-out forwards}
 footer{text-align:center;padding:20px;color:#444;font-size:0.75em}
+/* 音乐开关按钮 */
+#musicToggle{position:fixed;bottom:20px;right:20px;z-index:9999;width:50px;height:50px;border-radius:50%;border:2px solid var(--purple);background:rgba(10,10,15,0.85);cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);transition:all 0.3s ease;box-shadow:0 0 15px rgba(168,85,247,0.4)}
+#musicToggle:hover{transform:scale(1.1);box-shadow:0 0 25px rgba(168,85,247,0.7)}
+#musicToggle.playing{animation:musicPulse 2s ease-in-out infinite;border-color:var(--cyan);box-shadow:0 0 20px rgba(34,211,238,0.5)}
+@keyframes musicPulse{0%,100%{box-shadow:0 0 15px rgba(168,85,247,0.4)}50%{box-shadow:0 0 30px rgba(34,211,238,0.7)}}
 </style>
 </head>
 <body>
@@ -621,3 +626,10 @@ aiMsg.innerHTML=freeQuestions[0];
 document.getElementById('chatMessages').appendChild(aiMsg);
 },600);
 </script>
+<audio id="bgMusic" src="https://cdn.pixabay.com/audio/2022/03/15/audio_b3b3ce0cdd.mp3" preload="none" loop></audio>
+<button id="musicToggle" onclick="toggleMusic()" title="切换背景音乐">🎵</button>
+<script>
+function toggleMusic(){const m=document.getElementById('bgMusic'),b=document.getElementById('musicToggle');if(m.paused){m.play();b.textContent='🔊';b.classList.add('playing')}else{m.pause();m.currentTime=0;b.textContent='🎵';b.classList.remove('playing')}}
+</script>
+</body>
+</html>
