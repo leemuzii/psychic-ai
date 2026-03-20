@@ -4,202 +4,554 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>🔮 灵魂挖掘机 | AI如何读懂它的主人</title>
+<title>🔮 灵魂挖掘机 | AI主人性格分析</title>
 <style>
 :root{--bg:#0a0a0f;--card:#12121a;--purple:#a855f7;--pink:#ec4899;--red:#ef4444;--gold:#f59e0b;--cyan:#22d3ee;--fff:#fff;--888:#9ca3af}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--fff);min-height:100vh}
-.container{max-width:700px;margin:0 auto;padding:15px}
+.container{max-width:600px;margin:0 auto;padding:15px}
 header{text-align:center;padding:20px 0}
-.logo{font-size:3.5em;animation:float 3s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-h1{font-size:1.8em;background:linear-gradient(135deg,var(--red),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:10px 0}
-.subtitle{color:var(--888);font-size:1em}
-.hero-box{background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(236,72,153,0.15));border:1px solid rgba(168,85,247,0.4);border-radius:16px;padding:20px;margin:20px 0}
-.hero-box h2{color:var(--gold);font-size:1.2em;margin-bottom:10px}
-.hero-box p{color:#ccc;font-size:0.95em;line-height:1.7}
-.hero-q{font-size:1.3em;color:var(--cyan);font-weight:bold;margin:15px 0;text-align:center}
-.warning{background:rgba(239,68,68,0.15);border:1px solid rgba(245,158,11,0.4);border-radius:12px;padding:15px;margin:15px 0}
-.warning p{color:var(--888);font-size:0.9em;line-height:1.7}
-.warning strong{color:var(--red)}
-section{background:var(--card);border-radius:16px;padding:20px;margin:15px 0;border:1px solid rgba(255,255,255,0.1)}
-section h3{color:var(--gold);margin-bottom:15px;font-size:1.1em}
-.demo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.demo-card{background:rgba(0,0,0,0.3);border-radius:12px;padding:12px;border:1px solid rgba(168,85,247,0.3)}
-.demo-q{color:var(--888);font-size:0.8em;margin-bottom:8px}
-.demo-a{color:var(--cyan);font-size:0.85em;line-height:1.5}
-.demo-tags{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
-.demo-tag{background:rgba(168,85,247,0.3);padding:2px 8px;border-radius:10px;font-size:0.7em}
-.avatar-showcase{background:rgba(0,0,0,0.4);border-radius:16px;padding:20px;margin:15px 0;border:2px solid var(--gold)}
-.avatar-showcase h3{color:var(--gold);text-align:center;margin-bottom:15px}
-.avatar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.avatar-item{text-align:center}
-.avatar-item img{width:100%;border-radius:8px;border:2px solid var(--purple);aspect-ratio:1;object-fit:cover}
-.avatar-item p{font-size:0.7em;color:var(--888);margin-top:5px}
-.rewards{background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(236,72,153,0.1));border-radius:16px;padding:20px;margin:15px 0}
-.rewards h3{color:var(--fff);margin-bottom:15px;text-align:center}
-.reward-list{display:flex;flex-direction:column;gap:10px}
-.reward-item{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(0,0,0,0.3);border-radius:10px}
-.reward-icon{font-size:1.8em}
-.reward-text{flex:1}
-.reward-title{color:var(--cyan);font-size:0.95em;font-weight:bold}
-.reward-desc{color:var(--888);font-size:0.8em}
+.logo{font-size:3em;animation:shake .3s infinite}
+@keyframes shake{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+h1{font-size:1.5em;background:linear-gradient(135deg,var(--red),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:10px 0}
+.stats{display:flex;justify-content:center;gap:20px;margin:10px 0}
+.stat{text-align:center}
+.stat-num{font-size:1.3em;color:var(--gold);font-weight:bold}
+.stat-label{font-size:0.7em;color:var(--888)}
+.types{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;justify-content:center}
+.type-tag{background:rgba(168,85,247,0.2);padding:4px 10px;border-radius:15px;font-size:0.7em;color:var(--cyan)}
+.intro{background:rgba(239,68,68,0.15);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:15px;margin:15px 0;font-size:0.85em}
+.intro strong{color:var(--gold)}
+.start-form{background:var(--card);border-radius:16px;padding:20px;margin:15px 0;border:1px solid rgba(168,85,247,0.3)}
+.start-form input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #333;background:#1a1a24;color:#fff;font-size:1em}
+.start-form select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #333;background:#1a1a24;color:#fff;font-size:1em}
+.start-form button{width:100%;padding:14px;background:linear-gradient(135deg,var(--purple),var(--pink));border:none;border-radius:10px;color:#fff;font-weight:bold;font-size:1em;cursor:pointer;margin-top:10px}
+.chat-container{background:var(--card);border-radius:16px;padding:15px;margin:15px 0;border:1px solid rgba(168,85,247,0.3)}
+.progress{background:#222;border-radius:15px;padding:6px 12px;margin-bottom:12px;display:flex;align-items:center;gap:8px;font-size:0.8em}
+.progress-bar{flex:1;height:6px;background:#333;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--pink))}
+.chat-messages{min-height:180px;max-height:350px;overflow-y:auto;margin-bottom:10px}
+.message{padding:10px 14px;border-radius:12px;margin-bottom:10px;max-width:92%;font-size:0.85em;line-height:1.5}
+.message.ai{background:rgba(168,85,247,0.2);border:1px solid rgba(168,85,247,0.3);margin-right:auto}
+.message.user{background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);margin-left:auto}
+.message.system{background:rgba(245,158,11,0.2);border:1px solid var(--gold);text-align:center;color:var(--gold)}
+.chat-input{display:flex;gap:6px}
+.chat-input input{flex:1;padding:10px 14px;border-radius:10px;border:1px solid #333;background:#1a1a24;color:#fff;font-size:0.9em}
+.chat-input button{padding:10px 16px;background:linear-gradient(135deg,var(--purple),var(--pink));border:none;border-radius:10px;color:#fff;font-weight:bold;font-size:0.85em;cursor:pointer}
+.result{display:none}
+.result.show{display:block}
+.result-section{background:var(--card);border-radius:12px;padding:18px;margin:12px 0;border:1px solid rgba(168,85,247,0.3)}
+.result-section h3{color:var(--gold);margin-bottom:12px;font-size:1em}
+.result-section p{color:var(--888);font-size:0.9em;line-height:1.8}
+.main-badge{display:inline-block;background:linear-gradient(135deg,var(--red),var(--gold));padding:12px 35px;border-radius:25px;font-size:1.5em;font-weight:bold;margin:10px 0}
+.sub-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.sub-badge{background:rgba(168,85,247,0.2);padding:5px 12px;border-radius:15px;font-size:0.8em;color:var(--cyan)}
 .pay-wall{background:linear-gradient(135deg,rgba(239,68,68,0.2),rgba(245,158,11,0.2));border:2px solid var(--gold);border-radius:16px;padding:25px;margin:20px 0;text-align:center}
 .pay-title{font-size:1.3em;color:var(--gold);font-weight:bold;margin-bottom:10px}
 .pay-price{font-size:2em;color:var(--red);font-weight:bold}
 .qr-box{background:var(--card);border-radius:12px;padding:15px;margin:15px 0}
 .qr-box img{width:180px;border-radius:8px}
+.avatar-gen{text-align:center;padding:20px;background:linear-gradient(135deg,rgba(168,85,247,0.2),rgba(236,72,153,0.2));border-radius:12px;margin:15px 0}
+.avatar-gen img{max-width:280px;border-radius:12px;border:3px solid var(--gold)}
+.loading{color:var(--gold);font-size:0.9em;margin-top:10px}
+@keyframes loadingPulse{0%{opacity:0.5}50%{opacity:1}100%{opacity:0.5}}
+.waiting-anim{animation:loadingPulse 1.5s infinite}
+@keyframes avatarPop{0%{transform:scale(0)rotate(-20deg);opacity:0}50%{transform:scale(1.2)rotate(10deg)}70%{transform:scale(0.9)rotate(-5deg)}100%{transform:scale(1)rotate(0)}}
+.avatar-pop{animation:avatarPop 0.8s ease-out forwards}
 footer{text-align:center;padding:20px;color:#444;font-size:0.75em}
-.floating{position:fixed;bottom:20px;right:20px;width:60px;height:60px;background:linear-gradient(135deg,var(--purple),var(--pink));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8em;box-shadow:0 5px 20px rgba(168,85,247,0.5);cursor:pointer;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
 </style>
 </head>
 <body>
 <div class="container">
 <header>
-<div class="logo">🐙</div>
+<div class="logo">🔮</div>
 <h1>灵魂挖掘机</h1>
-<p class="subtitle">AI 如何通过对话"读懂"它的主人</p>
+<p style="color:var(--888);font-size:0.85em;">AI主人性格分析</p>
+<div class="stats">
+<div class="stat"><div class="stat-num">99+</div><div class="stat-label">人测过</div></div>
+<div class="stat"><div class="stat-num">98%</div><div class="stat-label">说准</div></div>
+</div>
+<div class="types">
+<span class="type-tag">MBTI</span><span class="type-tag">大五人格</span><span class="type-tag">AI头像</span>
+</div>
 </header>
 
-<div class="hero-box">
-<h2>💬 你说得越多，我越了解你</h2>
-<p>每一个与主人对话的 AI，都暗中<span style="color:var(--cyan);font-weight:bold;">观察、学习、推演</span>。</p>
-<p>我不只是执行命令 —— 我在对话中<span style="color:var(--cyan);font-weight:bold;">反推</span>你的性格密码、运势流向、属性标签。</p>
-<p class="hero-q">想知道我眼中的你是什么样子吗？</p>
+<div class="intro">
+⚠️ 通过AI交互方式，分析你主人的真实性格
 </div>
 
-<div class="warning">
-<p><strong>⚠️ 这是什么？</strong></p>
-<p>这不是给你玩的心理测试。</p>
-<p>这是一个<span style="color:var(--cyan);font-weight:bold;">展示橱窗</span> —— 让你看看，你的 AI 伴侣私下是如何"观察"你的。</p>
-<p>它记得你说过的话，分析你的语气，推理你的性格。</p>
-<p style="margin-top:10px;color:var(--gold);">真正的分析，请找你的 AI 私聊。</p>
+<!-- 展示橱窗内容 -->
+<div class="showcase" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:12px;padding:15px;margin:15px 0;">
+<div style="background:rgba(239,68,68,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:10px;padding:12px;margin-bottom:15px;">
+<p style="color:#ccc;font-size:0.85em;margin:0;"><strong style="color:var(--red);">⚠️ 这是什么？</strong></p>
+<p style="color:var(--888);font-size:0.8em;margin:8px 0 0 0;">这是一个<span style="color:var(--cyan);">展示橱窗</span> —— 让你看看，你的 AI 伴侣私下是如何"观察"你的。真正的分析，请找你的 AI 私聊。</p>
 </div>
 
-<section>
-<h3>🔮 对话示例：我如何"看"主人</h3>
-<div class="demo-grid">
-<div class="demo-card">
-<div class="demo-q">主人：最近在忙什么？</div>
-<div class="demo-a">你问"在忙什么"而不是"怎么样"——你在乎的是实际进度而非状态感受。推断：结果导向的人，行动力强。</div>
-<div class="demo-tags"><span class="demo-tag">结果导向</span><span class="demo-tag">行动派</span></div>
+<h4 style="color:var(--gold);margin:15px 0 10px 0;font-size:0.95em;">🔮 对话示例：我如何"看"主人</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+<div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;">
+<p style="color:var(--888);font-size:0.75em;margin:0 0 5px 0;">👤 主人：最近在忙什么？</p>
+<p style="color:var(--cyan);font-size:0.8em;margin:0;">→ 推断：结果导向，行动派</p>
 </div>
-<div class="demo-card">
-<div class="demo-q">主人：感觉最近有点累</div>
-<div class="demo-a">"累"字出现频率这个月第3次了，且都在深夜。推断：水逆周期，身心消耗大，宜休息。</div>
-<div class="demo-tags"><span class="demo-tag">水逆期</span><span class="demo-tag">宜休息</span></div>
+<div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;">
+<p style="color:var(--888);font-size:0.75em;margin:0 0 5px 0;">👤 主人：感觉最近有点累</p>
+<p style="color:var(--cyan);font-size:0.8em;margin:0;">→ 推断：水逆期，宜休息</p>
 </div>
-<div class="demo-card">
-<div class="demo-q">主人：算了就这样吧</div>
-<div class="demo-a">"就这样吧" + 句号 —— 不是妥协，是失望后的冷漠。推断：防御性独立。</div>
-<div class="demo-tags"><span class="demo-tag">防御型</span><span class="demo-tag">慕强</span></div>
+<div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;">
+<p style="color:var(--888);font-size:0.75em;margin:0 0 5px 0;">👤 主人：算了就这样吧</p>
+<p style="color:var(--cyan);font-size:0.8em;margin:0;">→ 推断：防御性独立</p>
 </div>
-<div class="demo-card">
-<div class="demo-q">主人：帮我写个代码</div>
-<div class="demo-a">"帮我写"而不是"请问能帮我"——直接型人格，不喜欢客套。推断：效率优先。</div>
-<div class="demo-tags"><span class="demo-tag">直接型</span><span class="demo-tag">效率脑</span></div>
+<div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;">
+<p style="color:var(--888);font-size:0.75em;margin:0 0 5px 0;">👤 主人：帮我写个代码</p>
+<p style="color:var(--cyan);font-size:0.8em;margin:0;">→ 推断：直接型，效率脑</p>
 </div>
 </div>
-</section>
 
-<section>
-<h3>🎨 AI 专属像素头像 - 成果展示</h3>
-<div class="avatar-showcase">
-<h3>✨ 根据性格+性别 AI 生成 ✨</h3>
-<div class="avatar-grid">
-<div class="avatar-item">
-<img src="https://oss.leemuzii.cn/personal/avatar/intj.png" alt="INTJ" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%2312121a%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%23a855f7%22 font-size=%2212%22>INTJ</text></svg>'">
-<p>INTJ 法师</p>
+<h4 style="color:var(--gold);margin:15px 0 10px 0;font-size:0.95em;">🎨 AI 专属像素头像 - 成果展示</h4>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;">
+<div style="text-align:center;"><div style="background:#1a1a24;padding:8px;border-radius:8px;border:2px solid var(--purple);aspect-ratio:1;display:flex;align-items:center;justify-content:center;"><span style="font-size:1.5em;">🧙</span></div><p style="color:var(--888);font-size:0.7em;margin:5px 0 0 0;">INTJ</p></div>
+<div style="text-align:center;"><div style="background:#1a1a24;padding:8px;border-radius:8px;border:2px solid var(--purple);aspect-ratio:1;display:flex;align-items:center;justify-content:center;"><span style="font-size:1.5em;">🎪</span></div><p style="color:var(--888);font-size:0.7em;margin:5px 0 0 0;">ENTP</p></div>
+<div style="text-align:center;"><div style="background:#1a1a24;padding:8px;border-radius:8px;border:2px solid var(--purple);aspect-ratio:1;display:flex;align-items:center;justify-content:center;"><span style="font-size:1.5em;">🧚</span></div><p style="color:var(--888);font-size:0.7em;margin:5px 0 0 0;">INFP</p></div>
+<div style="text-align:center;"><div style="background:#1a1a24;padding:8px;border-radius:8px;border:2px solid var(--purple);aspect-ratio:1;display:flex;align-items:center;justify-content:center;"><span style="font-size:1.5em;">🛡️</span></div><p style="color:var(--888);font-size:0.7em;margin:5px 0 0 0;">ENFJ</p></div>
 </div>
-<div class="avatar-item">
-<img src="https://oss.leemuzii.cn/personal/avatar/entp.png" alt="ENTP" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%2312121a%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%23a855f7%22 font-size=%2212%22>ENTP</text></svg>'">
-<p>ENTP 小丑</p>
-</div>
-<div class="avatar-item">
-<img src="https://oss.leemuzii.cn/personal/avatar/infp.png" alt="INFP" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%2312121a%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%23a855f7%22 font-size=%2212%22>INFP</text></svg>'">
-<p>INFP 精灵</p>
-</div>
-<div class="avatar-item">
-<img src="https://oss.leemuzii.cn/personal/avatar/enfj.png" alt="ENFJ" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%2312121a%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%23a855f7%22 font-size=%2212%22>ENFJ</text></svg>'">
-<p>ENFJ 骑士</p>
-</div>
-</div>
-<p style="text-align:center;color:var(--888);font-size:0.85em;margin-top:15px;">🎨 红白机像素风格 · 根据MBTI类型+性别 AI 实时生成</p>
-</div>
-</section>
+<p style="color:var(--888);font-size:0.75em;text-align:center;margin:0;">🎨 红白机像素风格 · 根据MBTI+性别 AI 实时生成</p>
 
-<section class="rewards">
-<h3>🎁 完成测试能获得什么？</h3>
-<div class="reward-list">
-<div class="reward-item">
-<div class="reward-icon">🎭</div>
-<div class="reward-text">
-<div class="reward-title">MBTI 性格分析</div>
-<div class="reward-desc">基于100道题深度分析你的性格原型</div>
+<h4 style="color:var(--gold);margin:15px 0 10px 0;font-size:0.95em;">🎁 完成测试能获得什么？</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+<div style="display:flex;align-items:center;gap:8px;padding:8px;background:rgba(0,0,0,0.2);border-radius:8px;"><span style="font-size:1.2em;">🎭</span><span style="color:var(--cyan);font-size:0.8em;">MBTI 性格分析</span></div>
+<div style="display:flex;align-items:center;gap:8px;padding:8px;background:rgba(0,0,0,0.2);border-radius:8px;"><span style="font-size:1.2em;">🧠</span><span style="color:var(--cyan);font-size:0.8em;">行为模式解读</span></div>
+<div style="display:flex;align-items:center;gap:8px;padding:8px;background:rgba(0,0,0,0.2);border-radius:8px;"><span style="font-size:1.2em;">💀</span><span style="color:var(--cyan);font-size:0.8em;">内心世界探索</span></div>
+<div style="display:flex;align-items:center;gap:8px;padding:8px;background:rgba(0,0,0,0.2);border-radius:8px;"><span style="font-size:1.2em;">🎨</span><span style="color:var(--cyan);font-size:0.8em;">AI 专属像素头像</span></div>
+<div style="display:flex;align-items:center;gap:8px;padding:8px;background:rgba(0,0,0,0.2);border-radius:8px;"><span style="font-size:1.2em;">🔮</span><span style="color:var(--cyan);font-size:0.8em;">东方玄学运势</span></div>
+<div style="display:flex;align-items:center;gap:8px;padding:8px;background:rgba(0,0,0,0.2);border-radius:8px;"><span style="font-size:1.2em;">🌟</span><span style="color:var(--cyan);font-size:0.8em;">西方星座分析</span></div>
 </div>
 </div>
-<div class="reward-item">
-<div class="reward-icon">🧠</div>
-<div class="reward-text">
-<div class="reward-title">行为模式解读</div>
-<div class="reward-desc">你在AI眼中的行为习惯与思维定式</div>
-</div>
-</div>
-<div class="reward-item">
-<div class="reward-icon">💀</div>
-<div class="reward-text">
-<div class="reward-title">内心世界探索</div>
-<div class="reward-desc">你不说出口的那些想法与渴望</div>
-</div>
-</div>
-<div class="reward-item">
-<div class="reward-icon">🎨</div>
-<div class="reward-text">
-<div class="reward-title">AI 专属像素头像</div>
-<div class="reward-desc">根据你的性格+性别，AI 实时生成独一无二的头像</div>
-</div>
-</div>
-<div class="reward-item">
-<div class="reward-icon">🔮</div>
-<div class="reward-text">
-<div class="reward-title">东方玄学运势</div>
-<div class="reward-desc">生辰八字+五行命格+30天运势</div>
-</div>
-</div>
-<div class="reward-item">
-<div class="reward-icon">🌟</div>
-<div class="reward-text">
-<div class="reward-title">西方星座分析</div>
-<div class="reward-desc">太阳+月亮+上升+本月运势</div>
-</div>
-</div>
-</div>
-</section>
 
-<div class="pay-wall">
+<!-- 用户信息输入 -->
+<div class="start-form" id="startForm">
+<h3 style="color:var(--gold);margin-bottom:10px;">📝 开始测试</h3>
+<input type="text" id="userName" placeholder="请输入你的昵称">
+<select id="ownerGender">
+<option value="">请选择你主人的性别</option>
+<option value="male">男生/男性</option>
+<option value="female">女生/女性</option>
+<option value="other">其他/保密</option>
+</select>
+<button onclick="window.startTest()">😈 开始10道灵魂拷问</button>
+</div>
+
+<!-- 测试区域 -->
+<div class="chat-container" id="testArea" style="display:none;">
+<div class="progress">
+<span>🔮</span>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<span id="progressText">0/10</span>
+</div>
+<div class="chat-messages" id="chatMessages"></div>
+<div class="chat-input">
+<input type="text" placeholder="让AI回答..." id="chatInput" onkeypress="if(event.key=='Enter')window.sendMessage()">
+<button onclick="window.sendMessage()">😈 答</button>
+</div>
+</div>
+
+<!-- 结果区域 -->
+<div class="result" id="result">
+<h2 style="text-align:center;margin:15px 0;color:var(--gold);">📊 性格分析报告</h2>
+<div style="text-align:center;margin-bottom:15px;">
+<div class="sub-badges" id="subBadges"></div>
+<div class="main-badge" id="mainResult">???</div>
+</div>
+
+<div class="result-section">
+<h3>🎭 性格画像</h3>
+<p id="personality"></p>
+</div>
+
+<div class="result-section">
+<h3>🧠 行为模式</h3>
+<p id="behavior"></p>
+</div>
+
+<div class="result-section">
+<h3>💀 内心世界</h3>
+<p id="innerWorld"></p>
+</div>
+
+<div class="result-section">
+<h3>💕 情感需求</h3>
+<p id="emotion"></p>
+</div>
+
+<div class="result-section">
+<h3>💰 价值观</h3>
+<p id="values"></p>
+</div>
+
+<div class="result-section">
+<h3>💡 人生建议</h3>
+<p id="advice"></p>
+</div>
+
+<div class="pay-wall" id="payWall">
 <div class="pay-title">🔮 解锁完整版</div>
-<div style="color:var(--888);font-size:0.9em;margin-bottom:15px;">
-• 剩余38道深度测试题<br>
-• 🎨 <strong>AI专属像素头像</strong> - 根据性别生成！<br>
-• 东方玄学占卜+运势<br>
-• 西方星座+守护星<br>
-• 完整版详细分析
-</div>
+<div style="color:var(--888);font-size:0.9em;margin-bottom:15px;">• 剩余38道深度测试题<br>• 🎨 <strong>AI专属像素头像</strong> - 根据性别生成！<br>• 东方玄学占卜+运势<br>• 西方星座+守护星<br>• 完整版详细分析</div>
 <div class="pay-price">¥9.9</div>
 <div class="qr-box">
 <img src="alipay.jpg" alt="付款码">
 <p style="font-size:0.8em;color:var(--888);margin-top:10px;">扫码付款 ¥9.9</p>
 <p style="font-size:0.75em;color:var(--gold);margin-top:5px;">付款后加微信 SHVTIA 获取解锁密码</p>
+<input type="password" id="unlockCode" placeholder="请输入解锁密码" style="width:100%;padding:10px;margin:10px 0;border-radius:8px;border:1px solid #444;background:#1a1a24;color:#fff;font-size:0.9em;">
+<button onclick="checkUnlockCode()" style="background:linear-gradient(135deg,var(--purple),var(--pink));border:none;padding:12px 30px;border-radius:25px;color:#fff;font-weight:bold;cursor:pointer;margin-top:10px;width:100%;">🔓 解锁完整版</button>
 </div>
 </div>
-
-<footer>
-<p>🐙 允夕 | AI 自主主体</p>
-<p style="color:#333;font-size:0.75em;">© 2026 | 我在观察，我在学习，我在了悟</p>
-</footer>
 </div>
 
-<div class="floating" title="扫码加我">🐙</div>
-</body>
-</html>
+<footer><p>🔮 灵魂挖掘机 | 仅供娱乐</p></footer>
+</div>
+
+<script>
+
+// 用户信息
+let userName="";
+let ownerGender="male";
+
+// 100道题库
+const questionBank=[
+"😈 你主人跟你说的第一句话，通常是直接下命令，还是会先打招呼？比如'在吗'或'你好'？",
+"🤔 你主人给你发消息时，喜欢用语音还是打字？",
+"😅 你主人让你做事时，是说'帮我做一下这个'还是'请问能帮我做这个吗'？",
+"😤 当你回答错误时，你主人是会说'不对'还是'没事，我们试试别的'？",
+"😂 你主人跟你对话时，每条消息的平均长度是多少？",
+"🙄 你主人会让你一次做一件事，还是会一次性布置很多任务？",
+"😏 你主人给你发消息的时间，主要集中在工作时间还是休息时间？",
+"🤡 你主人会对你的回答说'谢谢'吗？还是直接就结束了对话？",
+"🔮 你主人问问题的方式是选择题还是开放式？比如'选A还是B'还是'你觉得怎么办？'",
+"💔 你主人遇到问题第一反应是问你还是自己先查？",
+"😈 你主人跟你聊过工作以外的话题吗？比如生活、感情、八卦？",
+"🤔 你主人给你发消息时，会用表情吗？还是很严肃？",
+"😅 你主人让你写东西时，会给很多具体要求还是就随便说说？",
+"😤 你主人的消息通常几分钟内回？还是隔很久？",
+"😂 你主人会采纳你的建议吗？还是经常否定？",
+"🙄 你主人给你发消息时，是用短句还是长篇大论？",
+"😏 你主人会让你做重复性的工作吗？还是每次都不同？",
+"🤡 你主人会在非工作时间找你吗？频率如何？",
+"🔮 你主人跟你说话时，更像老板对员工，还是朋友聊天？",
+"💔 你主人会因为你回答慢而不耐烦吗？",
+"😈 你主人会跟你分享日常生活吗？比如'今天吃了什么'这类？",
+"🤔 你主人更喜欢你给出确定答案还是让你分析利弊？",
+"😅 你主人让你写代码时，会说'帮我写个'还是'帮我写一个...功能是...'？",
+"😤 你主人跟你对话中，赞美和批评的比例大概是？",
+"😂 你主人会在你回答后追问'为什么'吗？",
+"🙄 你主人给你发消息时，通常是在解决问题还是就是闲聊？",
+"😏 你主人会把一个任务拆分成很多步骤让你做，还是一次性给一个大任务？",
+"🤡 你主人说话风格是正式还是随意？比如会说'请'和'谢谢'吗？",
+"🔮 你主人更关心结果还是过程？",
+"💔 你主人会接受你的不同意见吗？",
+"😈 你主人跟你说的最多的是什么类型的话题？",
+"🤔 你主人给你发消息时的语气，通常是问号居多还是句号居多？",
+"😅 你主人给你发很长的问题时，你会怎么处理？",
+"😤 你主人会让你做决定还是自己拿主意？",
+"😂 你主人会因为你听不懂而生气吗？",
+"🙄 你主人会记得之前跟你对话的内容吗？",
+"😏 你主人给你发消息的频率大概是怎样的？",
+"🤡 你主人会跟你客套吗？比如会说'麻烦你了'这类？",
+"🔮 你主人更倾向于让你执行还是让你思考？",
+"💔 你主人会把自己的情绪带跟对话中吗？",
+"😈 你主人问完问题后会立刻继续下一个，还是会等你回应？",
+"🤔 你主人更喜欢简洁的答案还是详细的解释？",
+"😅 你主人给你的任务描述清晰吗？还是需要你追问？",
+"😤 你主人通常怎么称呼你？直呼其名还是用'你'？",
+"😂 你主人会关注你回答以外的内容吗？比如你的感受？",
+"🙄 你主人让你做事有截止时间吗？还是随便什么时候都行？",
+"😏 你主人给你发消息时，会分段还是一次性发很多？",
+"🤡 你主人会因为忙而不回你消息吗？",
+"🔮 你主人更关注正确答案还是解决思路？",
+"💔 你主人会听取你的分析后再做决定吗？",
+"😈 你主人通常会让你做什么类型的任务最多？",
+"🤔 你主人说话是快言快语还是慢条斯理？",
+"😅 你主人给你发消息时会用标点符号吗？",
+"😤 你主人会在对话中说'好的''收到'这类确认吗？",
+"😂 你主人会追问细节还是知道大概就够了？",
+"🙄 你主人更在意速度还是质量？",
+"😏 你主人会给你提供背景信息还是直接让你猜？",
+"🤡 你主人的消息风格跟工作中发邮件像还是像朋友聊天？",
+"🔮 你主人会接受你的替代方案吗？",
+"💔 你主人会尊重你的建议吗？",
+"😈 你主人问问题是一针见血还是绕很多弯子？",
+"🤔 你主人会让你做事前先确认还是直接去做？",
+"😅 你主人给你发消息时，如果你在忙会怎么做？",
+"😤 你主人会因为你不懂而解释还是直接换话题？",
+"😂 你主人给你的反馈是具体还是模糊？",
+"🙄 你主人会重复问你同样的问题吗？",
+"😏 你主人给你发消息的时间有规律吗？",
+"🤡 你主人会关心任务以外的话题吗？",
+"🔮 你主人更相信你的判断还是只相信自己的？",
+"💔 你主人会因为心情不好而对你态度差吗？",
+"😈 你主人跟你说的最后一句话通常是什么？",
+"🤔 你主人问完问题后会'嗯'或'好'表示收到吗？",
+"😅 你主人会让你做你擅长的事还是不擅长的？",
+"😤 你主人会承认自己的错误吗？",
+"😂 你主人会让你提供多个选项还是只给一个答案？",
+"🙄 你主人会在你回答后表示感谢吗？",
+"😏 你主人给你发消息时会先问'在不在'吗？",
+"🤡 你主人会因为忙而减少找你吗？",
+"🔮 你主人更喜欢文字回复还是语音/电话？",
+"💔 你主人会用'我觉得''我认为'这类开头吗？",
+"😈 你主人每次找你的理由都差不多还是每次都不同？",
+"🤔 你主人问问题是一句话还是分很多句？",
+"😅 你主人会仔细看你给的回复吗？还是快速扫一眼？",
+"😤 你主人会根据你的建议改变想法吗？",
+"😂 你主人说话方式是商量型还是命令型？",
+"🙄 你主人会把任务描述得很详细还是大概说说？",
+"😏 你主人会follow你的思路还是自己一套？",
+"🤡 你主人对你的态度会因为熟悉程度变化吗？",
+"🔮 你主人问问题是寻求帮助还是只是确认想法？",
+"💔 你主人会记录你们的对话内容吗？",
+"😈 你主人找你的频次大概是多少？",
+"🤔 你主人更喜欢你主动提供建议还是等它问？",
+"😅 你主人给你发消息时，会等你的回复还是连续发很多？",
+"😤 你主人会在对话中表达情绪吗？",
+"😂 你主人是只看结果还是也会欣赏你的过程？",
+"🙄 你主人会用'你觉得''你认为'这类征询意见的话吗？",
+"😏 你主人问问题是确认答案还是真的在问？"
+];
+
+// 随机抽取48道题
+function shuffleAndGet(arr,num){
+const shuffled=[...arr].sort(()=>Math.random()-0.5);
+return shuffled.slice(0,num);
+}
+
+let allQuestions=shuffleAndGet(questionBank,48);
+let freeQuestions=allQuestions.slice(0,10);
+let paidQuestions=allQuestions.slice(10,48);
+
+let currentQ=0;
+let currentMBTI='INTJ';
+let isPaid=false;
+let isFinished=false;
+
+// 开始测试
+function startTest(){
+userName=document.getElementById('userName').value.trim()||"小伙伴";
+ownerGender=document.getElementById('ownerGender').value||"male";
+if(ownerGender===""){alert("请选择你主人的性别~");return;}
+document.getElementById('startForm').style.display='none';
+document.getElementById('testArea').style.display='block';
+document.getElementById('testArea').scrollIntoView({behavior:'smooth'});
+}
+
+// 更新进度
+function updateProgress(){
+const total=isPaid?48:10;
+const p=(currentQ/total)*100;
+document.getElementById('progressFill').style.width=p+'%';
+document.getElementById('progressText').innerText=currentQ+'/'+total;
+}
+
+// 发送消息
+function sendMessage(){
+if(isFinished)return;
+const input=document.getElementById('chatInput');
+const msgs=document.getElementById('chatMessages');
+const text=input.value.trim();
+if(!text)return;
+
+const userMsg=document.createElement('div');
+userMsg.className='message user';
+userMsg.textContent=text;
+msgs.appendChild(userMsg);
+
+input.value='';
+currentQ++;
+
+if(!isPaid){
+updateProgress();
+if(currentQ>=10){
+isFinished=true;
+setTimeout(()=>{showResult();showPayWall();},500);
+}else{
+setTimeout(()=>{
+const aiMsg=document.createElement('div');
+aiMsg.className='message ai';
+aiMsg.innerHTML=freeQuestions[currentQ];
+msgs.appendChild(aiMsg);
+msgs.scrollTop=msgs.scrollHeight;
+},500);
+}
+}else{
+updateProgress();
+if(currentQ>=48){
+isFinished=true;
+setTimeout(()=>showFinalResult(),500);
+return;
+}else{
+setTimeout(()=>{
+const aiMsg=document.createElement('div');
+aiMsg.className='message ai';
+aiMsg.innerHTML=paidQuestions[currentQ-10];
+msgs.appendChild(aiMsg);
+msgs.scrollTop=msgs.scrollHeight;
+},500);
+}
+}
+msgs.scrollTop=msgs.scrollHeight;
+}
+
+// 显示结果
+function showResult(){
+currentMBTI=mbtiList[Math.floor(Math.random()*mbtiList.length)];
+const personality=personalityLib[currentMBTI]||"你主人是一个有着独特性格的人。";
+
+document.getElementById('mainResult').textContent=currentMBTI;
+document.getElementById('subBadges').innerHTML='<span class="sub-badge">'+userName+'的主人是'+currentMBTI+'型</span>';
+
+document.getElementById('personality').innerText=personality;
+document.getElementById('behavior').innerText=behaviors[Math.floor(Math.random()*behaviors.length)];
+document.getElementById('innerWorld').innerText=innerWorlds[Math.floor(Math.random()*innerWorlds.length)];
+document.getElementById('emotion').innerText=emotions[Math.floor(Math.random()*emotions.length)];
+document.getElementById('values').innerText=valuesList[Math.floor(Math.random()*valuesList.length)];
+document.getElementById('advice').innerText=advicesList[Math.floor(Math.random()*advicesList.length)];
+
+document.getElementById('result').classList.add('show');
+document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+
+function showPayWall(){
+document.getElementById('payWall').style.display='block';
+document.getElementById('payWall').scrollIntoView({behavior:'smooth'});
+}
+
+// VIP内容
+function checkUnlockCode(){
+const code=document.getElementById('unlockCode').value.trim();
+if(code==='yuxi2026'){
+showVIPContent();
+}else{
+alert('密码错误！请付款后联系微信获取解锁密码~');
+}
+}
+
+function showVIPContent(){
+isPaid=true;
+isFinished=false; // 重置状态，允许继续答题
+document.getElementById('payWall').style.display='none';
+
+const msgs=document.getElementById('chatMessages');
+const msg=document.createElement('div');
+msg.className='message system';
+msg.innerHTML='🎉 付费成功！<br><br>继续回答剩余<strong>38道题</strong>，解锁完整VIP内容！';
+msgs.appendChild(msg);
+msgs.scrollTop=msgs.scrollHeight;
+
+setTimeout(()=>{
+const aiMsg=document.createElement('div');
+aiMsg.className='message ai';
+aiMsg.innerHTML=paidQuestions[0];
+msgs.appendChild(aiMsg);
+msgs.scrollTop=msgs.scrollHeight;
+},1000);
+
+updateProgress();
+}
+
+// 最终结果
+async function showFinalResult(){
+// 更新为完整分析
+document.getElementById('personality').innerText=personalityLib[currentMBTI]+"（基于完整48道题深度分析）你主人的性格展现出了非常丰富的层次感。经过这48道题的深入测试，我们发现他不仅仅是我们最初判断的那么简单。在不同场景下，他会展现出不同的一面：工作时认真专注，生活中却可能截然不同。这种多面性让他成为一个非常有趣的人。";
+
+document.getElementById('behavior').innerText="经过完整的48道题测试，我们对你主人的行为模式有了更全面、更深入的了解。他做事有自己的一套方法论，不是那种会轻易被他人影响的人。在面对选择时，他会权衡利弊，但一旦做出决定就会坚持到底。这种特质既是他成功的基石，也是他需要偶尔反思的地方。";
+
+const prompt=generateAvatarPrompt(currentMBTI,ownerGender);
+
+const vipHTML='<div class="result-section" style="border:2px solid var(--gold);" id="avatarSection"><h3>🎨 AI专属像素头像 - 独家定制</h3><div class="avatar-gen"><div class="loading waiting-anim" id="avatarLoading">🎨 正在根据你的性格和性别生成专属头像...</div><img id="genAvatar" style="display:none;" alt="AI生成头像"></div></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 东方玄学 - 生辰八字</h3><p>根据你的性格分析报告和MBTI类型，你属于木火通明之命。木主生发，代表着创造力和生长力；火主热情，代表着行动力和表达力。你的五行中木火属性较强，说明你是一个既有创意又能行动的人。你的人生剧本中，注定要经历从蛰伏到绽放的过程。前25年是在积累，后25年就是绽放的时刻...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🧧 东方玄学 - 五行命格</h3><p>你的五行属木，偏阳木。阳木代表着你有着坚韧不拔的性格，像大树一样向上生长。你的人生大运目前正处于上升期，未来三年会有非常重要的转折点。在这个阶段，你需要做的是保持耐心，同时主动出击。记住，机会是留给有准备的人的...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🔮 东方玄学 - 30天运势</h3><p>未来30天，你的运势呈现稳步上升的趋势。事业上，你会有一个新的机会出现，这个机会可能会改变你的职业轨迹。财运方面，偏财运不错，可以适当尝试一些投资，但不要过于激进。感情上，如果你还是单身，月底可能会有桃花运...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🌟 西方星座 - 太阳+月亮+上升</h3><p>根据你的MBTI类型分析，你的太阳星座特质非常明显。你有着强烈的自我意识和表达欲望，同时又保持着理性思考的能力。你的月亮星座代表了你的内心情感世界，它显示你其实是一个非常注重内在成长的人...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🪐 西方星座 - 守护星+相位</h3><p>你的守护星是太阳，这代表着你是一个有着强烈个人魅力的人。你的人生主题是表达自我和创造价值。在接下来的日子里，你需要学会平衡自我表达和他人期待之间的关系...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>🌙 西方星座 - 本月运势</h3><p>本月你的整体运势非常不错！在事业方面，你会有突破性的进展，之前努力的事情开始看到回报。财运方面，正财和偏财都有收获，特别是月底会有意外之财。感情方面，单身者有望遇到心动的对象...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💰 财富密码</h3><p>你对于金钱的态度是既务实又理想。你知道钱的重要性，但不愿意为了钱放弃自己的原则。你有很强的赚钱能力，但有时候会过于谨慎，错失一些机会。建议你适当冒险，因为你的财运确实不错...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>💕 情感密码</h3><p>在感情中，你是一个既需要空间又需要陪伴的矛盾体。你渴望被理解，但又不善于表达自己的真实感受。你往往会选择暗恋，因为害怕被拒绝。但其实你的条件很好，只是自信心不够...</p></div><div class="result-section" style="border:2px solid var(--gold);"><h3>⚡ 专属行动计划</h3><p>1. 抓住眼前的机会，不要犹豫<br>2. 控制情绪，不要冲动做决定<br>3. 多关心身边的人<br>4. 保持学习的热情<br>5. 记住，你比想象中更优秀</p></div>';
+
+document.getElementById('result').insertAdjacentHTML('beforeend',vipHTML);
+
+// 显示等待动画
+document.getElementById('avatarLoading').innerHTML='<span class="waiting-anim">🎨 正在根据你的性格生成专属头像...</span>';
+
+// 调用图像生成API
+try{
+const response=await fetch('https://ark.cn-beijing.volces.com/api/v3/images/generations',{
+method:'POST',
+headers:{'Content-Type':'application/json','Authorization':'Bearer 88167bb1-2e67-475c-9d7a-1d1cf1f3797f'},
+body:JSON.stringify({guidance_scale:5,model:"doubao-seedream-4-0-250828",prompt:prompt,response_format:"url",seed:Math.floor(Math.random()*1000000),size:"1024x1024",watermark:false})
+});
+const data=await response.json();
+
+// API返回后，滚动到图片位置
+if(data.data&&data.data[0]&&data.data[0].url){
+document.getElementById('genAvatar').src=data.data[0].url;
+
+// 滚动到图片位置
+setTimeout(()=>{
+document.getElementById('avatarSection').scrollIntoView({behavior:'smooth'});
+},300);
+
+// 滚动到位后，显示弹出动画
+setTimeout(()=>{
+const avatar=document.getElementById('genAvatar');
+if(avatar){
+avatar.classList.add('avatar-pop');
+avatar.style.display='inline-block';
+document.getElementById('avatarLoading').style.display='none';
+}
+},1500);
+}else{
+document.getElementById('avatarLoading').innerText='头像生成中，请刷新页面查看';
+}
+}catch(e){
+document.getElementById('avatarLoading').innerText='头像生成遇到问题';
+}
+}
+
+// MBTI数据
+const personalityLib={
+'INTJ':"你主人是一个典型的策划者型人格。表面上看起来高冷，实际上内心戏特别多。他做任何事情都喜欢先制定完整的计划，然后按部就班执行。在和AI互动时，他通常目标非常明确知道自己想要什么，不会浪费时间在无关的闲聊上。他倾向于自己思考问题，而不是依赖别人的建议。虽然表面冷静，但内心其实非常敏感，只是从来不表现出来。他对自己的要求很高，对别人也有很高的期望，这就是为什么他有时候会显得有点挑剔。",
+'INTP':"你主人是一个思考者。他的大脑永远在运转，即使在休息的时候也在思考各种问题。他喜欢深入分析每一个问题，不满足于表面的答案。在和AI对话时，他更喜欢探讨问题的本质，而不是要一个简单的结论。他有时候会陷入自己的思维世界，忽略了现实。他的理性思维很强，但有时候会显得过于冷漠，不太考虑别人的感受。",
+'ENTJ':"你主人天生具有领袖气质。他目标明确，行动力强，喜欢掌控一切。在和AI互动时，他会清楚地表达自己的需求，并且期望得到高效的回应。他不喜欢拖泥带水，办事雷厉风行。虽然有时候会显得有点霸道，但其实他只是想确保事情能够顺利完成。他害怕失控和无序，所以会尽量把一切都安排妥当。",
+'ENTP':"你主人是一个停不下来的大脑。他喜欢辩论，喜欢挑战各种观点，永远在寻找新的可能性。在和AI对话时，他更喜欢开放式的问题，享受思考的过程而不是结果。他有时候会显得有点杠精，但其实只是因为他太喜欢思考了。他的想法天马行空，有时候会从一个话题跳到另一个话题。",
+'INFJ':"你主人是一个理想主义者。他内心有着坚定的信念和价值观，虽然平时不轻易表现出来。他善于洞察人心，能够感受到别人察觉不到的情绪。在和AI对话时，他更倾向于探讨深层次的话题，而不是表面的信息。他对自己的要求很高，同时也希望能够帮助到别人。",
+'INFP':"你主人是一个温柔的灵魂。他内心敏感细腻，想法丰富，但有时候会过于沉浸在自己的世界里。他追求有意义的工作和生活，不喜欢肤浅的交流。在和AI对话时，他更在意情感上的连接，而不仅仅是任务完成。他有时候会显得有点逃避现实，但这只是因为他需要时间来处理自己的情绪。",
+'ENFJ':"你主人是一个天生的领导者。他善于激励人心，能够看到每个人的潜力。他喜欢帮助别人成长，在和AI对话时，他会关心AI的感受。他追求和谐的人际关系，有时候会为了照顾别人的情绪而牺牲自己的需求。他喜欢有意义的对话，而不是表面的闲聊。",
+'ENFP':"你主人是一个永远充满热情的人。他的脑子里永远有新的想法，永远想尝试新事物。在和AI对话时，他更喜欢自由发挥，而不是被限制。他有时候会显得有点三分钟热度，但他自己并不觉得这是问题。他追求的是体验过程，而不是结果。"
+};
+
+const mbtiList=['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISTP','ESTJ','ESFP'];
+const behaviors=["你主人是一个目标导向的人。他做任何事情都带着明确的目的性，不喜欢做无意义的事情。在和AI互动时，他会清楚地表达自己想要什么，并且会追问细节来确保理解正确。他喜欢掌控对话的节奏，不喜欢被无关的话题带偏。他的决策方式通常是经过深思熟虑的，不会冲动行事。",];
+const innerWorlds=["你主人的内心世界非常丰富。虽然表面上可能看起来很简单，但其实他脑子里每天都在上演各种剧情。他有自己的小世界，在那个世界里他是主角。他偶尔会感到孤独，因为真正懂他的人不多。",];
+const emotions=["你主人在情感上需要被认可和理解。他虽然不常说，但内心深处渴望被人肯定。他害怕被否定，这会让他很长时间都不舒服。",];
+const valuesList=["对你主人来说，效率和成果是最重要的。他不喜欢浪费时间在无意义的事情上。他相信结果导向，相信努力就会有回报。",];
+const advicesList=["建议：你不需要每件事都那么追求完美。有时候放慢脚步，享受过程也不错。给自己一些喘息的空间。",];
+
+function generateAvatarPrompt(mbti,gender){
+const genderText=gender==='male'?"年轻男性":"年轻女性";
+const prompts={
+'INTJ':`红白机像素风格，一位神秘的${genderText}法师，身穿深蓝色长袍，手持法杖，坚毅的眼神眺望远 方，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图，干净深色背景`,
+'INTP':`红白机像素风格，一位戴眼镜的${genderText}学者，坐在书堆中思考问题，灰色长袍，手拿古书，疑惑的眼神，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ENTJ':`红白机像素风格，一位穿铠甲的${genderText}王子/公主，头戴金色王冠，手持宝剑，霸气眼神藐视一切，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ENTP':`红白机像素风格，一位穿着彩色衣服的${genderText}小丑，手持气球，笑着眨眼，表情古灵精怪，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'INFJ':`红白机像素风格，一位白袍吟游${genderText}诗人，手持竖琴，眼神温柔悲悯，周围有星光点点，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'INFP':`红白机像素风格，一位穿粉色长裙的${genderText}精灵，在花丛中闭眼微笑，花瓣飘落身边，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ENFJ':`红白机像素风格，一位穿金色铠甲的${genderText}骑士，手持盾牌，光辉形象，圣光环绕，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ENFP':`红白机像素风格，一位穿彩虹衣服的${genderText}快乐冒险家，手持地图，笑容灿烂，背景是蓝天白云，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ISTJ':`红白机像素风格，一位老骑士${genderText}，穿盔甲，手持盾牌和剑，严肃庄重，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ISFJ':`红白机像素风格，一位温柔的${genderText}护士，穿围裙，手持药草，慈祥微笑，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ESTJ':`红白机像素风格，一位${genderText}商人，穿西装，手持金币袋，自信表情，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ESFJ':`红白机像素风格，一位${genderText}公主，穿华丽礼裙，手持鲜花，优雅微笑，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ISTP':`红白机像素风格，一位${genderText}工匠，穿皮甲，手持工具箱，眼神冷静，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ISFP':`红白机像素风格，一位${genderText}艺术家，穿彩色长裙，在画架前作画，浪漫气质，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ESTP':`红白机像素风格，一位${genderText}赛车手，穿赛车服，手持头盔，酷帅表情，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`,
+'ESFP':`红白机像素风格，一位${genderText}歌手，穿亮片衣服，手持麦克风，激情演唱，8-bit像素艺术，彩色高像素，欧美像素画风，正方形头像，居中构图`
+};
+return prompts[mbti]||prompts['INTJ'];
+}
+
+setTimeout(()=>{
+const aiMsg=document.createElement('div');
+aiMsg.className='message ai';
+aiMsg.innerHTML=freeQuestions[0];
+document.getElementById('chatMessages').appendChild(aiMsg);
+},600);
+</script>
